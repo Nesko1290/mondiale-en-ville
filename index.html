@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MONDIALE EN VILLE 2026 | Fanzone Football Gen&egrave;ve</title>
+    <meta name="description" content="L'exp&eacute;rience football ultime au coeur de Gen&egrave;ve. Trois fanzones iconiques pour la Coupe du Monde FIFA 2026.">
+    <meta property="og:title" content="MONDIALE EN VILLE 2026">
+    <meta property="og:description" content="Fanzone football premium &agrave; Gen&egrave;ve. Cercle des Bains, Uptown Geneva, Optimhall.">
+    <meta http-equiv="refresh" content="300">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pitch: #1a7a45;
+            --pitch-deep: #0f5c30;
+            --pitch-soft: #2d9a5c;
+            --pitch-muted: #a3d4b5;
+            --accent: #c8102e;
+            --accent-soft: #e8384f;
+            --gold: #b8960c;
+            --gold-soft: #d4af37;
+            --bone: #faf9f6;
+            --warm-white: #f5f4f0;
+            --card-white: #ffffff;
+            --navy: #0c1a2e;
+            --navy-mid: #142238;
+            --navy-light: #1c2d45;
+            --text-primary: #1a1a2e;
+            --text-secondary: #5a6070;
+            --text-tertiary: #8a8f9c;
+            --text-on-dark: #e8e6e1;
+            --text-muted-dark: #8a9ab0;
+            --border-light: rgba(0,0,0,0.06);
+            --border-dark: rgba(255,255,255,0.08);
+            --shadow-card: 0 1px 3px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.03);
+            --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.06), 0 20px 48px rgba(0,0,0,0.06);
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            background: var(--bone);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* NOISE OVERLAY */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 9000;
+            pointer-events: none;
+            opacity: 0.02;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        /* ============================================
+           NAVIGATION — Floating pill, detached
+           ============================================ */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            padding: 0 8px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 32px;
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 100px;
+            width: max-content;
+            max-width: calc(100vw - 32px);
+            transition: all 0.5s var(--ease-spring);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+        }
+        nav.scrolled {
+            background: rgba(255,255,255,0.92);
+            box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+        }
+
+        .nav-logo {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 0 16px;
+            white-space: nowrap;
+            text-transform: uppercase;
+        }
+        .nav-links { display: flex; gap: 4px; list-style: none; }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            padding: 8px 14px;
+            border-radius: 100px;
+            transition: all 0.3s var(--ease-out-expo);
+        }
+        .nav-links a:hover { color: var(--text-primary); background: rgba(0,0,0,0.04); }
+        .nav-links a.active { color: var(--text-primary); background: rgba(0,0,0,0.05); }
+        .nav-cta {
+            background: var(--text-primary);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 100px;
+            transition: all 0.4s var(--ease-spring);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+        .nav-cta:hover { transform: scale(0.97); }
+        .nav-cta:active { transform: scale(0.95); }
+        .nav-cta .arrow {
+            width: 22px; height: 22px;
+            background: rgba(255,255,255,0.12);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 10px;
+            transition: transform 0.3s var(--ease-spring);
+        }
+        .nav-cta:hover .arrow { transform: translate(1px, -1px) scale(1.05); }
+
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 101; padding: 16px; }
+        .hamburger span { width: 20px; height: 1.5px; background: var(--text-primary); transition: all 0.3s var(--ease-out-expo); display: block; }
+
+        /* ============================================
+           HERO — Dark, cinematic
+           ============================================ */
+        .hero {
+            min-height: 100dvh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: var(--navy);
+            color: var(--text-on-dark);
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1489944440615-453fc2b6a9a9?w=1920&q=80') center/cover;
+            opacity: 0.18;
+            will-change: transform;
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 20% 80%, rgba(26,122,69,0.12) 0%, transparent 70%),
+                radial-gradient(ellipse 60% 50% at 80% 20%, rgba(200,16,46,0.08) 0%, transparent 70%),
+                linear-gradient(180deg, rgba(12,26,46,0.5) 0%, rgba(12,26,46,0.92) 100%);
+        }
+        .hero-lines {
+            position: absolute;
+            inset: 0;
+            opacity: 0.03;
+            background-image:
+                linear-gradient(rgba(255,255,255,1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px);
+            background-size: 100px 100px;
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 900px;
+            padding: 0 24px;
+            padding-top: 80px;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 16px 6px 8px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--pitch-muted);
+            margin-bottom: 40px;
+        }
+        .hero-eyebrow .dot {
+            width: 8px; height: 8px;
+            background: var(--pitch-soft);
+            border-radius: 50%;
+            animation: breathe 3s ease-in-out infinite;
+        }
+        @keyframes breathe { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.4;transform:scale(0.8);} }
+
+        .hero-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(52px, 10vw, 120px);
+            line-height: 0.92;
+            letter-spacing: -0.03em;
+            margin-bottom: 28px;
+            font-weight: 400;
+        }
+        .hero-title .line-1 { display: block; color: #ffffff; }
+        .hero-title .line-2 {
+            display: block;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 300;
+            font-size: 0.42em;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--pitch-muted);
+            margin-top: 8px;
+        }
+        .hero-title .line-3 {
+            display: block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.22em;
+            font-weight: 400;
+            letter-spacing: 0.5em;
+            color: var(--accent-soft);
+            margin-top: 12px;
+        }
+
+        .hero-sub {
+            font-size: 17px;
+            color: var(--text-muted-dark);
+            font-weight: 300;
+            line-height: 1.8;
+            max-width: 520px;
+        }
+
+        .countdown-wrap {
+            margin-top: 56px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+        .countdown-label {
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-muted-dark);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .countdown {
+            display: flex;
+            gap: 32px;
+        }
+        .cd-unit { text-align: center; }
+        .cd-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 48px;
+            font-weight: 500;
+            color: #ffffff;
+            line-height: 1;
+            font-variant-numeric: tabular-nums;
+        }
+        .cd-txt {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted-dark);
+            margin-top: 8px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+            margin-top: 40px;
+        }
+        .hero-stat-val {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 32px;
+            font-weight: 500;
+            color: var(--gold-soft);
+            font-variant-numeric: tabular-nums;
+        }
+        .hero-stat-lbl {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted-dark);
+            margin-top: 4px;
+        }
+
+        .scroll-cue {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            animation: drift 3s ease-in-out infinite;
+        }
+        .scroll-cue span {
+            font-size: 9px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-muted-dark);
+        }
+        .scroll-cue-line {
+            width: 1px;
+            height: 32px;
+            background: linear-gradient(to bottom, var(--pitch-soft), transparent);
+        }
+        @keyframes drift { 0%,100%{transform:translateX(-50%) translateY(0);} 50%{transform:translateX(-50%) translateY(8px);} }
+
+        /* ============================================
+           SHARED SECTION LAYOUT
+           ============================================ */
+        section { padding: 120px 24px; }
+
+        .container { max-width: 1200px; margin: 0 auto; }
+        .container-narrow { max-width: 800px; margin: 0 auto; }
+
+        .s-eyebrow {
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .s-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(32px, 4.5vw, 56px);
+            letter-spacing: -0.03em;
+            line-height: 1.05;
+            margin-bottom: 16px;
+            font-weight: 400;
+            text-wrap: balance;
+        }
+        .s-desc {
+            font-size: 15px;
+            line-height: 1.7;
+            font-weight: 300;
+            max-width: 540px;
+        }
+        .s-header { margin-bottom: 64px; }
+
+        /* Light sections */
+        .sec-bone { background: var(--bone); color: var(--text-primary); }
+        .sec-bone .s-eyebrow { color: var(--pitch); }
+        .sec-bone .s-desc { color: var(--text-secondary); }
+
+        .sec-white { background: var(--card-white); color: var(--text-primary); }
+        .sec-white .s-eyebrow { color: var(--pitch); }
+        .sec-white .s-desc { color: var(--text-secondary); }
+
+        /* Dark sections */
+        .sec-navy { background: var(--navy); color: var(--text-on-dark); }
+        .sec-navy .s-eyebrow { color: var(--pitch-muted); }
+        .sec-navy .s-desc { color: var(--text-muted-dark); }
+
+        .sec-navymid { background: var(--navy-mid); color: var(--text-on-dark); }
+        .sec-navymid .s-eyebrow { color: var(--pitch-muted); }
+        .sec-navymid .s-desc { color: var(--text-muted-dark); }
+
+        /* ============================================
+           VENUES — Double-bezel cards
+           ============================================ */
+        .venues-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .v-card-shell {
+            background: rgba(0,0,0,0.02);
+            border: 1px solid var(--border-light);
+            border-radius: 24px;
+            padding: 6px;
+            transition: all 0.6s var(--ease-spring);
+        }
+        .v-card-shell:hover {
+            box-shadow: var(--shadow-card-hover);
+            transform: translateY(-4px);
+        }
+        .v-card-shell.hq { grid-column: 1 / -1; }
+
+        .v-card {
+            background: var(--card-white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+        }
+        .v-img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            transition: transform 0.7s var(--ease-spring);
+        }
+        .v-card-shell.hq .v-img { height: 400px; }
+        .v-card-shell:hover .v-img { transform: scale(1.03); }
+
+        .v-body { padding: 28px 32px 32px; }
+
+        .v-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 100px;
+            margin-bottom: 12px;
+        }
+        .v-badge-hq { background: var(--accent); color: white; }
+        .v-badge-sec {
+            background: rgba(26,122,69,0.08);
+            color: var(--pitch);
+            border: 1px solid rgba(26,122,69,0.12);
+        }
+
+        .v-name {
+            font-family: 'Instrument Serif', serif;
+            font-size: 28px;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+            font-weight: 400;
+        }
+        .v-desc {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.65;
+        }
+        .v-tags {
+            display: flex;
+            gap: 8px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-light);
+            flex-wrap: wrap;
+        }
+        .v-tag {
+            font-size: 11px;
+            color: var(--text-secondary);
+            padding: 5px 14px;
+            background: var(--warm-white);
+            border-radius: 100px;
+            font-weight: 500;
+        }
+
+        /* ============================================
+           GROUPS — Dark bento grid
+           ============================================ */
+        .groups-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 12px;
+        }
+        .g-card-shell {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-dark);
+            border-radius: 20px;
+            padding: 4px;
+            transition: border-color 0.4s var(--ease-out-expo);
+        }
+        .g-card-shell:hover { border-color: rgba(45,154,92,0.3); }
+
+        .g-card {
+            background: var(--navy-light);
+            border-radius: 17px;
+            overflow: hidden;
+        }
+        .g-head {
+            background: linear-gradient(135deg, var(--pitch-deep), var(--pitch));
+            padding: 14px 20px;
+        }
+        .g-letter {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: white;
+        }
+        .g-teams { padding: 4px 0; }
+        .g-team {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            transition: background 0.2s;
+        }
+        .g-team:last-child { border-bottom: none; }
+        .g-team:hover { background: rgba(255,255,255,0.02); }
+        .g-flag { font-size: 18px; margin-right: 10px; line-height: 1; }
+        .g-name { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.85); }
+
+        /* ============================================
+           SCHEDULE — Light, editorial
+           ============================================ */
+        .sched-day { margin-bottom: 36px; }
+        .sched-date {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-light);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-primary);
+        }
+        .sched-badge {
+            background: var(--pitch);
+            color: white;
+            padding: 3px 10px;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            border-radius: 100px;
+        }
+        .m-row {
+            display: grid;
+            grid-template-columns: 64px 1fr auto auto;
+            align-items: center;
+            padding: 10px 16px;
+            background: var(--card-white);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            margin-bottom: 4px;
+            transition: all 0.4s var(--ease-spring);
+        }
+        .m-row:hover {
+            border-color: var(--pitch);
+            transform: translateX(4px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .m-time {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--pitch);
+            font-variant-numeric: tabular-nums;
+        }
+        .m-teams { font-weight: 600; font-size: 13px; color: var(--text-primary); }
+        .m-grp {
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .m-venue {
+            font-size: 10px;
+            color: var(--text-tertiary);
+            margin-left: 12px;
+            font-style: italic;
+        }
+
+        /* ============================================
+           BILLETTERIE — FourVenues embed
+           ============================================ */
+        .ticket-embed {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--card-white);
+            border: 1px solid var(--border-light);
+            border-radius: 24px;
+            padding: 8px;
+            min-height: 400px;
+        }
+        .ticket-inner {
+            border-radius: 20px;
+            overflow: hidden;
+            min-height: 380px;
+        }
+
+        /* ============================================
+           PARTNER FORM — Light
+           ============================================ */
+        .partner-form-wrap { max-width: 700px; margin: 0 auto; }
+
+        .f-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .f-group { display: flex; flex-direction: column; gap: 6px; }
+        .f-group.full { grid-column: 1 / -1; }
+        .f-group label {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .sec-bone .f-group label { color: var(--text-tertiary); }
+        .sec-bone .f-group input,
+        .sec-bone .f-group select,
+        .sec-bone .f-group textarea {
+            background: var(--card-white);
+            border: 1px solid var(--border-light);
+            padding: 12px 16px;
+            color: var(--text-primary);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 14px;
+            outline: none;
+            border-radius: 12px;
+            transition: all 0.3s var(--ease-out-expo);
+        }
+        .sec-bone .f-group input:focus,
+        .sec-bone .f-group select:focus,
+        .sec-bone .f-group textarea:focus {
+            border-color: var(--pitch);
+            box-shadow: 0 0 0 3px rgba(26,122,69,0.08);
+        }
+        .sec-bone .f-group textarea { resize: vertical; min-height: 100px; }
+        .sec-bone .f-group select { appearance: none; cursor: pointer; }
+
+        .sec-navy .f-group label,
+        .sec-navymid .f-group label { color: var(--text-muted-dark); }
+        .sec-navy .f-group input,
+        .sec-navy .f-group select,
+        .sec-navy .f-group textarea,
+        .sec-navymid .f-group input,
+        .sec-navymid .f-group select,
+        .sec-navymid .f-group textarea {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border-dark);
+            padding: 12px 16px;
+            color: var(--text-on-dark);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 14px;
+            outline: none;
+            border-radius: 12px;
+            transition: all 0.3s var(--ease-out-expo);
+        }
+        .sec-navy .f-group input:focus,
+        .sec-navy .f-group select:focus,
+        .sec-navy .f-group textarea:focus,
+        .sec-navymid .f-group input:focus,
+        .sec-navymid .f-group select:focus,
+        .sec-navymid .f-group textarea:focus {
+            border-color: var(--pitch-soft);
+        }
+        .sec-navy .f-group textarea,
+        .sec-navymid .f-group textarea { resize: vertical; min-height: 100px; }
+        .sec-navy .f-group select,
+        .sec-navymid .f-group select { appearance: none; cursor: pointer; }
+
+        .f-submit { grid-column: 1 / -1; margin-top: 8px; }
+
+        .btn {
+            border: none;
+            padding: 14px 32px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 12px;
+            transition: all 0.4s var(--ease-spring);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn:active { transform: scale(0.98); }
+        .btn-green { background: var(--pitch); color: white; }
+        .btn-green:hover { background: var(--pitch-deep); box-shadow: 0 8px 24px rgba(26,122,69,0.2); }
+        .btn-red { background: var(--accent); color: white; }
+        .btn-red:hover { background: #a80d26; box-shadow: 0 8px 24px rgba(200,16,46,0.2); }
+        .btn-dark { background: var(--text-primary); color: white; }
+        .btn-dark:hover { background: #111; }
+
+        /* ============================================
+           BOOKING — Dark, lounge cards
+           ============================================ */
+        .booking-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+        .lounge-shell {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-dark);
+            border-radius: 20px;
+            padding: 4px;
+            margin-bottom: 12px;
+            transition: border-color 0.4s var(--ease-out-expo);
+        }
+        .lounge-shell:hover { border-color: rgba(212,175,55,0.3); }
+        .lounge-inner {
+            background: var(--navy-light);
+            border-radius: 17px;
+            padding: 24px;
+        }
+        .l-name {
+            font-family: 'Instrument Serif', serif;
+            font-size: 22px;
+            letter-spacing: -0.02em;
+            margin-bottom: 4px;
+            color: var(--text-on-dark);
+        }
+        .l-price {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            color: var(--gold-soft);
+            margin-bottom: 8px;
+            font-variant-numeric: tabular-nums;
+        }
+        .l-desc { color: var(--text-muted-dark); font-size: 13px; line-height: 1.6; }
+        .l-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+        .l-tag {
+            background: rgba(255,255,255,0.05);
+            padding: 4px 12px;
+            font-size: 10px;
+            color: var(--text-muted-dark);
+            letter-spacing: 0.5px;
+            border-radius: 100px;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: var(--navy);
+            color: var(--text-on-dark);
+            padding: 64px 24px 28px;
+        }
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .f-brand {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .f-tagline { color: var(--text-muted-dark); font-size: 13px; line-height: 1.65; }
+        .f-title {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted-dark);
+            margin-bottom: 14px;
+            font-weight: 700;
+        }
+        .f-link {
+            display: block;
+            color: var(--text-muted-dark);
+            text-decoration: none;
+            font-size: 13px;
+            margin-bottom: 8px;
+            transition: color 0.3s;
+        }
+        .f-link:hover { color: var(--text-on-dark); }
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .f-copy { font-size: 11px; color: var(--text-muted-dark); }
+        .f-socials { display: flex; gap: 8px; }
+        .f-socials a {
+            width: 32px; height: 32px;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid var(--border-dark);
+            color: var(--text-muted-dark);
+            text-decoration: none;
+            font-size: 11px; font-weight: 700;
+            border-radius: 8px;
+            transition: all 0.3s var(--ease-out-expo);
+        }
+        .f-socials a:hover { border-color: var(--pitch-soft); color: var(--pitch-soft); }
+
+        /* AUTO-REFRESH */
+        .refresh-bar { position: fixed; bottom: 0; left: 0; width: 100%; height: 2px; background: transparent; z-index: 99; }
+        .refresh-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--pitch), var(--pitch-soft)); transition: width 1s linear; }
+        .refresh-pill {
+            position: fixed; bottom: 14px; right: 16px; z-index: 99;
+            background: var(--card-white);
+            border: 1px solid var(--border-light);
+            padding: 6px 14px;
+            font-size: 10px;
+            letter-spacing: 0.5px;
+            color: var(--text-tertiary);
+            display: flex; align-items: center; gap: 6px;
+            border-radius: 100px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            font-family: 'JetBrains Mono', monospace;
+            font-variant-numeric: tabular-nums;
+        }
+        .refresh-pill .dot { width: 5px; height: 5px; background: var(--pitch-soft); border-radius: 50%; animation: breathe 2s infinite; }
+
+        /* MOBILE MENU */
+        .mobile-menu {
+            display: none; position: fixed; inset: 0;
+            background: rgba(250,249,246,0.97);
+            backdrop-filter: blur(24px);
+            z-index: 100;
+            flex-direction: column; align-items: center; justify-content: center; gap: 24px;
+        }
+        .mobile-menu.active { display: flex; }
+        .mobile-menu a {
+            font-family: 'Instrument Serif', serif;
+            font-size: 36px;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .mobile-menu.active a {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.5s var(--ease-out-expo);
+        }
+        .mobile-menu.active a:nth-child(1) { transition-delay: 0.05s; }
+        .mobile-menu.active a:nth-child(2) { transition-delay: 0.1s; }
+        .mobile-menu.active a:nth-child(3) { transition-delay: 0.15s; }
+        .mobile-menu.active a:nth-child(4) { transition-delay: 0.2s; }
+        .mobile-menu.active a:nth-child(5) { transition-delay: 0.25s; }
+        .mobile-menu.active a:nth-child(6) { transition-delay: 0.3s; }
+        .mobile-menu a:hover { color: var(--pitch); }
+
+        /* ANIMATIONS */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            filter: blur(4px);
+            transition: all 0.8s var(--ease-out-expo);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        .form-success { display: none; text-align: center; padding: 48px 24px; }
+        .form-success.show { display: block; }
+        .form-success .check {
+            width: 56px; height: 56px;
+            border: 2px solid var(--pitch-soft);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 24px;
+            color: var(--pitch);
+        }
+        .form-success h3 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 28px;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+        .form-success p { color: var(--text-secondary); font-size: 14px; line-height: 1.6; }
+        .sec-navy .form-success p,
+        .sec-navymid .form-success p { color: var(--text-muted-dark); }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 968px) {
+            nav { top: 12px; }
+            .nav-links, .nav-cta { display: none; }
+            .hamburger { display: flex; }
+            section { padding: 80px 20px; }
+            .venues-grid { grid-template-columns: 1fr; }
+            .v-card-shell.hq { grid-column: auto; }
+            .booking-layout { grid-template-columns: 1fr; }
+            .f-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+            .hero-stats { gap: 24px; flex-wrap: wrap; }
+            .countdown { gap: 20px; }
+            .cd-num { font-size: 36px; }
+        }
+        @media (max-width: 600px) {
+            .hero-stats { flex-direction: column; gap: 16px; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .m-row { grid-template-columns: 1fr; gap: 4px; padding: 12px; }
+            .m-venue { margin-left: 0; }
+            .countdown { flex-wrap: wrap; gap: 16px; }
+            .cd-num { font-size: 28px; }
+            .cd-unit { min-width: 56px; }
+            nav { padding: 0 4px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav id="navbar">
+    <a href="#" class="nav-logo">Mondiale en Ville</a>
+    <ul class="nav-links">
+        <li><a href="#venues">Fanzones</a></li>
+        <li><a href="#groups">Groupes</a></li>
+        <li><a href="#schedule">Programme</a></li>
+        <li><a href="#tickets">Billetterie</a></li>
+        <li><a href="#partners">Partenaires</a></li>
+    </ul>
+    <a href="#booking" class="nav-cta">R&eacute;server<span class="arrow">&nearr;</span></a>
+    <div class="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+    </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#venues" onclick="toggleMenu()">Fanzones</a>
+    <a href="#groups" onclick="toggleMenu()">Groupes</a>
+    <a href="#schedule" onclick="toggleMenu()">Programme</a>
+    <a href="#tickets" onclick="toggleMenu()">Billetterie</a>
+    <a href="#partners" onclick="toggleMenu()">Partenaires</a>
+    <a href="#booking" onclick="toggleMenu()">R&eacute;server un Salon</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-lines"></div>
+    <div class="hero-content">
+        <div class="hero-eyebrow reveal">
+            <span class="dot"></span>
+            Gen&egrave;ve, Suisse &mdash; &Eacute;t&eacute; 2026
+        </div>
+        <h1 class="hero-title reveal">
+            <span class="line-1">Mondiale<br>en Ville</span>
+            <span class="line-2">L'exp&eacute;rience football ultime</span>
+            <span class="line-3">2 0 2 6</span>
+        </h1>
+        <p class="hero-sub reveal">Trois lieux iconiques au c&oelig;ur de Gen&egrave;ve. Chaque match, chaque but, chaque &eacute;motion d&eacute;cupl&eacute;e. Un &eacute;t&eacute; que vous n'oublierez pas.</p>
+
+        <div class="countdown-wrap reveal">
+            <div class="countdown-label">Compte &agrave; rebours</div>
+            <div class="countdown">
+                <div class="cd-unit"><div class="cd-num" id="cd-d">--</div><div class="cd-txt">Jours</div></div>
+                <div class="cd-unit"><div class="cd-num" id="cd-h">--</div><div class="cd-txt">Heures</div></div>
+                <div class="cd-unit"><div class="cd-num" id="cd-m">--</div><div class="cd-txt">Min</div></div>
+                <div class="cd-unit"><div class="cd-num" id="cd-s">--</div><div class="cd-txt">Sec</div></div>
+            </div>
+        </div>
+
+        <div class="hero-stats reveal">
+            <div><div class="hero-stat-val">3</div><div class="hero-stat-lbl">Fanzones</div></div>
+            <div><div class="hero-stat-val">48</div><div class="hero-stat-lbl">&Eacute;quipes</div></div>
+            <div><div class="hero-stat-val">104</div><div class="hero-stat-lbl">Matchs</div></div>
+            <div><div class="hero-stat-val">16</div><div class="hero-stat-lbl">Villes h&ocirc;tes</div></div>
+        </div>
+    </div>
+    <div class="scroll-cue"><span>D&eacute;couvrir</span><div class="scroll-cue-line"></div></div>
+</section>
+
+<!-- FANZONES -->
+<section id="venues" class="sec-white">
+    <div class="container">
+        <div class="s-header reveal">
+            <div class="s-eyebrow">Nos fanzones</div>
+            <h2 class="s-title">Trois lieux. Une ville.<br>Du pur football.</h2>
+            <p class="s-desc">Vivez la Coupe du Monde dans les lieux les plus embl&eacute;matiques de Gen&egrave;ve. Chaque match, chaque but, chaque &eacute;motion amplifi&eacute;e.</p>
+        </div>
+
+        <div class="venues-grid">
+            <div class="v-card-shell hq reveal">
+                <div class="v-card">
+                    <img src="https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?w=1200&q=80" alt="Cercle des Bains Gen&egrave;ve" class="v-img">
+                    <div class="v-body">
+                        <span class="v-badge v-badge-hq">Quartier g&eacute;n&eacute;ral</span>
+                        <h3 class="v-name">Cercle des Bains</h3>
+                        <p class="v-desc">&Eacute;tablissement l&eacute;gendaire de Gen&egrave;ve, le Cercle des Bains devient le centre n&eacute;vralgique de Mondiale en Ville. &Eacute;crans g&eacute;ants, son premium et une ambiance incomparable.</p>
+                        <div class="v-tags">
+                            <span class="v-tag">&Eacute;crans LED g&eacute;ants</span>
+                            <span class="v-tag">Son premium</span>
+                            <span class="v-tag">Salons VIP</span>
+                            <span class="v-tag">Restauration</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="v-card-shell reveal">
+                <div class="v-card">
+                    <img src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=800&q=80" alt="Uptown Geneva" class="v-img">
+                    <div class="v-body">
+                        <span class="v-badge v-badge-sec">Fanzone</span>
+                        <h3 class="v-name">Uptown Geneva</h3>
+                        <p class="v-desc">Ambiance vibrante en plein air. Musique live, food trucks et action non-stop sur grand &eacute;cran.</p>
+                        <div class="v-tags">
+                            <span class="v-tag">Plein air</span>
+                            <span class="v-tag">Musique live</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="v-card-shell reveal">
+                <div class="v-card">
+                    <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=800&q=80" alt="Optimhall" class="v-img">
+                    <div class="v-body">
+                        <span class="v-badge v-badge-sec">Fanzone</span>
+                        <h3 class="v-name">Optimhall</h3>
+                        <p class="v-desc">L'exp&eacute;rience ar&egrave;ne indoor. &Eacute;crans immersifs, son surround et capacit&eacute; pour des centaines de supporters.</p>
+                        <div class="v-tags">
+                            <span class="v-tag">&Eacute;crans immersifs</span>
+                            <span class="v-tag">Son surround</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- GROUPES -->
+<section id="groups" class="sec-navy">
+    <div class="container">
+        <div class="s-header reveal">
+            <div class="s-eyebrow">Phase de groupes</div>
+            <h2 class="s-title">Coupe du Monde FIFA 2026</h2>
+            <p class="s-desc">48 nations. 12 groupes. Suivez chaque match en direct depuis nos fanzones.</p>
+        </div>
+        <div class="groups-grid">
+            <div class="g-card-shell reveal"><div class="g-card"><div class="g-head"><span class="g-letter">Groupe A</span></div><div class="g-teams"><div class="g-team"><span class="g-flag">&#127474;&#127485;</span><span class="g-name">Mexique</span></div><div class="g-team"><span class="g-flag">&#127487;&#127462;</span><span class="g-name">Afrique du Sud</span></div><div class="g-team"><span class="g-flag">&#127472;&#127479;</span><span class="g-name">Cor&eacute;e du Sud</span></div><div class="g-team"><span class="g-flag">&#127464;&#127487;</span><span class="g-name">Tch&eacute;quie</span></div></div></div></div>
+            <div class="g-card-shell reveal"><div class="g-card"><div class="g-head"><span class="g-letter">Groupe B</span></div><div class="g-teams"><div class="g-team"><span class="g-flag">&#127464;&#127462;</span><span class="g-name">Canada</span></div><div class="g-team"><span class="g-flag">&#127463;&#127462;</span><span class="g-name">Bosnie-Herz.</span></div><div class="g-team"><span class="g-flag">&#127478;&#127462;</span><span class="g-name">Qatar</span></div><div class="g-team"><span class="g-flag">&#127464;&#127469;</span><span class="g-name">Suisse</span></div></div></div></div>
+            <div class="g-card-shell reveal"><div class="g-card"><div class="g-head"><span class="g-letter">Groupe C</span></div><div class="g-teams"><div class="g-team"><span class="g-flag">&#127463;&#127479;</span><span class="g-name">Br&eacute;sil</span></div><div class="g-team"><span class="g-flag">&#127474;&#127462;</span><span class="g-name">Maroc</span></div><div class="g-team"><span class="g-flag">&#127469;&#127481;</span><span class="g-name">Ha&iuml;ti</span></div><div class="g-team"><span class="g-flag">&#127468;&#127463;</span><span class="g-name">&Eacute;cosse</span></div></div></div></div>
+            <div class="g-card-shell reveal"><div class="g-card"><div class="g-head"><span class="g-letter">Groupe D</span></div><div class="g-teams"><div class="g-team"><span class="g-flag">&#127482;&#127480;</span><span class="g-name">&Eacute;tats-Unis</span></div><div class="g-team"><span class="g-flag">&#127477;&#127486;</span><span class="g-name">Paraguay</span></div><div class="g-team"><span class="g-flag">&#127462;&#127482;</span><span class="g-name">Australie</span></div><div class="g-team"><span class="g-flag">&#127481;&#127479;</span><span class="g-name">T&uuml;rkiye</span></div></div></div></div>
+            <div class="g-card-shell reveal"><div class="g-card"><div class="g-head"><span class="g-letter">Groupe E</span></div><div class="g-teams"><div class="g-team"><span class="g-flag">&#127465;&#127466;</span><span class="g-name">Allemagne</span></div><div class="g-team"><span class="g-flag">&#127464;&#127484;</span><span class="g-name">Cura&ccedil;ao</span></div><div class="g-team"><span class="g-flag">&#127464;&#127470;</span><span class="g-name">C&ocirc;te d'Ivoire</span></div><div class="g-team"><span class="g-flag">&#127466;&#127464;</span><span class="g-name">&Eacute;quateur</span></div></div></div></div>
+            <div class="g-card-shell reveal"><div class="g-card"><div class="g-head"><span class="g-letter">Groupe F</span></div><div class="g-teams"><div class="g-team"><span class="g-flag">&#127475;&#127473;</span><span class="g-name">Pays-Bas</span></div><div class="g-team"><span class="g-flag">&#127471;&#127477;</span><span class="g-name">Japon</span></div><div class="g-team"><span class="g-flag">&#127480;&#127466;</span><span class="g-name">Su&egrave;de</span></div><div class="g-team"><span class="g-flag">&#127481;&#127475;</span><span class="g-name">Tunisie</span></div></div></div></div>
+            <div class="g-card-shell reveal"><div class="g-card"><div class="g-head"><span class="g-letter">Groupe G</span></div><div class="g-teams"><div class="g-team"><span class="g-flag">&#127463;&#127466;</span><span class="g-name">Belgique</span></div><div class="g-team"><span class="g-flag">&#127466;&#127468;</span><span class="g-name">&Eacute;gypte</span></div><div class="g-team"><span class="g-flag">&#127470;&#127479;</span><span class="g-name">Iran</span></div><div class="g-team"><span class="g-flag">&#127475;&#127487;</span><span class="g-name">Nlle-Z&eacute;lande</span></div></div></div></div>
+            <div class="g-card-shell reveal"><div class="g-card"><div class="g-head"><span class="g-letter">Groupe H</span></div><div class="g-teams"><div class="g-team"><span class="g-flag">&#127466;&#127480;</span><span class="g-name">Espagne</span></div><div class="g-team"><span class="g-flag">&#127464;&#127483;</span><span class="g-name">Cap-Vert</span></div><div class="g-team"><span class="g-flag">&#127480;&#127462;</span><span class="g-name">Arabie Saoudite</span></div><div class="g-team"><span class="g-flag">&#127482;&#127486;</span><span class="g-name">Uruguay</span></div></div></div></div>
+            <div class="g-card-shell reveal"><div class="g-card"><div class="g-head"><span class="g-letter">Groupe I</span></div><div class="g-teams"><div class="g-team"><span class="g-flag">&#127467;&#127479;</span><span class="g-name">France</span></div><div class="g-team"><span class="g-flag">&#127480;&#127475;</span><span class="g-name">S&eacute;n&eacute;gal</span></div><div class="g-team"><span class="g-flag">&#127470;&#127478;</span><span class="g-name">Irak</span></div><div class="g-team"><span class="g-flag">&#127475;&#127476;</span><span class="g-name">Norv&egrave;ge</span></div></div></div></div>
+            <div class="g-card-shell reveal"><div class="g-card"><div class="g-head"><span class="g-letter">Groupe J</span></div><div class="g-teams"><div class="g-team"><span class="g-flag">&#127462;&#127479;</span><span class="g-name">Argentine</span></div><div class="g-team"><span class="g-flag">&#127465;&#127487;</span><span class="g-name">Alg&eacute;rie</span></div><div class="g-team"><span class="g-flag">&#127462;&#127481;</span><span class="g-name">Autriche</span></div><div class="g-team"><span class="g-flag">&#127471;&#127476;</span><span class="g-name">Jordanie</span></div></div></div></div>
+            <div class="g-card-shell reveal"><div class="g-card"><div class="g-head"><span class="g-letter">Groupe K</span></div><div class="g-teams"><div class="g-team"><span class="g-flag">&#127477;&#127481;</span><span class="g-name">Portugal</span></div><div class="g-team"><span class="g-flag">&#127464;&#127465;</span><span class="g-name">RD Congo</span></div><div class="g-team"><span class="g-flag">&#127482;&#127487;</span><span class="g-name">Ouzb&eacute;kistan</span></div><div class="g-team"><span class="g-flag">&#127464;&#127476;</span><span class="g-name">Colombie</span></div></div></div></div>
+            <div class="g-card-shell reveal"><div class="g-card"><div class="g-head"><span class="g-letter">Groupe L</span></div><div class="g-teams"><div class="g-team"><span class="g-flag">&#127466;&#127475;</span><span class="g-name">Angleterre</span></div><div class="g-team"><span class="g-flag">&#127469;&#127479;</span><span class="g-name">Croatie</span></div><div class="g-team"><span class="g-flag">&#127468;&#127469;</span><span class="g-name">Ghana</span></div><div class="g-team"><span class="g-flag">&#127477;&#127462;</span><span class="g-name">Panama</span></div></div></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- PROGRAMME -->
+<section id="schedule" class="sec-bone">
+    <div class="container">
+        <div class="s-header reveal">
+            <div class="s-eyebrow">Programme des matchs</div>
+            <h2 class="s-title">Horaires officiels FIFA 2026</h2>
+            <p class="s-desc">Tous les horaires en heure de Gen&egrave;ve (CET). Ouverture des portes 1h avant le premier match. Diffus&eacute;s en direct dans nos 3 fanzones.</p>
+        </div>
+        <div class="container-narrow">
+
+            <div class="sched-day reveal"><div class="sched-date">11 Juin 2026 <span class="sched-badge">Jour d'ouverture</span></div>
+                <div class="m-row"><span class="m-time">21:00</span><span class="m-teams">Mexique vs Afrique du Sud</span><span class="m-grp">Groupe A</span><span class="m-venue">Mexico</span></div>
+                <div class="m-row"><span class="m-time">04:00</span><span class="m-teams">Cor&eacute;e du Sud vs Tch&eacute;quie</span><span class="m-grp">Groupe A</span><span class="m-venue">Guadalajara</span></div>
+            </div>
+
+            <div class="sched-day reveal"><div class="sched-date">12 Juin 2026</div>
+                <div class="m-row"><span class="m-time">21:00</span><span class="m-teams">Canada vs Bosnie-Herz.</span><span class="m-grp">Groupe B</span><span class="m-venue">Toronto</span></div>
+                <div class="m-row"><span class="m-time">03:00</span><span class="m-teams">&Eacute;tats-Unis vs Paraguay</span><span class="m-grp">Groupe D</span><span class="m-venue">Inglewood</span></div>
+            </div>
+
+            <div class="sched-day reveal"><div class="sched-date">13 Juin 2026</div>
+                <div class="m-row"><span class="m-time">21:00</span><span class="m-teams">Qatar vs Suisse</span><span class="m-grp">Groupe B</span><span class="m-venue">Santa Clara</span></div>
+                <div class="m-row"><span class="m-time">00:00</span><span class="m-teams">Br&eacute;sil vs Maroc</span><span class="m-grp">Groupe C</span><span class="m-venue">New Jersey</span></div>
+                <div class="m-row"><span class="m-time">03:00</span><span class="m-teams">Ha&iuml;ti vs &Eacute;cosse</span><span class="m-grp">Groupe C</span><span class="m-venue">Massachusetts</span></div>
+            </div>
+
+            <div class="sched-day reveal"><div class="sched-date">14 Juin 2026</div>
+                <div class="m-row"><span class="m-time">06:00</span><span class="m-teams">Australie vs T&uuml;rkiye</span><span class="m-grp">Groupe D</span><span class="m-venue">Vancouver</span></div>
+                <div class="m-row"><span class="m-time">19:00</span><span class="m-teams">Allemagne vs Cura&ccedil;ao</span><span class="m-grp">Groupe E</span><span class="m-venue">Houston</span></div>
+                <div class="m-row"><span class="m-time">22:00</span><span class="m-teams">Pays-Bas vs Japon</span><span class="m-grp">Groupe F</span><span class="m-venue">Arlington</span></div>
+                <div class="m-row"><span class="m-time">01:00</span><span class="m-teams">C&ocirc;te d'Ivoire vs &Eacute;quateur</span><span class="m-grp">Groupe E</span><span class="m-venue">Philadelphie</span></div>
+                <div class="m-row"><span class="m-time">04:00</span><span class="m-teams">Su&egrave;de vs Tunisie</span><span class="m-grp">Groupe F</span><span class="m-venue">Guadalupe</span></div>
+            </div>
+
+            <div class="sched-day reveal"><div class="sched-date">15 Juin 2026</div>
+                <div class="m-row"><span class="m-time">18:00</span><span class="m-teams">Espagne vs Cap-Vert</span><span class="m-grp">Groupe H</span><span class="m-venue">Atlanta</span></div>
+                <div class="m-row"><span class="m-time">21:00</span><span class="m-teams">Belgique vs &Eacute;gypte</span><span class="m-grp">Groupe G</span><span class="m-venue">Seattle</span></div>
+                <div class="m-row"><span class="m-time">00:00</span><span class="m-teams">Arabie Saoudite vs Uruguay</span><span class="m-grp">Groupe H</span><span class="m-venue">Miami</span></div>
+                <div class="m-row"><span class="m-time">03:00</span><span class="m-teams">Iran vs Nlle-Z&eacute;lande</span><span class="m-grp">Groupe G</span><span class="m-venue">Inglewood</span></div>
+            </div>
+
+            <div class="sched-day reveal"><div class="sched-date">16 Juin 2026</div>
+                <div class="m-row"><span class="m-time">21:00</span><span class="m-teams">France vs S&eacute;n&eacute;gal</span><span class="m-grp">Groupe I</span><span class="m-venue">New Jersey</span></div>
+                <div class="m-row"><span class="m-time">00:00</span><span class="m-teams">Irak vs Norv&egrave;ge</span><span class="m-grp">Groupe I</span><span class="m-venue">Massachusetts</span></div>
+                <div class="m-row"><span class="m-time">03:00</span><span class="m-teams">Argentine vs Alg&eacute;rie</span><span class="m-grp">Groupe J</span><span class="m-venue">Kansas City</span></div>
+            </div>
+
+            <div class="sched-day reveal"><div class="sched-date">17 Juin 2026</div>
+                <div class="m-row"><span class="m-time">06:00</span><span class="m-teams">Autriche vs Jordanie</span><span class="m-grp">Groupe J</span><span class="m-venue">Santa Clara</span></div>
+                <div class="m-row"><span class="m-time">19:00</span><span class="m-teams">Portugal vs RD Congo</span><span class="m-grp">Groupe K</span><span class="m-venue">Houston</span></div>
+                <div class="m-row"><span class="m-time">22:00</span><span class="m-teams">Angleterre vs Croatie</span><span class="m-grp">Groupe L</span><span class="m-venue">Arlington</span></div>
+                <div class="m-row"><span class="m-time">01:00</span><span class="m-teams">Ghana vs Panama</span><span class="m-grp">Groupe L</span><span class="m-venue">Toronto</span></div>
+                <div class="m-row"><span class="m-time">04:00</span><span class="m-teams">Colombie vs Ouzb&eacute;kistan</span><span class="m-grp">Groupe K</span><span class="m-venue">Mexico</span></div>
+            </div>
+
+            <div class="sched-day reveal"><div class="sched-date">18 Juin 2026 <span class="sched-badge">Journ&eacute;e 2</span></div>
+                <div class="m-row"><span class="m-time">18:00</span><span class="m-teams">Tch&eacute;quie vs Afrique du Sud</span><span class="m-grp">Groupe A</span><span class="m-venue">Atlanta</span></div>
+                <div class="m-row"><span class="m-time">21:00</span><span class="m-teams">Suisse vs Bosnie-Herz.</span><span class="m-grp">Groupe B</span><span class="m-venue">Inglewood</span></div>
+                <div class="m-row"><span class="m-time">00:00</span><span class="m-teams">Canada vs Qatar</span><span class="m-grp">Groupe B</span><span class="m-venue">Vancouver</span></div>
+                <div class="m-row"><span class="m-time">03:00</span><span class="m-teams">Mexique vs Cor&eacute;e du Sud</span><span class="m-grp">Groupe A</span><span class="m-venue">Guadalajara</span></div>
+            </div>
+
+            <div class="sched-day reveal"><div class="sched-date">19 Juin 2026</div>
+                <div class="m-row"><span class="m-time">21:00</span><span class="m-teams">&Eacute;tats-Unis vs Australie</span><span class="m-grp">Groupe D</span><span class="m-venue">Seattle</span></div>
+                <div class="m-row"><span class="m-time">00:00</span><span class="m-teams">&Eacute;cosse vs Maroc</span><span class="m-grp">Groupe C</span><span class="m-venue">Massachusetts</span></div>
+                <div class="m-row"><span class="m-time">02:30</span><span class="m-teams">Br&eacute;sil vs Ha&iuml;ti</span><span class="m-grp">Groupe C</span><span class="m-venue">Philadelphie</span></div>
+                <div class="m-row"><span class="m-time">05:00</span><span class="m-teams">T&uuml;rkiye vs Paraguay</span><span class="m-grp">Groupe D</span><span class="m-venue">Santa Clara</span></div>
+            </div>
+
+            <div class="sched-day reveal"><div class="sched-date">20 Juin 2026</div>
+                <div class="m-row"><span class="m-time">19:00</span><span class="m-teams">Pays-Bas vs Su&egrave;de</span><span class="m-grp">Groupe F</span><span class="m-venue">Houston</span></div>
+                <div class="m-row"><span class="m-time">22:00</span><span class="m-teams">Allemagne vs C&ocirc;te d'Ivoire</span><span class="m-grp">Groupe E</span><span class="m-venue">Toronto</span></div>
+                <div class="m-row"><span class="m-time">02:00</span><span class="m-teams">&Eacute;quateur vs Cura&ccedil;ao</span><span class="m-grp">Groupe E</span><span class="m-venue">Kansas City</span></div>
+            </div>
+
+            <div class="sched-day reveal"><div class="sched-date">21 Juin 2026</div>
+                <div class="m-row"><span class="m-time">06:00</span><span class="m-teams">Tunisie vs Japon</span><span class="m-grp">Groupe F</span><span class="m-venue">Guadalupe</span></div>
+                <div class="m-row"><span class="m-time">18:00</span><span class="m-teams">Espagne vs Arabie Saoudite</span><span class="m-grp">Groupe H</span><span class="m-venue">Atlanta</span></div>
+                <div class="m-row"><span class="m-time">21:00</span><span class="m-teams">Belgique vs Iran</span><span class="m-grp">Groupe G</span><span class="m-venue">Inglewood</span></div>
+                <div class="m-row"><span class="m-time">00:00</span><span class="m-teams">Uruguay vs Cap-Vert</span><span class="m-grp">Groupe H</span><span class="m-venue">Miami</span></div>
+                <div class="m-row"><span class="m-time">03:00</span><span class="m-teams">Nlle-Z&eacute;lande vs &Eacute;gypte</span><span class="m-grp">Groupe G</span><span class="m-venue">Vancouver</span></div>
+            </div>
+
+            <div class="sched-day reveal"><div class="sched-date">22 Juin 2026</div>
+                <div class="m-row"><span class="m-time">19:00</span><span class="m-teams">Argentine vs Autriche</span><span class="m-grp">Groupe J</span><span class="m-venue">Arlington</span></div>
+                <div class="m-row"><span class="m-time">23:00</span><span class="m-teams">France vs Irak</span><span class="m-grp">Groupe I</span><span class="m-venue">Philadelphie</span></div>
+                <div class="m-row"><span class="m-time">02:00</span><span class="m-teams">Norv&egrave;ge vs S&eacute;n&eacute;gal</span><span class="m-grp">Groupe I</span><span class="m-venue">New Jersey</span></div>
+                <div class="m-row"><span class="m-time">05:00</span><span class="m-teams">Jordanie vs Alg&eacute;rie</span><span class="m-grp">Groupe J</span><span class="m-venue">Santa Clara</span></div>
+            </div>
+
+            <div class="sched-day reveal"><div class="sched-date">23 Juin 2026</div>
+                <div class="m-row"><span class="m-time">19:00</span><span class="m-teams">Portugal vs Ouzb&eacute;kistan</span><span class="m-grp">Groupe K</span><span class="m-venue">Houston</span></div>
+                <div class="m-row"><span class="m-time">22:00</span><span class="m-teams">Angleterre vs Ghana</span><span class="m-grp">Groupe L</span><span class="m-venue">Massachusetts</span></div>
+                <div class="m-row"><span class="m-time">01:00</span><span class="m-teams">Panama vs Croatie</span><span class="m-grp">Groupe L</span><span class="m-venue">Toronto</span></div>
+                <div class="m-row"><span class="m-time">04:00</span><span class="m-teams">Colombie vs RD Congo</span><span class="m-grp">Groupe K</span><span class="m-venue">Guadalajara</span></div>
+            </div>
+
+            <div class="sched-day reveal"><div class="sched-date">24 Juin 2026 <span class="sched-badge">Journ&eacute;e 3</span></div>
+                <div class="m-row"><span class="m-time">21:00</span><span class="m-teams">Bosnie-Herz. vs Qatar</span><span class="m-grp">Groupe B</span><span class="m-venue">Seattle</span></div>
+                <div class="m-row"><span class="m-time">21:00</span><span class="m-teams">Suisse vs Canada</span><span class="m-grp">Groupe B</span><span class="m-venue">Vancouver</span></div>
+                <div class="m-row"><span class="m-time">00:00</span><span class="m-teams">Maroc vs Ha&iuml;ti</span><span class="m-grp">Groupe C</span><span class="m-venue">Atlanta</span></div>
+                <div class="m-row"><span class="m-time">00:00</span><span class="m-teams">&Eacute;cosse vs Br&eacute;sil</span><span class="m-grp">Groupe C</span><span class="m-venue">Miami</span></div>
+                <div class="m-row"><span class="m-time">03:00</span><span class="m-teams">Tch&eacute;quie vs Mexique</span><span class="m-grp">Groupe A</span><span class="m-venue">Mexico</span></div>
+                <div class="m-row"><span class="m-time">03:00</span><span class="m-teams">Afrique du Sud vs Cor&eacute;e du Sud</span><span class="m-grp">Groupe A</span><span class="m-venue">Guadalupe</span></div>
+            </div>
+
+            <div class="sched-day reveal"><div class="sched-date">25 Juin 2026</div>
+                <div class="m-row"><span class="m-time">22:00</span><span class="m-teams">Cura&ccedil;ao vs C&ocirc;te d'Ivoire</span><span class="m-grp">Groupe E</span><span class="m-venue">Philadelphie</span></div>
+                <div class="m-row"><span class="m-time">22:00</span><span class="m-teams">&Eacute;quateur vs Allemagne</span><span class="m-grp">Groupe E</span><span class="m-venue">New Jersey</span></div>
+                <div class="m-row"><span class="m-time">01:00</span><span class="m-teams">Japon vs Su&egrave;de</span><span class="m-grp">Groupe F</span><span class="m-venue">Arlington</span></div>
+                <div class="m-row"><span class="m-time">01:00</span><span class="m-teams">Tunisie vs Pays-Bas</span><span class="m-grp">Groupe F</span><span class="m-venue">Kansas City</span></div>
+                <div class="m-row"><span class="m-time">04:00</span><span class="m-teams">Paraguay vs Australie</span><span class="m-grp">Groupe D</span><span class="m-venue">Santa Clara</span></div>
+                <div class="m-row"><span class="m-time">04:00</span><span class="m-teams">T&uuml;rkiye vs &Eacute;tats-Unis</span><span class="m-grp">Groupe D</span><span class="m-venue">Inglewood</span></div>
+            </div>
+
+            <div class="sched-day reveal"><div class="sched-date">26 Juin 2026</div>
+                <div class="m-row"><span class="m-time">21:00</span><span class="m-teams">Norv&egrave;ge vs France</span><span class="m-grp">Groupe I</span><span class="m-venue">Massachusetts</span></div>
+                <div class="m-row"><span class="m-time">21:00</span><span class="m-teams">Irak vs S&eacute;n&eacute;gal</span><span class="m-grp">Groupe I</span><span class="m-venue">Toronto</span></div>
+                <div class="m-row"><span class="m-time">02:00</span><span class="m-teams">Cap-Vert vs Arabie Saoudite</span><span class="m-grp">Groupe H</span><span class="m-venue">Houston</span></div>
+                <div class="m-row"><span class="m-time">02:00</span><span class="m-teams">Uruguay vs Espagne</span><span class="m-grp">Groupe H</span><span class="m-venue">Guadalajara</span></div>
+                <div class="m-row"><span class="m-time">05:00</span><span class="m-teams">&Eacute;gypte vs Iran</span><span class="m-grp">Groupe G</span><span class="m-venue">Seattle</span></div>
+                <div class="m-row"><span class="m-time">05:00</span><span class="m-teams">Nlle-Z&eacute;lande vs Belgique</span><span class="m-grp">Groupe G</span><span class="m-venue">Vancouver</span></div>
+            </div>
+
+            <div class="sched-day reveal"><div class="sched-date">27 Juin 2026</div>
+                <div class="m-row"><span class="m-time">23:00</span><span class="m-teams">Ghana vs Croatie</span><span class="m-grp">Groupe L</span><span class="m-venue">Philadelphie</span></div>
+                <div class="m-row"><span class="m-time">23:00</span><span class="m-teams">Panama vs Angleterre</span><span class="m-grp">Groupe L</span><span class="m-venue">New Jersey</span></div>
+                <div class="m-row"><span class="m-time">01:30</span><span class="m-teams">Portugal vs Colombie</span><span class="m-grp">Groupe K</span><span class="m-venue">Miami</span></div>
+                <div class="m-row"><span class="m-time">01:30</span><span class="m-teams">Ouzb&eacute;kistan vs RD Congo</span><span class="m-grp">Groupe K</span><span class="m-venue">Atlanta</span></div>
+                <div class="m-row"><span class="m-time">04:00</span><span class="m-teams">Autriche vs Alg&eacute;rie</span><span class="m-grp">Groupe J</span><span class="m-venue">Kansas City</span></div>
+                <div class="m-row"><span class="m-time">04:00</span><span class="m-teams">Argentine vs Jordanie</span><span class="m-grp">Groupe J</span><span class="m-venue">Arlington</span></div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- BILLETTERIE -->
+<section id="tickets" class="sec-white">
+    <div class="container">
+        <div class="s-header reveal">
+            <div class="s-eyebrow">Billetterie</div>
+            <h2 class="s-title">R&eacute;servez vos places</h2>
+            <p class="s-desc">S&eacute;curisez votre entr&eacute;e dans nos fanzones. Consultez les &eacute;v&eacute;nements disponibles et r&eacute;servez en ligne.</p>
+        </div>
+        <div class="ticket-embed reveal">
+            <div class="ticket-inner">
+                <script src="https://www.fourvenues.com/assets/iframe/Locos/events"></script>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PARTENAIRES -->
+<section id="partners" class="sec-bone">
+    <div class="container">
+        <div class="s-header reveal">
+            <div class="s-eyebrow">Devenir partenaire</div>
+            <h2 class="s-title">Rejoignez l'aventure</h2>
+            <p class="s-desc">Associez votre marque au plus grand rendez-vous football de Gen&egrave;ve. Visibilit&eacute; premium, public passionn&eacute; et retomb&eacute;es m&eacute;morables.</p>
+        </div>
+        <div class="partner-form-wrap reveal">
+            <form id="partnerForm" class="f-grid" onsubmit="submitPartnerForm(event)">
+                <div class="f-group"><label>Nom de l'entreprise</label><input type="text" placeholder="Votre entreprise" required></div>
+                <div class="f-group"><label>Personne de contact</label><input type="text" placeholder="Nom complet" required></div>
+                <div class="f-group"><label>Email</label><input type="email" placeholder="email@entreprise.com" required></div>
+                <div class="f-group"><label>T&eacute;l&eacute;phone</label><input type="tel" placeholder="+41 XX XXX XX XX"></div>
+                <div class="f-group"><label>Type de partenariat</label>
+                    <select required><option value="" disabled selected>S&eacute;lectionnez</option><option>Sponsor titre</option><option>Partenaire officiel</option><option>Partenaire F&B</option><option>Partenaire m&eacute;dia</option><option>Partenaire technologique</option><option>Activation de marque</option><option>Autre</option></select>
+                </div>
+                <div class="f-group"><label>Budget estim&eacute;</label>
+                    <select><option value="" disabled selected>S&eacute;lectionnez</option><option>CHF 5'000 &ndash; 15'000</option><option>CHF 15'000 &ndash; 50'000</option><option>CHF 50'000 &ndash; 100'000</option><option>CHF 100'000+</option></select>
+                </div>
+                <div class="f-group full"><label>Message</label><textarea placeholder="Parlez-nous de votre marque et de comment vous souhaitez participer..."></textarea></div>
+                <div class="f-submit"><button type="submit" class="btn btn-red">Envoyer la demande</button></div>
+            </form>
+            <div class="form-success" id="partnerSuccess">
+                <div class="check">&#10003;</div>
+                <h3>Merci</h3>
+                <p>Votre demande de partenariat a &eacute;t&eacute; re&ccedil;ue. Notre &eacute;quipe vous contactera sous 48 heures.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- RESERVATION VIP -->
+<section id="booking" class="sec-navymid">
+    <div class="container">
+        <div class="s-header reveal">
+            <div class="s-eyebrow">Exp&eacute;rience VIP</div>
+            <h2 class="s-title">R&eacute;servez un salon priv&eacute;</h2>
+            <p class="s-desc">Un cadre exclusif pour vivre la Coupe du Monde entre proches, coll&egrave;gues ou clients.</p>
+        </div>
+        <div class="booking-layout">
+            <div class="reveal">
+                <div class="lounge-shell"><div class="lounge-inner">
+                    <div class="l-name">Suite VIP Cercle</div>
+                    <div class="l-price">D&egrave;s CHF 2'500 / jour de match</div>
+                    <div class="l-desc">Terrasse priv&eacute;e, bar d&eacute;di&eacute;, restauration premium et la meilleure vue sur l'&eacute;cran.</div>
+                    <div class="l-tags"><span class="l-tag">20 invit&eacute;s max.</span><span class="l-tag">Bar priv&eacute;</span><span class="l-tag">Restauration incluse</span><span class="l-tag">H&ocirc;te d&eacute;di&eacute;</span></div>
+                </div></div>
+                <div class="lounge-shell"><div class="lounge-inner">
+                    <div class="l-name">Sky Lounge Uptown</div>
+                    <div class="l-price">D&egrave;s CHF 1'500 / jour de match</div>
+                    <div class="l-desc">Terrasse panoramique en plein air avec confort suppl&eacute;mentaire.</div>
+                    <div class="l-tags"><span class="l-tag">15 invit&eacute;s max.</span><span class="l-tag">Terrasse plein air</span><span class="l-tag">Forfait boissons</span></div>
+                </div></div>
+                <div class="lounge-shell"><div class="lounge-inner">
+                    <div class="l-name">Box Premium Optimhall</div>
+                    <div class="l-price">D&egrave;s CHF 1'800 / jour de match</div>
+                    <div class="l-desc">Espace premium ferm&eacute;. &Eacute;cran immersif, zone sonore priv&eacute;e et service haut de gamme.</div>
+                    <div class="l-tags"><span class="l-tag">12 invit&eacute;s max.</span><span class="l-tag">&Eacute;cran priv&eacute;</span><span class="l-tag">F&B inclus</span></div>
+                </div></div>
+            </div>
+            <div class="reveal">
+                <form id="bookingForm" class="f-grid" onsubmit="submitBookingForm(event)">
+                    <div class="f-group"><label>Nom complet</label><input type="text" placeholder="Votre nom" required></div>
+                    <div class="f-group"><label>Email</label><input type="email" placeholder="email@exemple.com" required></div>
+                    <div class="f-group"><label>T&eacute;l&eacute;phone</label><input type="tel" placeholder="+41 XX XXX XX XX" required></div>
+                    <div class="f-group"><label>Nombre d'invit&eacute;s</label><input type="number" min="1" max="50" placeholder="10" required></div>
+                    <div class="f-group"><label>Lieu souhait&eacute;</label>
+                        <select required><option value="" disabled selected>Choisir le lieu</option><option>Cercle des Bains &ndash; Suite VIP</option><option>Uptown Geneva &ndash; Sky Lounge</option><option>Optimhall &ndash; Box Premium</option></select>
+                    </div>
+                    <div class="f-group"><label>Date souhait&eacute;e</label><input type="date" min="2026-06-11" max="2026-07-19" required></div>
+                    <div class="f-group full"><label>Demandes sp&eacute;ciales</label><textarea placeholder="Match sp&eacute;cifique, exigences alimentaires, branding..."></textarea></div>
+                    <div class="f-submit"><button type="submit" class="btn btn-green">Demander une r&eacute;servation</button></div>
+                </form>
+                <div class="form-success" id="bookingSuccess">
+                    <div class="check">&#10003;</div>
+                    <h3>Demande envoy&eacute;e</h3>
+                    <p>Notre &eacute;quipe VIP vous contactera sous 24 heures pour confirmer la disponibilit&eacute;.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-grid">
+        <div>
+            <div class="f-brand">Mondiale en Ville</div>
+            <p class="f-tagline">L'exp&eacute;rience fanzone football de r&eacute;f&eacute;rence &agrave; Gen&egrave;ve pour la Coupe du Monde FIFA 2026. Trois lieux, un &eacute;t&eacute; inoubliable.</p>
+        </div>
+        <div>
+            <div class="f-title">Fanzones</div>
+            <a href="#venues" class="f-link">Cercle des Bains</a>
+            <a href="#venues" class="f-link">Uptown Geneva</a>
+            <a href="#venues" class="f-link">Optimhall</a>
+        </div>
+        <div>
+            <div class="f-title">Exp&eacute;rience</div>
+            <a href="#groups" class="f-link">Phase de groupes</a>
+            <a href="#schedule" class="f-link">Programme des matchs</a>
+            <a href="#booking" class="f-link">Salons priv&eacute;s</a>
+            <a href="#tickets" class="f-link">Billetterie</a>
+        </div>
+        <div>
+            <div class="f-title">Contact</div>
+            <a href="#partners" class="f-link">Devenir partenaire</a>
+            <a href="mailto:info@mondiale-en-ville.ch" class="f-link">info@mondiale-en-ville.ch</a>
+            <a href="#" class="f-link">Dossier de presse</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span class="f-copy">&copy; 2026 Mondiale en Ville. Tous droits r&eacute;serv&eacute;s. Gen&egrave;ve, Suisse.</span>
+        <div class="f-socials">
+            <a href="#" title="Instagram">IG</a>
+            <a href="#" title="TikTok">TK</a>
+            <a href="#" title="X">X</a>
+            <a href="#" title="Facebook">FB</a>
+        </div>
+    </div>
+</footer>
+
+<!-- AUTO-REFRESH -->
+<div class="refresh-bar"><div class="refresh-bar-fill" id="refreshProgress"></div></div>
+<div class="refresh-pill"><span class="dot"></span><span id="refreshTimer">5:00</span></div>
+
+<script>
+    // COUNTDOWN
+    const kickoff = new Date('2026-06-11T19:00:00Z');
+    function updateCountdown() {
+        const diff = kickoff - new Date();
+        if (diff <= 0) {
+            document.getElementById('cd-d').textContent = '0';
+            document.getElementById('cd-h').textContent = '00';
+            document.getElementById('cd-m').textContent = '00';
+            document.getElementById('cd-s').textContent = '00';
+            document.querySelector('.countdown-label').textContent = 'La Coupe du Monde a commenc\u00e9';
+            return;
+        }
+        document.getElementById('cd-d').textContent = Math.floor(diff / 86400000);
+        document.getElementById('cd-h').textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2,'0');
+        document.getElementById('cd-m').textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2,'0');
+        document.getElementById('cd-s').textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2,'0');
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // AUTO-REFRESH (5 min)
+    let rc = 300;
+    const pb = document.getElementById('refreshProgress');
+    const rt = document.getElementById('refreshTimer');
+    setInterval(() => {
+        rc--;
+        pb.style.width = ((300 - rc) / 300 * 100) + '%';
+        rt.textContent = Math.floor(rc/60) + ':' + String(rc%60).padStart(2,'0');
+        if (rc <= 0) location.reload();
+    }, 1000);
+
+    // NAV SCROLL
+    window.addEventListener('scroll', () => {
+        document.getElementById('navbar').classList.toggle('scrolled', scrollY > 60);
+    });
+
+    // MOBILE MENU
+    function toggleMenu() {
+        document.getElementById('mobileMenu').classList.toggle('active');
+    }
+
+    // SCROLL REVEAL (IntersectionObserver)
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // FORMS
+    function submitPartnerForm(e) {
+        e.preventDefault();
+        document.getElementById('partnerForm').style.display = 'none';
+        document.getElementById('partnerSuccess').classList.add('show');
+    }
+    function submitBookingForm(e) {
+        e.preventDefault();
+        document.getElementById('bookingForm').style.display = 'none';
+        document.getElementById('bookingSuccess').classList.add('show');
+    }
+
+    // ACTIVE NAV
+    const secs = document.querySelectorAll('section[id]');
+    window.addEventListener('scroll', () => {
+        let cur = '';
+        secs.forEach(s => { if (scrollY >= s.offsetTop - 100) cur = s.getAttribute('id'); });
+        document.querySelectorAll('.nav-links a').forEach(a => {
+            a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
+        });
+    });
+</script>
+</body>
+</html>
