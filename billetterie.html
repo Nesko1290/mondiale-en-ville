@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billetterie | MONDIALE EN VILLE 2026</title>
+    <meta name="description" content="R&eacute;servez vos billets pour les fanzones MONDIALE EN VILLE 2026 &agrave; Gen&egrave;ve. Acc&egrave;s g&eacute;n&eacute;ral, VIP et salons priv&eacute;s.">
+    <meta property="og:title" content="Billetterie — MONDIALE EN VILLE 2026">
+    <meta property="og:description" content="S&eacute;curisez vos places pour les fanzones FIFA World Cup 2026 &agrave; Gen&egrave;ve.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pitch: #1a7a45;
+            --pitch-deep: #0f5c30;
+            --pitch-soft: #2d9a5c;
+            --pitch-muted: #a3d4b5;
+            --accent: #c8102e;
+            --accent-soft: #e8384f;
+            --gold: #b8960c;
+            --gold-soft: #d4af37;
+            --bone: #faf9f6;
+            --warm-white: #f5f4f0;
+            --card-white: #ffffff;
+            --navy: #0c1a2e;
+            --navy-mid: #142238;
+            --navy-light: #1c2d45;
+            --text-primary: #1a1a2e;
+            --text-secondary: #5a6070;
+            --text-tertiary: #8a8f9c;
+            --text-on-dark: #e8e6e1;
+            --text-muted-dark: #8a9ab0;
+            --border-light: rgba(0,0,0,0.06);
+            --border-dark: rgba(255,255,255,0.08);
+            --shadow-card: 0 1px 3px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.03);
+            --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.06), 0 20px 48px rgba(0,0,0,0.06);
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            background: var(--bone);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 9000;
+            pointer-events: none;
+            opacity: 0.02;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        /* NAVIGATION */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            padding: 0 8px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 32px;
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 100px;
+            width: max-content;
+            max-width: calc(100vw - 32px);
+            transition: all 0.5s var(--ease-spring);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+        }
+        nav.scrolled {
+            background: rgba(255,255,255,0.92);
+            box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+        }
+        .nav-logo {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 0 16px;
+            white-space: nowrap;
+            text-transform: uppercase;
+        }
+        .nav-links { display: flex; gap: 4px; list-style: none; }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            padding: 8px 14px;
+            border-radius: 100px;
+            transition: all 0.3s var(--ease-out-expo);
+        }
+        .nav-links a:hover { color: var(--text-primary); background: rgba(0,0,0,0.04); }
+        .nav-links a.active { color: var(--text-primary); background: rgba(0,0,0,0.05); }
+        .nav-cta {
+            background: var(--text-primary);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 100px;
+            transition: all 0.4s var(--ease-spring);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+        .nav-cta:hover { transform: scale(0.97); }
+        .nav-cta:active { transform: scale(0.95); }
+        .nav-cta .arrow {
+            width: 22px; height: 22px;
+            background: rgba(255,255,255,0.12);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 10px;
+            transition: transform 0.3s var(--ease-spring);
+        }
+        .nav-cta:hover .arrow { transform: translate(1px, -1px) scale(1.05); }
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 101; padding: 16px; }
+        .hamburger span { width: 20px; height: 1.5px; background: var(--text-primary); transition: all 0.3s var(--ease-out-expo); display: block; }
+
+        /* HERO HEADER — Compact, page-specific */
+        .page-hero {
+            min-height: 60dvh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: var(--navy);
+            color: var(--text-on-dark);
+            text-align: center;
+        }
+        .page-hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1920&q=80') center/cover;
+            opacity: 0.15;
+        }
+        .page-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 70% 50% at 30% 70%, rgba(26,122,69,0.1) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 70% 30%, rgba(200,16,46,0.06) 0%, transparent 70%),
+                linear-gradient(180deg, rgba(12,26,46,0.4) 0%, rgba(12,26,46,0.95) 100%);
+        }
+        .page-hero-lines {
+            position: absolute;
+            inset: 0;
+            opacity: 0.03;
+            background-image:
+                linear-gradient(rgba(255,255,255,1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px);
+            background-size: 100px 100px;
+        }
+        .page-hero-content {
+            position: relative;
+            max-width: 700px;
+            padding: 0 24px;
+            padding-top: 100px;
+        }
+        .page-hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 16px 6px 8px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--pitch-muted);
+            margin-bottom: 32px;
+        }
+        .page-hero-eyebrow .dot {
+            width: 8px; height: 8px;
+            background: var(--pitch-soft);
+            border-radius: 50%;
+            animation: breathe 3s ease-in-out infinite;
+        }
+        @keyframes breathe { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.4;transform:scale(0.8);} }
+
+        .page-hero h1 {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(42px, 7vw, 80px);
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+        .page-hero .subtitle {
+            font-size: 17px;
+            color: var(--text-muted-dark);
+            font-weight: 300;
+            line-height: 1.8;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+        .stat-val {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 28px;
+            font-weight: 500;
+            color: var(--gold-soft);
+            font-variant-numeric: tabular-nums;
+        }
+        .stat-lbl {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted-dark);
+            margin-top: 4px;
+        }
+
+        /* SHARED LAYOUT */
+        section { padding: 120px 24px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .container-narrow { max-width: 800px; margin: 0 auto; }
+
+        .s-eyebrow {
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .s-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(32px, 4.5vw, 56px);
+            letter-spacing: -0.03em;
+            line-height: 1.05;
+            margin-bottom: 16px;
+            font-weight: 400;
+            text-wrap: balance;
+        }
+        .s-desc {
+            font-size: 15px;
+            line-height: 1.7;
+            font-weight: 300;
+            max-width: 540px;
+        }
+        .s-header { margin-bottom: 64px; }
+
+        .sec-bone { background: var(--bone); color: var(--text-primary); }
+        .sec-bone .s-eyebrow { color: var(--pitch); }
+        .sec-bone .s-desc { color: var(--text-secondary); }
+
+        .sec-white { background: var(--card-white); color: var(--text-primary); }
+        .sec-white .s-eyebrow { color: var(--pitch); }
+        .sec-white .s-desc { color: var(--text-secondary); }
+
+        .sec-navy { background: var(--navy); color: var(--text-on-dark); }
+        .sec-navy .s-eyebrow { color: var(--pitch-muted); }
+        .sec-navy .s-desc { color: var(--text-muted-dark); }
+
+        .sec-navymid { background: var(--navy-mid); color: var(--text-on-dark); }
+        .sec-navymid .s-eyebrow { color: var(--pitch-muted); }
+        .sec-navymid .s-desc { color: var(--text-muted-dark); }
+
+        /* TICKET TYPES — Cards grid */
+        .tickets-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 80px;
+        }
+        .t-shell {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border-dark);
+            border-radius: 24px;
+            padding: 6px;
+            transition: all 0.6s var(--ease-spring);
+        }
+        .t-shell:hover {
+            box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+            transform: translateY(-6px);
+        }
+        .t-shell.featured {
+            border-color: var(--gold-soft);
+            background: rgba(184,150,12,0.06);
+        }
+        .t-card {
+            background: var(--navy-mid);
+            border-radius: 20px;
+            padding: 40px 32px;
+            display: flex;
+            flex-direction: column;
+            min-height: 480px;
+            box-shadow: inset 0 1px 1px rgba(255,255,255,0.04);
+        }
+        .t-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 14px;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 100px;
+            margin-bottom: 24px;
+            width: fit-content;
+        }
+        .t-badge-standard {
+            background: rgba(26,122,69,0.12);
+            color: var(--pitch-muted);
+            border: 1px solid rgba(26,122,69,0.15);
+        }
+        .t-badge-vip {
+            background: rgba(184,150,12,0.12);
+            color: var(--gold-soft);
+            border: 1px solid rgba(184,150,12,0.2);
+        }
+        .t-badge-prive {
+            background: rgba(200,16,46,0.1);
+            color: var(--accent-soft);
+            border: 1px solid rgba(200,16,46,0.15);
+        }
+        .t-name {
+            font-family: 'Instrument Serif', serif;
+            font-size: 32px;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+            font-weight: 400;
+            color: var(--text-on-dark);
+        }
+        .t-price {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            color: var(--text-muted-dark);
+            margin-bottom: 24px;
+            font-variant-numeric: tabular-nums;
+        }
+        .t-price strong {
+            font-size: 36px;
+            color: #ffffff;
+            font-weight: 500;
+        }
+        .t-price span {
+            font-size: 13px;
+            color: var(--text-muted-dark);
+        }
+        .t-desc {
+            color: var(--text-muted-dark);
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 28px;
+            padding-bottom: 28px;
+            border-bottom: 1px solid var(--border-dark);
+        }
+        .t-features {
+            list-style: none;
+            flex: 1;
+            margin-bottom: 32px;
+        }
+        .t-features li {
+            font-size: 13px;
+            color: var(--text-muted-dark);
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .t-features li::before {
+            content: '';
+            width: 18px;
+            height: 18px;
+            background: rgba(26,122,69,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .t-features li::after {
+            content: none;
+        }
+        .t-check {
+            color: var(--pitch-soft);
+            font-size: 11px;
+            min-width: 18px;
+            height: 18px;
+            background: rgba(26,122,69,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .t-features li { padding-left: 0; }
+        .t-features li::before { display: none; }
+
+        .t-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s var(--ease-spring);
+            text-decoration: none;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .t-btn:hover { transform: scale(0.97); }
+        .t-btn:active { transform: scale(0.95); }
+
+        .t-btn-standard {
+            background: transparent;
+            color: var(--text-on-dark);
+            border: 1px solid var(--border-dark);
+        }
+        .t-btn-standard:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(255,255,255,0.15);
+        }
+        .t-btn-vip {
+            background: var(--gold-soft);
+            color: var(--navy);
+        }
+        .t-btn-prive {
+            background: var(--accent);
+            color: white;
+        }
+        .t-btn .arrow {
+            width: 22px; height: 22px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 10px;
+            transition: transform 0.3s var(--ease-spring);
+        }
+        .t-btn-standard .arrow { background: rgba(255,255,255,0.08); }
+        .t-btn:hover .arrow { transform: translate(1px, -1px) scale(1.05); }
+
+        /* FANZONES QUICK ACCESS */
+        .venues-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        .venue-pill-shell {
+            background: rgba(0,0,0,0.02);
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: 5px;
+            transition: all 0.5s var(--ease-spring);
+        }
+        .venue-pill-shell:hover {
+            box-shadow: var(--shadow-card-hover);
+            transform: translateY(-3px);
+        }
+        .venue-pill {
+            background: var(--card-white);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .venue-pill-img {
+            width: 64px;
+            height: 64px;
+            border-radius: 12px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .venue-pill-name {
+            font-family: 'Instrument Serif', serif;
+            font-size: 20px;
+            letter-spacing: -0.02em;
+            margin-bottom: 4px;
+        }
+        .venue-pill-meta {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            font-weight: 500;
+        }
+        .venue-pill-badge {
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border-radius: 100px;
+            margin-left: auto;
+            white-space: nowrap;
+        }
+        .venue-pill-badge.hq { background: var(--accent); color: white; }
+        .venue-pill-badge.sec { background: rgba(26,122,69,0.08); color: var(--pitch); border: 1px solid rgba(26,122,69,0.12); }
+
+        /* FOURVENUES EMBED */
+        .ticket-embed {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--card-white);
+            border: 1px solid var(--border-light);
+            border-radius: 24px;
+            padding: 8px;
+            min-height: 500px;
+        }
+        .ticket-inner {
+            border-radius: 20px;
+            overflow: hidden;
+            min-height: 480px;
+        }
+
+        /* FAQ SECTION */
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .faq-shell {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border-dark);
+            border-radius: 20px;
+            padding: 5px;
+        }
+        .faq-card {
+            background: var(--navy-mid);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: inset 0 1px 1px rgba(255,255,255,0.04);
+        }
+        .faq-q {
+            font-family: 'Instrument Serif', serif;
+            font-size: 20px;
+            letter-spacing: -0.01em;
+            margin-bottom: 10px;
+            color: var(--text-on-dark);
+        }
+        .faq-a {
+            font-size: 13px;
+            line-height: 1.7;
+            color: var(--text-muted-dark);
+        }
+
+        /* INFO BANNER */
+        .info-banner {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(26,122,69,0.06);
+            border: 1px solid rgba(26,122,69,0.1);
+            border-radius: 16px;
+            padding: 20px 28px;
+        }
+        .info-banner-icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(26,122,69,0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        .info-banner-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        .info-banner-text strong { color: var(--text-primary); }
+
+        /* BACK LINK */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: var(--text-muted-dark);
+            text-decoration: none;
+            transition: color 0.3s var(--ease-out-expo);
+            position: absolute;
+            top: 100px;
+            left: 24px;
+        }
+        .back-link:hover { color: var(--text-on-dark); }
+        .back-link .back-arrow {
+            width: 28px; height: 28px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 12px;
+            transition: all 0.3s var(--ease-spring);
+        }
+        .back-link:hover .back-arrow { background: rgba(255,255,255,0.1); transform: translateX(-2px); }
+
+        /* FOOTER */
+        footer {
+            background: var(--navy);
+            color: var(--text-on-dark);
+            padding: 64px 24px 32px;
+            border-top: 1px solid var(--border-dark);
+        }
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .f-brand {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .f-tagline { color: var(--text-muted-dark); font-size: 13px; line-height: 1.65; }
+        .f-title {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted-dark);
+            margin-bottom: 14px;
+            font-weight: 700;
+        }
+        .f-link {
+            display: block;
+            color: var(--text-muted-dark);
+            text-decoration: none;
+            font-size: 13px;
+            margin-bottom: 8px;
+            transition: color 0.3s;
+        }
+        .f-link:hover { color: var(--text-on-dark); }
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .f-copy { font-size: 11px; color: var(--text-muted-dark); }
+        .f-socials { display: flex; gap: 8px; }
+        .f-socials a {
+            width: 32px; height: 32px;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid var(--border-dark);
+            color: var(--text-muted-dark);
+            text-decoration: none;
+            font-size: 11px; font-weight: 700;
+            border-radius: 8px;
+            transition: all 0.3s var(--ease-out-expo);
+        }
+        .f-socials a:hover { border-color: var(--pitch-soft); color: var(--pitch-soft); }
+
+        /* MOBILE MENU */
+        .mobile-menu {
+            display: none; position: fixed; inset: 0;
+            background: rgba(250,249,246,0.97);
+            backdrop-filter: blur(24px);
+            z-index: 100;
+            flex-direction: column; align-items: center; justify-content: center; gap: 24px;
+        }
+        .mobile-menu.active { display: flex; }
+        .mobile-menu a {
+            font-family: 'Instrument Serif', serif;
+            font-size: 36px;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .mobile-menu.active a {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.5s var(--ease-out-expo);
+        }
+        .mobile-menu.active a:nth-child(1) { transition-delay: 0.05s; }
+        .mobile-menu.active a:nth-child(2) { transition-delay: 0.1s; }
+        .mobile-menu.active a:nth-child(3) { transition-delay: 0.15s; }
+        .mobile-menu.active a:nth-child(4) { transition-delay: 0.2s; }
+        .mobile-menu.active a:nth-child(5) { transition-delay: 0.25s; }
+        .mobile-menu a:hover { color: var(--pitch); }
+
+        /* ANIMATIONS */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            filter: blur(4px);
+            transition: all 0.8s var(--ease-out-expo);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 968px) {
+            nav { top: 12px; }
+            .nav-links, .nav-cta { display: none; }
+            .hamburger { display: flex; }
+            section { padding: 80px 20px; }
+            .tickets-grid { grid-template-columns: 1fr; }
+            .venues-row { grid-template-columns: 1fr; }
+            .faq-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+            .hero-stats { gap: 24px; flex-wrap: wrap; }
+            .back-link { top: 80px; left: 16px; }
+        }
+        @media (max-width: 600px) {
+            .footer-grid { grid-template-columns: 1fr; }
+            .hero-stats { flex-direction: column; gap: 16px; }
+            .info-banner { flex-direction: column; text-align: center; }
+            nav { padding: 0 4px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav id="navbar">
+    <a href="index.html" class="nav-logo">Mondiale en Ville</a>
+    <ul class="nav-links">
+        <li><a href="index.html#venues">Fanzones</a></li>
+        <li><a href="index.html#schedule">Programme</a></li>
+        <li><a href="billetterie.html" class="active">Billetterie</a></li>
+        <li><a href="index.html#partners">Partenaires</a></li>
+    </ul>
+    <a href="#reserve" class="nav-cta">R&eacute;server<span class="arrow">&nearr;</span></a>
+    <div class="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+    </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" onclick="toggleMenu()">Accueil</a>
+    <a href="index.html#venues" onclick="toggleMenu()">Fanzones</a>
+    <a href="index.html#schedule" onclick="toggleMenu()">Programme</a>
+    <a href="#reserve" onclick="toggleMenu()">Billetterie</a>
+    <a href="index.html#partners" onclick="toggleMenu()">Partenaires</a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-lines"></div>
+    <a href="index.html" class="back-link">
+        <span class="back-arrow">&larr;</span>
+        Retour
+    </a>
+    <div class="page-hero-content">
+        <div class="page-hero-eyebrow reveal">
+            <span class="dot"></span>
+            Billetterie officielle
+        </div>
+        <h1 class="reveal">R&eacute;servez vos places</h1>
+        <p class="subtitle reveal">Choisissez votre formule et vivez la Coupe du Monde FIFA 2026 dans nos fanzones premium au c&oelig;ur de Gen&egrave;ve.</p>
+
+        <div class="hero-stats reveal">
+            <div>
+                <div class="stat-val">3</div>
+                <div class="stat-lbl">Fanzones</div>
+            </div>
+            <div>
+                <div class="stat-val">48</div>
+                <div class="stat-lbl">Matchs diffus&eacute;s</div>
+            </div>
+            <div>
+                <div class="stat-val">17</div>
+                <div class="stat-lbl">Jours d'&eacute;v&eacute;nement</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TICKET TYPES -->
+<section class="sec-navy" id="formules">
+    <div class="container">
+        <div class="s-header reveal">
+            <div class="s-eyebrow">Nos formules</div>
+            <h2 class="s-title">Trouvez votre exp&eacute;rience</h2>
+            <p class="s-desc">Trois niveaux d'acc&egrave;s pour profiter de chaque moment. De l'ambiance collective &agrave; l'exclusivit&eacute; totale.</p>
+        </div>
+
+        <div class="tickets-grid">
+            <!-- STANDARD -->
+            <div class="t-shell reveal">
+                <div class="t-card">
+                    <div class="t-badge t-badge-standard">Acc&egrave;s g&eacute;n&eacute;ral</div>
+                    <div class="t-name">Standard</div>
+                    <div class="t-price"><strong>CHF 25</strong> <span>/ match</span></div>
+                    <div class="t-desc">L'ambiance fanzone dans toute sa puret&eacute;. &Eacute;cran g&eacute;ant, son immersif et l'&eacute;nergie de la foule.</div>
+                    <ul class="t-features">
+                        <li><span class="t-check">&#10003;</span> Acc&egrave;s &agrave; la fanzone</li>
+                        <li><span class="t-check">&#10003;</span> &Eacute;cran g&eacute;ant HD</li>
+                        <li><span class="t-check">&#10003;</span> Son surround</li>
+                        <li><span class="t-check">&#10003;</span> Animations et jeux</li>
+                        <li><span class="t-check">&#10003;</span> Food & drinks sur place</li>
+                    </ul>
+                    <a href="#reserve" class="t-btn t-btn-standard">R&eacute;server<span class="arrow">&nearr;</span></a>
+                </div>
+            </div>
+
+            <!-- VIP -->
+            <div class="t-shell featured reveal">
+                <div class="t-card">
+                    <div class="t-badge t-badge-vip">&#9733; Recommand&eacute;</div>
+                    <div class="t-name">VIP</div>
+                    <div class="t-price"><strong>CHF 95</strong> <span>/ match</span></div>
+                    <div class="t-desc">Une exp&eacute;rience surclass&eacute;e avec vue privil&eacute;gi&eacute;e, bar premium et service &agrave; table.</div>
+                    <ul class="t-features">
+                        <li><span class="t-check">&#10003;</span> Zone VIP d&eacute;di&eacute;e</li>
+                        <li><span class="t-check">&#10003;</span> Vue privil&eacute;gi&eacute;e sur l'&eacute;cran</li>
+                        <li><span class="t-check">&#10003;</span> Bar premium inclus</li>
+                        <li><span class="t-check">&#10003;</span> Service &agrave; table</li>
+                        <li><span class="t-check">&#10003;</span> Entr&eacute;e prioritaire</li>
+                        <li><span class="t-check">&#10003;</span> Wi-Fi haut d&eacute;bit</li>
+                    </ul>
+                    <a href="#reserve" class="t-btn t-btn-vip">R&eacute;server VIP<span class="arrow">&nearr;</span></a>
+                </div>
+            </div>
+
+            <!-- PRIVE -->
+            <div class="t-shell reveal">
+                <div class="t-card">
+                    <div class="t-badge t-badge-prive">Salon priv&eacute;</div>
+                    <div class="t-name">Priv&eacute;</div>
+                    <div class="t-price"><strong>CHF 490</strong> <span>/ soir&eacute;e</span></div>
+                    <div class="t-desc">Votre salon exclusif pour 8 &agrave; 20 personnes. Id&eacute;al pour les entreprises et les c&eacute;l&eacute;brations priv&eacute;es.</div>
+                    <ul class="t-features">
+                        <li><span class="t-check">&#10003;</span> Salon priv&eacute; ferm&eacute;</li>
+                        <li><span class="t-check">&#10003;</span> &Eacute;cran priv&eacute;</li>
+                        <li><span class="t-check">&#10003;</span> Champagne de bienvenue</li>
+                        <li><span class="t-check">&#10003;</span> Menu gastronomique</li>
+                        <li><span class="t-check">&#10003;</span> H&ocirc;te d&eacute;di&eacute;</li>
+                        <li><span class="t-check">&#10003;</span> Branding personnalis&eacute;</li>
+                    </ul>
+                    <a href="index.html#booking" class="t-btn t-btn-prive">Demander un devis<span class="arrow">&nearr;</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FANZONES QUICK ACCESS -->
+<section class="sec-bone">
+    <div class="container">
+        <div class="s-header reveal">
+            <div class="s-eyebrow">Nos lieux</div>
+            <h2 class="s-title">Choisissez votre fanzone</h2>
+            <p class="s-desc">Trois lieux iconiques au c&oelig;ur de Gen&egrave;ve, chacun avec sa propre atmosph&egrave;re.</p>
+        </div>
+
+        <div class="venues-row">
+            <div class="venue-pill-shell reveal">
+                <div class="venue-pill">
+                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=200&q=80" alt="Cercle des Bains" class="venue-pill-img">
+                    <div>
+                        <div class="venue-pill-name">Cercle des Bains</div>
+                        <div class="venue-pill-meta">Quartier des Bains</div>
+                    </div>
+                    <span class="venue-pill-badge hq">QG</span>
+                </div>
+            </div>
+            <div class="venue-pill-shell reveal">
+                <div class="venue-pill">
+                    <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=200&q=80" alt="Uptown Geneva" class="venue-pill-img">
+                    <div>
+                        <div class="venue-pill-name">Uptown Geneva</div>
+                        <div class="venue-pill-meta">Centre-ville</div>
+                    </div>
+                    <span class="venue-pill-badge sec">Fanzone</span>
+                </div>
+            </div>
+            <div class="venue-pill-shell reveal">
+                <div class="venue-pill">
+                    <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=200&q=80" alt="Optimhall" class="venue-pill-img">
+                    <div>
+                        <div class="venue-pill-name">Optimhall</div>
+                        <div class="venue-pill-meta">M&eacute;tro &amp; Concerts</div>
+                    </div>
+                    <span class="venue-pill-badge sec">Fanzone</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOURVENUES RESERVATION -->
+<section id="reserve" class="sec-white">
+    <div class="container">
+        <div class="s-header reveal">
+            <div class="s-eyebrow">R&eacute;servation en ligne</div>
+            <h2 class="s-title">S&eacute;lectionnez vos &eacute;v&eacute;nements</h2>
+            <p class="s-desc">Consultez le calendrier complet et r&eacute;servez directement en ligne via notre plateforme s&eacute;curis&eacute;e.</p>
+        </div>
+
+        <div class="ticket-embed reveal">
+            <div class="ticket-inner">
+                <script src="https://www.fourvenues.com/assets/iframe/Locos/events"></script>
+            </div>
+        </div>
+
+        <div class="info-banner reveal" style="margin-top: 40px;">
+            <div class="info-banner-icon">&#9432;</div>
+            <div class="info-banner-text">
+                <strong>Besoin d'aide ?</strong> Contactez notre &eacute;quipe &agrave; <a href="mailto:info@mondiale-en-ville.ch" style="color: var(--pitch); text-decoration: none; font-weight: 600;">info@mondiale-en-ville.ch</a> pour toute question concernant votre r&eacute;servation.
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec-navymid">
+    <div class="container">
+        <div class="s-header reveal">
+            <div class="s-eyebrow">Questions fr&eacute;quentes</div>
+            <h2 class="s-title">Tout savoir avant de r&eacute;server</h2>
+        </div>
+
+        <div class="faq-grid">
+            <div class="faq-shell reveal">
+                <div class="faq-card">
+                    <div class="faq-q">Peut-on acheter des billets sur place ?</div>
+                    <div class="faq-a">Oui, sous r&eacute;serve de disponibilit&eacute;. Nous recommandons fortement la r&eacute;servation en ligne pour garantir votre place, les jours de grands matchs se remplissent rapidement.</div>
+                </div>
+            </div>
+            <div class="faq-shell reveal">
+                <div class="faq-card">
+                    <div class="faq-q">Les enfants sont-ils admis ?</div>
+                    <div class="faq-a">Les enfants de moins de 12 ans accompagn&eacute;s d'un adulte b&eacute;n&eacute;ficient de l'entr&eacute;e gratuite en zone Standard. L'acc&egrave;s VIP et Priv&eacute; est soumis aux m&ecirc;mes tarifs.</div>
+                </div>
+            </div>
+            <div class="faq-shell reveal">
+                <div class="faq-card">
+                    <div class="faq-q">Quelles sont les conditions d'annulation ?</div>
+                    <div class="faq-a">Annulation gratuite jusqu'&agrave; 48 heures avant l'&eacute;v&eacute;nement. Pass&eacute; ce d&eacute;lai, le billet est non remboursable mais transf&eacute;rable &agrave; une autre personne.</div>
+                </div>
+            </div>
+            <div class="faq-shell reveal">
+                <div class="faq-card">
+                    <div class="faq-q">Peut-on r&eacute;server un salon pour un groupe corporate ?</div>
+                    <div class="faq-a">Absolument. Nos salons priv&eacute;s accueillent de 8 &agrave; 20 personnes avec des options de branding personnalis&eacute;. Contactez-nous pour un devis sur mesure.</div>
+                </div>
+            </div>
+            <div class="faq-shell reveal">
+                <div class="faq-card">
+                    <div class="faq-q">Comment acc&eacute;der aux fanzones ?</div>
+                    <div class="faq-a">Nos trois lieux sont accessibles en transports publics (TPG). Le Cercle des Bains est situ&eacute; au Quartier des Bains, Uptown en centre-ville, et Optimhall &agrave; proximit&eacute; du m&eacute;tro.</div>
+                </div>
+            </div>
+            <div class="faq-shell reveal">
+                <div class="faq-card">
+                    <div class="faq-q">Le billet est-il valable pour toutes les fanzones ?</div>
+                    <div class="faq-a">Chaque billet est sp&eacute;cifique &agrave; une fanzone et un match. Vous pouvez acheter des billets pour diff&eacute;rents lieux selon le programme des matchs qui vous int&eacute;resse.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-grid">
+        <div>
+            <div class="f-brand">Mondiale en Ville</div>
+            <p class="f-tagline">L'exp&eacute;rience fanzone football de r&eacute;f&eacute;rence &agrave; Gen&egrave;ve pour la Coupe du Monde FIFA 2026. Trois lieux, un &eacute;t&eacute; inoubliable.</p>
+        </div>
+        <div>
+            <div class="f-title">Fanzones</div>
+            <a href="index.html#venues" class="f-link">Cercle des Bains</a>
+            <a href="index.html#venues" class="f-link">Uptown Geneva</a>
+            <a href="index.html#venues" class="f-link">Optimhall</a>
+        </div>
+        <div>
+            <div class="f-title">Exp&eacute;rience</div>
+            <a href="index.html#groups" class="f-link">Phase de groupes</a>
+            <a href="index.html#schedule" class="f-link">Programme des matchs</a>
+            <a href="index.html#booking" class="f-link">Salons priv&eacute;s</a>
+            <a href="billetterie.html" class="f-link">Billetterie</a>
+        </div>
+        <div>
+            <div class="f-title">Contact</div>
+            <a href="index.html#partners" class="f-link">Devenir partenaire</a>
+            <a href="mailto:info@mondiale-en-ville.ch" class="f-link">info@mondiale-en-ville.ch</a>
+            <a href="#" class="f-link">Dossier de presse</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span class="f-copy">&copy; 2026 Mondiale en Ville. Tous droits r&eacute;serv&eacute;s. Gen&egrave;ve, Suisse.</span>
+        <div class="f-socials">
+            <a href="#" title="Instagram">IG</a>
+            <a href="#" title="TikTok">TK</a>
+            <a href="#" title="X">X</a>
+            <a href="#" title="Facebook">FB</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // NAV SCROLL
+    window.addEventListener('scroll', () => {
+        document.getElementById('navbar').classList.toggle('scrolled', scrollY > 60);
+    });
+
+    // MOBILE MENU
+    function toggleMenu() {
+        document.getElementById('mobileMenu').classList.toggle('active');
+    }
+
+    // SCROLL REVEAL
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
