@@ -1,0 +1,16 @@
+Date,Catégorie,Sous-catégorie,Description,Fournisseur,Montant CHF,TVA %,Mode de paiement,Payé par,Statut,Pièce jointe,Notes
+2026-05-04,Setup,Domaine,Achat domaine mondialeenville.ch,Infomaniak,15.00,8.1,Carte,Brian,Payé,recu_domaine.pdf,Renouvellement annuel
+,Venues,Location,Cercle des Bains - acompte,Cercle des Bains,,8.1,Virement,Maikel,En attente,,Selon contrat
+,Venues,Location,Uptown Geneva - acompte,Uptown Geneva,,8.1,Virement,Maikel,En attente,,Selon contrat
+,Venues,Location,Optimhall - acompte,Optimhall,,8.1,Virement,Maikel,En attente,,Selon contrat
+,Publicité,Meta Ads,Campagne lancement semaine 1,Meta,,0,Carte,Brian,En attente,,Budget initial 500 CHF
+,Publicité,Google Ads,Campagne search,Google,,0,Carte,Brian,En attente,,Budget initial 200 CHF
+,Publicité,TikTok Ads,Campagne notoriété,TikTok,,0,Carte,Brian,En attente,,Budget initial 150 CHF
+,Personnel,Sécurité,Agents sécurité - soirée 1,À définir,,8.1,Virement,Maikel,En attente,,
+,Personnel,Bar,Staff bar - soirée 1,À définir,,8.1,Virement,Maikel,En attente,,
+,Personnel,Accueil,Staff billetterie / accueil,À définir,,8.1,Virement,Maikel,En attente,,
+,Contenu,Photo/Vidéo,Shooting promo,À définir,,8.1,Virement,Maikel,En attente,,Demande Arbi
+,Contenu,Print,Affiches A2,À définir,,8.1,Carte,Arbi,En attente,,
+,Outils,SaaS,FourVenues / billetterie,FourVenues,,0,Carte,Brian,En attente,,Commission par billet à confirmer
+,Outils,SaaS,Hébergement,Infomaniak,,8.1,Carte,Brian,En attente,,
+,Divers,,,,,,,,En attente,,
