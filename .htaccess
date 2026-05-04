@@ -1,0 +1,13 @@
+DirectoryIndex index.html
+
+<FilesMatch "\.(md|csv|json|js|lock)$">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "^(\.htaccess|\.gitignore|package\.json|vite\.config\.js)$">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "\.html$">
+    Require all granted
+</FilesMatch>
