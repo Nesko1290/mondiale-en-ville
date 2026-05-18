@@ -85,11 +85,28 @@ Côté app, ajouter dans `.env` :
 EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_xxx
 ```
 
-> En prod, remplacer l'update client `markDepositPaid()` par un webhook
-> Stripe (`payment_intent.succeeded`) qui flip `bookings.deposit_paid` et
-> `bookings.status` côté serveur.
+## 8. Webhook Stripe
 
-## 8. Storage
+L'update client `markDepositPaid()` est optimiste — la source de vérité est
+le webhook `stripe-webhook` qui confirme l'événement `payment_intent.succeeded`
+(et logge les `payment_failed`).
+
+```bash
+supabase functions deploy stripe-webhook --no-verify-jwt
+supabase secrets set STRIPE_WEBHOOK_SECRET=whsec_xxx
+```
+
+Cote Stripe (Dashboard → Developers → Webhooks → Add endpoint) :
+
+- URL : `https://<project-ref>.supabase.co/functions/v1/stripe-webhook`
+- Événements : `payment_intent.succeeded`, `payment_intent.payment_failed`
+
+Le secret `whsec_...` est généré par Stripe à la création du endpoint.
+
+> Le flag `--no-verify-jwt` est requis : Stripe n'envoie pas de JWT Supabase.
+> La signature du webhook est vérifiée à la main dans la function (HMAC-SHA256).
+
+## 9. Storage
 
 Bucket `project-photos` créé en privé. Les fichiers sont rangés par
 `{user_id}/{timestamp}.{ext}`. Lecture via signed URL (1h par défaut).

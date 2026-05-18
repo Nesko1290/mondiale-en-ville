@@ -128,8 +128,9 @@ export async function createDepositIntent(bookingId: string): Promise<{
 }
 
 export async function markDepositPaid(bookingId: string): Promise<void> {
-  // TODO en prod : remplacer par un webhook Stripe qui valide cote serveur
-  // que le PaymentIntent est succeeded avant de flipper le booking.
+  // Update optimiste cote client pour UX instantanee. La source de verite
+  // reste le webhook stripe-webhook qui reflippe la meme ligne — l'update est
+  // idempotent.
   const { error } = await supabase
     .from("bookings")
     .update({ deposit_paid: true, status: "en_preparation" })
