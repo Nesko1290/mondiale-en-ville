@@ -8,7 +8,7 @@ export default function OnboardingScreen() {
   return (
     <Screen
       footer={
-        <Button label="Suivant" onPress={() => router.replace("/(tabs)")} />
+        <Button label="Suivant" onPress={() => router.replace("/login")} />
       }
     >
       <Header back onBack={() => router.back()} />
