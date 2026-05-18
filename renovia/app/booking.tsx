@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, Alert } from "react-native";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { Screen } from "@/components/Screen";
@@ -7,25 +7,59 @@ import { Header } from "@/components/Header";
 import { Button } from "@/components/Button";
 import { Card } from "@/components/Card";
 import { useApp } from "@/lib/store";
+import { createBooking } from "@/lib/api";
 
 const DAY_LABELS = ["L", "M", "M", "J", "V", "S", "D"];
 const TIME_SLOTS = ["08:00", "10:00", "14:00", "16:00"];
 
 export default function BookingScreen() {
   const setSchedule = useApp((s) => s.setSchedule);
+  const currentProject = useApp((s) => s.currentProject);
+  const selectedArtisan = useApp((s) => s.selectedArtisan);
+  const estimate = useApp((s) => s.estimate);
   const [selectedDay, setSelectedDay] = useState<number>(15);
   const [selectedTime, setSelectedTime] = useState<string>("10:00");
+  const [saving, setSaving] = useState(false);
 
-  const onContinue = () => {
+  const onContinue = async () => {
     const [h, m] = selectedTime.split(":").map((n) => parseInt(n, 10));
-    setSchedule(new Date(2024, 4, selectedDay, h, m).toISOString());
-    router.push("/summary");
+    const scheduledAt = new Date(2024, 4, selectedDay, h, m).toISOString();
+    setSchedule(scheduledAt);
+
+    const projectId = currentProject?.id;
+    const artisanId = selectedArtisan?.id;
+    if (!projectId || !artisanId) {
+      Alert.alert("Erreur", "Projet ou artisan manquant.");
+      return;
+    }
+
+    const totalChf = estimate?.totalChf ?? 2150;
+    const depositChf = estimate?.depositChf ?? 215;
+
+    setSaving(true);
+    try {
+      const row = await createBooking({
+        projectId,
+        artisanId,
+        scheduledAt,
+        totalChf,
+        depositChf,
+      });
+      // TODO type bookingId on store
+      useApp.setState((s) => ({ ...(s as any), bookingId: row.id }));
+      router.push("/summary");
+    } catch (e) {
+      console.log("createBooking error", e);
+      Alert.alert("Erreur", "Impossible de créer la réservation.");
+    } finally {
+      setSaving(false);
+    }
   };
 
   const days: number[] = Array.from({ length: 31 }, (_, i) => i + 1);
 
   return (
-    <Screen footer={<Button label="Continuer" onPress={onContinue} />}>
+    <Screen footer={<Button label="Continuer" loading={saving} onPress={onContinue} />}>
       <Header back />
 
       <Text className="text-2xl font-semibold text-ink mt-2 mb-4">

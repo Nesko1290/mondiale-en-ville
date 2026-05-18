@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { View, Text, Pressable } from "react-native";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
@@ -7,6 +8,10 @@ import { Button } from "@/components/Button";
 import { Card } from "@/components/Card";
 import { useApp } from "@/lib/store";
 import { mockArtisans } from "@/lib/mock";
+import { subscribeBooking } from "@/lib/api";
+import type { Database } from "@/lib/supabase";
+
+type BookingRow = Database["public"]["Tables"]["bookings"]["Row"];
 
 type StepStatus = "done" | "current" | "pending";
 
@@ -38,9 +43,58 @@ function StepLine({ active }: { active: boolean }) {
   );
 }
 
+const STATUS_STEP: Record<string, number> = {
+  reserve: 1,
+  en_preparation: 2,
+  en_cours: 3,
+  termine: 4,
+};
+
+function formatScheduled(iso: string): string {
+  try {
+    const d = new Date(iso);
+    const date = d.toLocaleDateString("fr-CH", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+    const time = d.toLocaleTimeString("fr-CH", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    return `${date} à ${time}`;
+  } catch {
+    return iso;
+  }
+}
+
 export default function TrackingScreen() {
   const artisan = useApp((s) => s.selectedArtisan);
   const artisanName = artisan?.name ?? mockArtisans[0].name;
+  const [booking, setBooking] = useState<BookingRow | null>(null);
+
+  useEffect(() => {
+    const bookingId = (useApp.getState() as any).bookingId as string | undefined;
+    if (!bookingId) return;
+    const unsubscribe = subscribeBooking(bookingId, (row) => {
+      setBooking(row);
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  const currentStep = booking ? STATUS_STEP[booking.status] ?? 3 : 3;
+  const scheduledLabel = booking?.scheduled_at
+    ? formatScheduled(booking.scheduled_at)
+    : "Mercredi 15 mai 2024 à 10:00";
+
+  const stepStatus = (idx: number): StepStatus => {
+    if (idx < currentStep) return "done";
+    if (idx === currentStep) return "current";
+    return "pending";
+  };
 
   return (
     <Screen
@@ -59,13 +113,13 @@ export default function TrackingScreen() {
       </Text>
 
       <View className="flex-row items-center mb-2">
-        <StepCircle status="done" />
-        <StepLine active />
-        <StepCircle status="done" />
-        <StepLine active />
-        <StepCircle status="current" />
-        <StepLine active={false} />
-        <StepCircle status="pending" />
+        <StepCircle status={stepStatus(1)} />
+        <StepLine active={currentStep > 1} />
+        <StepCircle status={stepStatus(2)} />
+        <StepLine active={currentStep > 2} />
+        <StepCircle status={stepStatus(3)} />
+        <StepLine active={currentStep > 3} />
+        <StepCircle status={stepStatus(4)} />
       </View>
 
       <View className="flex-row justify-between mb-1">
@@ -107,7 +161,7 @@ export default function TrackingScreen() {
       <Card>
         <Text className="text-muted text-xs">Prochain rendez-vous</Text>
         <Text className="text-ink font-medium mt-1">
-          Mercredi 15 mai 2024 à 10:00
+          {scheduledLabel}
         </Text>
       </Card>
     </Screen>

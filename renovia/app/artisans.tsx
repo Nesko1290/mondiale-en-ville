@@ -1,10 +1,12 @@
-import { View, Text } from "react-native";
+import { useEffect, useState } from "react";
+import { ActivityIndicator, View, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { Screen } from "@/components/Screen";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/Button";
 import { Card } from "@/components/Card";
+import { listArtisans } from "@/lib/api";
 
 type IconName = keyof typeof Ionicons.glyphMap;
 
@@ -21,14 +23,43 @@ const BADGES: Badge[] = [
 ];
 
 export default function ArtisansScreen() {
+  const [firstId, setFirstId] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let active = true;
+    (async () => {
+      try {
+        const rows = await listArtisans();
+        if (active && rows.length > 0) setFirstId(rows[0].id);
+      } catch (e) {
+        console.log("listArtisans error", e);
+      } finally {
+        if (active) setLoading(false);
+      }
+    })();
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const onContinue = () => {
+    router.push(firstId ? `/artisan/${firstId}` : "/artisan/a1");
+  };
+
+  if (loading) {
+    return (
+      <Screen scroll={false}>
+        <View className="flex-1 items-center justify-center">
+          <ActivityIndicator color="#0B1320" />
+        </View>
+      </Screen>
+    );
+  }
+
   return (
     <Screen
-      footer={
-        <Button
-          label="Continuer"
-          onPress={() => router.push("/artisan/a1")}
-        />
-      }
+      footer={<Button label="Continuer" onPress={onContinue} />}
     >
       <Header back />
       <Text className="text-ink text-2xl font-semibold mt-2">

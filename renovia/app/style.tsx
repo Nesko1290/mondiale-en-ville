@@ -5,6 +5,7 @@ import { Screen } from "@/components/Screen";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/Button";
 import { useApp } from "@/lib/store";
+import { updateProject } from "@/lib/api";
 import type { ProjectStyle } from "@/lib/types";
 
 type Filter = "tous" | "moderne" | "minimaliste" | "classique" | "scandinave";
@@ -32,11 +33,28 @@ const TILES: StyleTile[] = [
 
 export default function StyleScreen() {
   const setStyle = useApp((s) => s.setStyle);
+  const currentProject = useApp((s) => s.currentProject);
   const [filter, setFilter] = useState<Filter>("tous");
   const [selected, setSelected] = useState<ProjectStyle | null>(null);
+  const [saving, setSaving] = useState(false);
 
   const visibleTiles =
     filter === "tous" ? TILES : TILES.filter((t) => t.value === filter);
+
+  const onNext = async () => {
+    if (!selected) return;
+    if (currentProject?.id) {
+      setSaving(true);
+      try {
+        await updateProject(currentProject.id, { style: selected });
+      } catch (e) {
+        console.log("updateProject error", e);
+      } finally {
+        setSaving(false);
+      }
+    }
+    router.push("/render");
+  };
 
   return (
     <Screen
@@ -44,7 +62,8 @@ export default function StyleScreen() {
         <Button
           label="Suivant"
           disabled={!selected}
-          onPress={() => router.push("/render")}
+          loading={saving}
+          onPress={onNext}
         />
       }
     >

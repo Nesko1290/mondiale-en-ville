@@ -1,10 +1,36 @@
+import { useEffect, useState } from "react";
 import { View, Text, ScrollView, Pressable } from "react-native";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { Card } from "@/components/Card";
-import { mockProjects } from "@/lib/mock";
+import { listProjects } from "@/lib/api";
+import { projectTypeLabel } from "@/lib/format";
+import type { Database } from "@/lib/supabase";
+
+type ProjectRow = Database["public"]["Tables"]["projects"]["Row"];
 
 export default function HomeScreen() {
+  const [projects, setProjects] = useState<ProjectRow[] | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let active = true;
+    (async () => {
+      try {
+        const rows = await listProjects();
+        if (active) setProjects(rows);
+      } catch (e) {
+        console.log("listProjects error", e);
+        if (active) setProjects([]);
+      } finally {
+        if (active) setLoading(false);
+      }
+    })();
+    return () => {
+      active = false;
+    };
+  }, []);
+
   return (
     <ScrollView className="flex-1 bg-cream" contentContainerStyle={{ paddingBottom: 24 }}>
       <View className="px-5 pt-4">
@@ -46,21 +72,40 @@ export default function HomeScreen() {
         </View>
       </View>
 
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ paddingHorizontal: 20, gap: 12 }}
-      >
-        {mockProjects.map((p) => (
-          <Card key={p.id} className="w-40">
-            <View className="h-32 bg-cream-200 rounded-md mb-3" />
-            <Text className="text-ink text-sm font-semibold" numberOfLines={1}>
-              {p.title}
+      {loading ? (
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{ paddingHorizontal: 20, gap: 12 }}
+        >
+          <View className="w-40 h-44 rounded-card bg-cream-200" />
+          <View className="w-40 h-44 rounded-card bg-cream-200" />
+        </ScrollView>
+      ) : projects && projects.length > 0 ? (
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{ paddingHorizontal: 20, gap: 12 }}
+        >
+          {projects.map((row) => (
+            <Card key={row.id} className="w-40">
+              <View className="h-32 bg-cream-200 rounded-md mb-3" />
+              <Text className="text-ink text-sm font-semibold" numberOfLines={1}>
+                {row.title ?? projectTypeLabel(row.type)}
+              </Text>
+              <Text className="text-muted text-xs mt-1">{row.rooms} pièces</Text>
+            </Card>
+          ))}
+        </ScrollView>
+      ) : (
+        <View className="px-5">
+          <Card>
+            <Text className="text-ink text-sm">
+              Aucun projet pour l'instant. Démarrez-en un !
             </Text>
-            <Text className="text-muted text-xs mt-1">{p.rooms} pièces</Text>
           </Card>
-        ))}
-      </ScrollView>
+        </View>
+      )}
     </ScrollView>
   );
 }

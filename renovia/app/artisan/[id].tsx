@@ -1,4 +1,5 @@
-import { View, Text, ScrollView } from "react-native";
+import { useEffect, useState } from "react";
+import { ActivityIndicator, View, Text, ScrollView } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { Screen } from "@/components/Screen";
@@ -6,15 +7,70 @@ import { Header } from "@/components/Header";
 import { Button } from "@/components/Button";
 import { Card } from "@/components/Card";
 import { useApp } from "@/lib/store";
-import { mockArtisans } from "@/lib/mock";
+import { getArtisan } from "@/lib/api";
+import type { Database } from "@/lib/supabase";
+import type { Artisan } from "@/lib/types";
+
+type ArtisanRow = Database["public"]["Tables"]["artisans"]["Row"];
 
 export default function ArtisanDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const setArtisan = useApp((s) => s.setArtisan);
-  const artisan = mockArtisans.find((a) => a.id === id) ?? mockArtisans[0];
+  const [artisan, setArtisanRow] = useState<ArtisanRow | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let active = true;
+    (async () => {
+      try {
+        if (!id) return;
+        const row = await getArtisan(id);
+        if (active) setArtisanRow(row);
+      } catch (e) {
+        console.log("getArtisan error", e);
+      } finally {
+        if (active) setLoading(false);
+      }
+    })();
+    return () => {
+      active = false;
+    };
+  }, [id]);
+
+  if (loading) {
+    return (
+      <Screen scroll={false}>
+        <View className="flex-1 items-center justify-center">
+          <ActivityIndicator color="#0B1320" />
+        </View>
+      </Screen>
+    );
+  }
+
+  if (!artisan) {
+    return (
+      <Screen scroll={false}>
+        <Header back />
+        <View className="flex-1 items-center justify-center">
+          <Text className="text-ink text-base">Artisan introuvable</Text>
+        </View>
+      </Screen>
+    );
+  }
 
   const onChoose = () => {
-    setArtisan(artisan);
+    const mapped: Artisan = {
+      id: artisan.id,
+      name: artisan.name,
+      city: artisan.city ?? "",
+      rating: artisan.rating,
+      reviewsCount: artisan.reviews_count,
+      about: artisan.about ?? "",
+      verified: artisan.verified,
+      avatarUri: artisan.avatar_url ?? undefined,
+      portfolio: artisan.portfolio ?? [],
+    };
+    setArtisan(mapped);
     router.push("/booking");
   };
 
@@ -32,7 +88,7 @@ export default function ArtisanDetailScreen() {
             <Ionicons name="star" size={14} color="#F59E0B" />
             <Text className="text-ink text-sm font-medium">{artisan.rating}</Text>
             <Text className="text-muted text-sm">
-              ({artisan.reviewsCount} avis)
+              ({artisan.reviews_count} avis)
             </Text>
           </View>
           <Text className="text-muted text-sm mt-0.5">{artisan.city}</Text>

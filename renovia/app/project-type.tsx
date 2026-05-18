@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, Alert } from "react-native";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { Screen } from "@/components/Screen";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/Button";
 import { useApp } from "@/lib/store";
+import { createProject } from "@/lib/api";
 import type { ProjectType } from "@/lib/types";
 
 type Option = { value: ProjectType; label: string };
@@ -21,11 +22,37 @@ const OPTIONS: Option[] = [
 
 export default function ProjectTypeScreen() {
   const setType = useApp((s) => s.setType);
+  const currentProject = useApp((s) => s.currentProject);
   const [selected, setSelected] = useState<ProjectType | null>(null);
+  const [saving, setSaving] = useState(false);
 
   const onSelect = (v: ProjectType) => {
     setSelected(v);
     setType(v);
+  };
+
+  const onNext = async () => {
+    if (!selected) return;
+    if (currentProject?.id) {
+      router.push("/style");
+      return;
+    }
+    setSaving(true);
+    try {
+      const row = await createProject({
+        type: selected,
+        photoPath: currentProject?.photoUri,
+      });
+      useApp.setState((s) => ({
+        currentProject: { ...(s.currentProject ?? {}), id: row.id },
+      }));
+      router.push("/style");
+    } catch (e) {
+      console.log("createProject error", e);
+      Alert.alert("Erreur", "Impossible d'enregistrer le projet.");
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
@@ -34,7 +61,8 @@ export default function ProjectTypeScreen() {
         <Button
           label="Suivant"
           disabled={!selected}
-          onPress={() => router.push("/style")}
+          loading={saving}
+          onPress={onNext}
         />
       }
     >
