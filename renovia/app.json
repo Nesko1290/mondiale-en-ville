@@ -1,0 +1,47 @@
+{
+  "expo": {
+    "name": "Renovia",
+    "slug": "renovia",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "scheme": "renovia",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#0B1320"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.renovia.app",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Renovia utilise l'appareil photo pour analyser vos pièces et proposer une rénovation."
+      }
+    },
+    "android": {
+      "package": "com.renovia.app",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#0B1320"
+      },
+      "permissions": ["CAMERA"]
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Renovia utilise l'appareil photo pour analyser vos pièces."
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
