@@ -67,7 +67,29 @@ L'authentification utilisateur est requise (JWT Supabase) ; la function rejette
 les projets qui n'appartiennent pas au caller. Le rendu est reposé dans le
 bucket `project-photos` sous `{user_id}/renders/`.
 
-## 7. Storage
+## 7. Edge Function "create-deposit-intent" (Stripe)
+
+L'écran `app/summary.tsx` invoque `create-deposit-intent` au tap "Payer l'acompte".
+La function crée un Customer + EphemeralKey + PaymentIntent Stripe pour le
+montant de l'acompte stocké dans la table `bookings`. Le client ouvre ensuite
+le PaymentSheet natif Stripe.
+
+```bash
+supabase secrets set STRIPE_SECRET_KEY=sk_test_xxx
+supabase functions deploy create-deposit-intent
+```
+
+Côté app, ajouter dans `.env` :
+
+```
+EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_xxx
+```
+
+> En prod, remplacer l'update client `markDepositPaid()` par un webhook
+> Stripe (`payment_intent.succeeded`) qui flip `bookings.deposit_paid` et
+> `bookings.status` côté serveur.
+
+## 8. Storage
 
 Bucket `project-photos` créé en privé. Les fichiers sont rangés par
 `{user_id}/{timestamp}.{ext}`. Lecture via signed URL (1h par défaut).

@@ -29,6 +29,7 @@
     "expo-file-system": "~17.0.1",
     "@react-native-async-storage/async-storage": "1.23.1",
     "@supabase/supabase-js": "^2.45.4",
+    "@stripe/stripe-react-native": "0.38.6",
     "react-native-url-polyfill": "^2.0.0",
     "base64-arraybuffer": "^1.0.2",
     "react": "18.2.0",

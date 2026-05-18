@@ -61,8 +61,14 @@ lib/                  theme, types, store, mock data, formatters
 - Realtime sur `bookings` + `projects` pour l'écran Suivi
 - Schéma + seed : `supabase/schema.sql`, `supabase/seed.sql`
 
+## Edge Functions
+
+- `render` — appelle Replicate (SDXL img2img) avec un prompt dérivé du style choisi, re-upload le rendu dans le bucket privé. Voir `supabase/functions/render/`.
+- `create-deposit-intent` — crée un PaymentIntent Stripe pour l'acompte. Voir `supabase/functions/create-deposit-intent/`.
+
 ## TODO branchements
 
-- Endpoint IA (ControlNet inpainting) côté serveur ou Edge Function
-- Stripe acompte
-- Push notifications (`expo-notifications`)
+- Webhook Stripe `payment_intent.succeeded` pour confirmer l'acompte côté serveur
+- Push notifications (`expo-notifications`) sur changement de statut booking
+- Apple/Google client IDs configurés côté provider Supabase
+- Assets : icônes app + splash image

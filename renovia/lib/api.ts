@@ -112,6 +112,31 @@ export async function createBooking(input: {
   return data;
 }
 
+export async function createDepositIntent(bookingId: string): Promise<{
+  clientSecret: string;
+  ephemeralKey: string;
+  customer: string;
+  amount: number;
+  currency: string;
+}> {
+  const { data, error } = await supabase.functions.invoke("create-deposit-intent", {
+    body: { bookingId },
+  });
+  if (error) throw error;
+  if (!data?.clientSecret) throw new Error("PaymentIntent invalide");
+  return data;
+}
+
+export async function markDepositPaid(bookingId: string): Promise<void> {
+  // TODO en prod : remplacer par un webhook Stripe qui valide cote serveur
+  // que le PaymentIntent est succeeded avant de flipper le booking.
+  const { error } = await supabase
+    .from("bookings")
+    .update({ deposit_paid: true, status: "en_preparation" })
+    .eq("id", bookingId);
+  if (error) throw error;
+}
+
 export async function requestRender(input: {
   projectId: string;
   style?: string;

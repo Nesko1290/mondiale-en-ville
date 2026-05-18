@@ -1,5 +1,7 @@
-import { View, Text } from "react-native";
+import { useState } from "react";
+import { View, Text, Alert } from "react-native";
 import { router } from "expo-router";
+import { useStripe } from "@stripe/stripe-react-native";
 import { Screen } from "@/components/Screen";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/Button";
@@ -7,6 +9,7 @@ import { Card } from "@/components/Card";
 import { useApp } from "@/lib/store";
 import { chf } from "@/lib/format";
 import { mockArtisans, mockEstimate } from "@/lib/mock";
+import { createDepositIntent, markDepositPaid } from "@/lib/api";
 
 const WEEKDAYS = [
   "Dimanche",
@@ -68,12 +71,54 @@ function Row({ label, value, trailing, first }: RowProps) {
 export default function SummaryScreen() {
   const artisan = useApp((s) => s.selectedArtisan);
   const scheduledAt = useApp((s) => s.scheduledAt);
+  const bookingId = useApp((s) => s.bookingId);
+  const estimate = useApp((s) => s.estimate);
   const artisanName = artisan?.name ?? mockArtisans[0].name;
+  const totalChf = estimate?.totalChf ?? mockEstimate.totalChf;
+  const depositChf = estimate?.depositChf ?? mockEstimate.depositChf;
+
+  const { initPaymentSheet, presentPaymentSheet } = useStripe();
+  const [paying, setPaying] = useState(false);
+
+  const onPay = async () => {
+    if (!bookingId) {
+      Alert.alert("Erreur", "Réservation introuvable.");
+      return;
+    }
+    setPaying(true);
+    try {
+      const intent = await createDepositIntent(bookingId);
+      const { error: initErr } = await initPaymentSheet({
+        merchantDisplayName: "Renovia",
+        paymentIntentClientSecret: intent.clientSecret,
+        customerEphemeralKeySecret: intent.ephemeralKey,
+        customerId: intent.customer,
+        allowsDelayedPaymentMethods: false,
+        returnURL: "renovia://payment-return",
+      });
+      if (initErr) throw new Error(initErr.message);
+
+      const { error: payErr } = await presentPaymentSheet();
+      if (payErr) {
+        if (payErr.code !== "Canceled") {
+          Alert.alert("Paiement", payErr.message);
+        }
+        return;
+      }
+      await markDepositPaid(bookingId);
+      router.push("/tracking");
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : "Paiement impossible";
+      Alert.alert("Erreur", msg);
+    } finally {
+      setPaying(false);
+    }
+  };
 
   return (
     <Screen
       footer={
-        <Button label="Payer l'acompte" onPress={() => router.push("/tracking")} />
+        <Button label="Payer l'acompte" loading={paying} onPress={onPay} />
       }
     >
       <Header back />
@@ -87,11 +132,7 @@ export default function SummaryScreen() {
         <Row label="Surface estimée" value="25 m²" />
         <Row label="Artisan" value={artisanName} />
         <Row label="Date" value={formatFr(scheduledAt)} />
-        <Row
-          label="Estimation"
-          value={chf(mockEstimate.totalChf)}
-          trailing="TTC"
-        />
+        <Row label="Estimation" value={chf(totalChf)} trailing="TTC" />
       </Card>
 
       <View
@@ -100,7 +141,7 @@ export default function SummaryScreen() {
       >
         <Text className="text-muted text-sm">Acompte (10%)</Text>
         <Text className="text-ink text-2xl font-semibold mt-1">
-          {chf(mockEstimate.depositChf)}
+          {chf(depositChf)}
         </Text>
         <Text className="text-muted text-sm mt-2">
           L'acompte est déduit du montant final.

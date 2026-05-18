@@ -43,6 +43,13 @@
       ],
       [
         "expo-apple-authentication"
+      ],
+      [
+        "@stripe/stripe-react-native",
+        {
+          "merchantIdentifier": "merchant.com.renovia.app",
+          "enableGooglePay": true
+        }
       ]
     ],
     "experiments": {
