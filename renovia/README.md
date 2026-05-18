@@ -15,8 +15,11 @@ App mobile de rénovation : prends une photo d'une pièce, choisis un style, voi
 ```bash
 cd renovia
 npm install
+cp .env.example .env       # remplir avec les credentials Supabase
 npx expo start
 ```
+
+Configuration Supabase : voir `supabase/README.md`.
 
 Puis scanner le QR avec Expo Go (iOS / Android) ou lancer un simulateur.
 
@@ -50,10 +53,16 @@ lib/                  theme, types, store, mock data, formatters
 `/render` → `/analysis` → `/estimate` → `/artisans` → `/artisan/[id]` →
 `/booking` → `/summary` → `/tracking` → `/done`
 
-## TODO branchements backend
+## Backend (Supabase)
 
-- Auth Supabase
-- Upload photo → Storage
-- Endpoint IA (ControlNet inpainting) côté serveur
+- Auth Apple + Google (`lib/auth.ts`)
+- Tables : `profiles`, `artisans`, `projects`, `bookings`, `reviews` (RLS activée)
+- Storage bucket privé `project-photos` (path : `{user_id}/{ts}.{ext}`)
+- Realtime sur `bookings` + `projects` pour l'écran Suivi
+- Schéma + seed : `supabase/schema.sql`, `supabase/seed.sql`
+
+## TODO branchements
+
+- Endpoint IA (ControlNet inpainting) côté serveur ou Edge Function
 - Stripe acompte
-- Realtime suivi projet
+- Push notifications (`expo-notifications`)

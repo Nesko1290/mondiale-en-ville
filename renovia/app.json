@@ -15,6 +15,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.renovia.app",
+      "usesAppleSignIn": true,
       "infoPlist": {
         "NSCameraUsageDescription": "Renovia utilise l'appareil photo pour analyser vos pièces et proposer une rénovation."
       }
@@ -33,11 +34,15 @@
     },
     "plugins": [
       "expo-router",
+      "expo-secure-store",
       [
         "expo-camera",
         {
           "cameraPermission": "Renovia utilise l'appareil photo pour analyser vos pièces."
         }
+      ],
+      [
+        "expo-apple-authentication"
       ]
     ],
     "experiments": {

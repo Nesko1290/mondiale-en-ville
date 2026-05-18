@@ -1,0 +1,54 @@
+# Supabase — setup Renovia
+
+## 1. Créer le projet
+
+1. Aller sur https://supabase.com → New project
+2. Récupérer `Project URL` et `anon public key` (Settings → API)
+3. Les copier dans `renovia/.env` :
+
+```
+EXPO_PUBLIC_SUPABASE_URL=https://xxx.supabase.co
+EXPO_PUBLIC_SUPABASE_ANON_KEY=eyJ...
+```
+
+## 2. Appliquer le schéma
+
+Dans Supabase Studio → SQL editor :
+
+1. Coller `schema.sql` → Run
+2. Coller `seed.sql` → Run (artisans de démo)
+
+Le schéma est idempotent — peut être rejoué sans casse.
+
+## 3. Activer Apple Sign In
+
+Studio → Authentication → Providers → Apple :
+- Service ID (depuis Apple Developer)
+- Team ID
+- Key ID + clé privée (.p8)
+
+## 4. Activer Google Sign In
+
+Studio → Authentication → Providers → Google :
+- Client ID (Web)
+- Client Secret
+
+Côté app, ajouter aussi le client iOS dans `.env` :
+
+```
+EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID=...apps.googleusercontent.com
+EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID=...apps.googleusercontent.com
+```
+
+Ajouter `renovia://auth-callback` dans les Redirect URLs autorisées.
+
+## 5. Realtime
+
+Les tables `bookings` et `projects` sont publiées sur le canal `supabase_realtime`
+(voir fin de `schema.sql`). L'écran Suivi (`app/tracking.tsx`) s'y abonne pour
+réagir aux changements de statut.
+
+## 6. Storage
+
+Bucket `project-photos` créé en privé. Les fichiers sont rangés par
+`{user_id}/{timestamp}.{ext}`. Lecture via signed URL (1h par défaut).
