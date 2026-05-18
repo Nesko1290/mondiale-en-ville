@@ -112,6 +112,18 @@ export async function createBooking(input: {
   return data;
 }
 
+export async function requestRender(input: {
+  projectId: string;
+  style?: string;
+}): Promise<{ renderedPath: string; renderedUrl: string | null }> {
+  const { data, error } = await supabase.functions.invoke("render", {
+    body: input,
+  });
+  if (error) throw error;
+  if (!data?.renderedPath) throw new Error("Render response invalide");
+  return data as { renderedPath: string; renderedUrl: string | null };
+}
+
 export function subscribeBooking(
   bookingId: string,
   onChange: (row: BookingRow) => void

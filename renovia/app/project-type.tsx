@@ -43,9 +43,7 @@ export default function ProjectTypeScreen() {
         type: selected,
         photoPath: currentProject?.photoUri,
       });
-      useApp.setState((s) => ({
-        currentProject: { ...(s.currentProject ?? {}), id: row.id },
-      }));
+      useApp.getState().setProjectId(row.id);
       router.push("/style");
     } catch (e) {
       console.log("createProject error", e);

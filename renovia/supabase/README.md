@@ -48,7 +48,26 @@ Les tables `bookings` et `projects` sont publiées sur le canal `supabase_realti
 (voir fin de `schema.sql`). L'écran Suivi (`app/tracking.tsx`) s'y abonne pour
 réagir aux changements de statut.
 
-## 6. Storage
+## 6. Edge Function "render" (IA)
+
+L'écran `app/render.tsx` invoque la function `render` qui appelle Replicate
+(SDXL img2img par défaut) avec un prompt dérivé du style choisi.
+
+```bash
+# Configurer les secrets
+supabase secrets set REPLICATE_API_TOKEN=r8_xxx
+# Optionnel : pinner un autre modele
+supabase secrets set REPLICATE_MODEL=stability-ai/sdxl:39ed52f2...
+
+# Deployer
+supabase functions deploy render
+```
+
+L'authentification utilisateur est requise (JWT Supabase) ; la function rejette
+les projets qui n'appartiennent pas au caller. Le rendu est reposé dans le
+bucket `project-photos` sous `{user_id}/renders/`.
+
+## 7. Storage
 
 Bucket `project-photos` créé en privé. Les fichiers sont rangés par
 `{user_id}/{timestamp}.{ext}`. Lecture via signed URL (1h par défaut).

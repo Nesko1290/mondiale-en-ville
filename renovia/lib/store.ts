@@ -7,8 +7,10 @@ type AppState = {
   analysis: WallAnalysis | null;
   selectedArtisan: Artisan | null;
   scheduledAt: string | null;
+  bookingId: string | null;
 
   startProject: () => void;
+  setProjectId: (id: string) => void;
   setPhoto: (uri: string) => void;
   setType: (type: ProjectType) => void;
   setStyle: (style: ProjectStyle) => void;
@@ -17,6 +19,7 @@ type AppState = {
   setEstimate: (estimate: Estimate) => void;
   setArtisan: (artisan: Artisan) => void;
   setSchedule: (iso: string) => void;
+  setBookingId: (id: string) => void;
   reset: () => void;
 };
 
@@ -26,6 +29,7 @@ export const useApp = create<AppState>((set) => ({
   analysis: null,
   selectedArtisan: null,
   scheduledAt: null,
+  bookingId: null,
 
   startProject: () =>
     set({
@@ -36,6 +40,8 @@ export const useApp = create<AppState>((set) => ({
         createdAt: new Date().toISOString(),
       },
     }),
+  setProjectId: (id) =>
+    set((s) => ({ currentProject: { ...(s.currentProject ?? {}), id } })),
   setPhoto: (uri) =>
     set((s) => ({ currentProject: { ...(s.currentProject ?? {}), photoUri: uri } })),
   setType: (type) =>
@@ -48,6 +54,7 @@ export const useApp = create<AppState>((set) => ({
   setEstimate: (estimate) => set({ estimate }),
   setArtisan: (artisan) => set({ selectedArtisan: artisan }),
   setSchedule: (iso) => set({ scheduledAt: iso }),
+  setBookingId: (id) => set({ bookingId: id }),
   reset: () =>
     set({
       currentProject: null,
@@ -55,5 +62,6 @@ export const useApp = create<AppState>((set) => ({
       analysis: null,
       selectedArtisan: null,
       scheduledAt: null,
+      bookingId: null,
     }),
 }));

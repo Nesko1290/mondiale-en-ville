@@ -45,8 +45,7 @@ export default function BookingScreen() {
         totalChf,
         depositChf,
       });
-      // TODO type bookingId on store
-      useApp.setState((s) => ({ ...(s as any), bookingId: row.id }));
+      useApp.getState().setBookingId(row.id);
       router.push("/summary");
     } catch (e) {
       console.log("createBooking error", e);

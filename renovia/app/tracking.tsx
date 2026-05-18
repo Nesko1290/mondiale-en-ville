@@ -74,8 +74,8 @@ export default function TrackingScreen() {
   const artisanName = artisan?.name ?? mockArtisans[0].name;
   const [booking, setBooking] = useState<BookingRow | null>(null);
 
+  const bookingId = useApp((s) => s.bookingId);
   useEffect(() => {
-    const bookingId = (useApp.getState() as any).bookingId as string | undefined;
     if (!bookingId) return;
     const unsubscribe = subscribeBooking(bookingId, (row) => {
       setBooking(row);
@@ -83,7 +83,7 @@ export default function TrackingScreen() {
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [bookingId]);
 
   const currentStep = booking ? STATUS_STEP[booking.status] ?? 3 : 3;
   const scheduledLabel = booking?.scheduled_at
