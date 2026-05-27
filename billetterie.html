@@ -766,6 +766,48 @@
 </head>
 <body>
 
+<!-- ACCÈS PROTÉGÉ -->
+<div id="accessGate" role="dialog" aria-modal="true" aria-label="Accès protégé">
+    <div class="ag-card">
+        <div class="ag-logo">MONDIALE EN VILLE</div>
+        <p class="ag-sub">Site temporairement protégé.<br>Veuillez saisir le mot de passe pour continuer.</p>
+        <form id="agForm" autocomplete="off">
+            <input id="agInput" type="password" placeholder="Mot de passe" aria-label="Mot de passe" autocomplete="off">
+            <button type="submit">Entrer</button>
+        </form>
+        <p id="agError" class="ag-error" hidden>Mot de passe incorrect.</p>
+    </div>
+</div>
+<style>
+    #accessGate{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;background:#0c1a2e;font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;padding:24px;}
+    #accessGate .ag-card{width:100%;max-width:360px;text-align:center;}
+    #accessGate .ag-logo{color:#d4af37;font-weight:800;letter-spacing:.12em;font-size:15px;margin-bottom:10px;}
+    #accessGate .ag-sub{color:#8a9ab0;font-size:14px;line-height:1.5;margin:0 0 28px;}
+    #accessGate input{width:100%;box-sizing:border-box;padding:14px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);color:#fff;font-size:15px;outline:none;margin-bottom:12px;}
+    #accessGate input:focus{border-color:#d4af37;}
+    #accessGate button{width:100%;padding:14px 16px;border:0;border-radius:10px;background:#c8102e;color:#fff;font-weight:700;font-size:15px;cursor:pointer;transition:background .2s;}
+    #accessGate button:hover{background:#e8384f;}
+    #accessGate .ag-error{color:#e8384f;font-size:13px;margin:14px 0 0;}
+    html.ag-locked,html.ag-locked body{overflow:hidden!important;}
+</style>
+<script>
+(function(){
+    var KEY='mev_access',PASS='Brian96',html=document.documentElement;
+    function unlock(){var g=document.getElementById('accessGate');if(g&&g.parentNode)g.parentNode.removeChild(g);html.classList.remove('ag-locked');}
+    try{if(sessionStorage.getItem(KEY)==='1'){unlock();return;}}catch(e){}
+    html.classList.add('ag-locked');
+    document.addEventListener('DOMContentLoaded',function(){
+        var form=document.getElementById('agForm'),input=document.getElementById('agInput'),err=document.getElementById('agError');
+        if(input)input.focus();
+        if(form)form.addEventListener('submit',function(ev){
+            ev.preventDefault();
+            if(input.value===PASS){try{sessionStorage.setItem(KEY,'1');}catch(e){}unlock();}
+            else{if(err)err.hidden=false;input.value='';input.focus();}
+        });
+    });
+})();
+</script>
+
 <!-- NAVIGATION -->
 <nav id="navbar">
     <a href="index.html" class="nav-logo">Mondiale en Ville</a>
