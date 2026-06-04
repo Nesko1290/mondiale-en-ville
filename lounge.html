@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lounge Priv&eacute; | MONDIALE EN VILLE 2026</title>
+    <meta name="description" content="R&eacute;servez un lounge priv&eacute; &agrave; l'Optimhall pour la Coupe du Monde 2026. &Eacute;cran priv&eacute;, boissons et food inclus d&egrave;s CHF 300.">
+    <meta property="og:title" content="Lounge Priv&eacute; — MONDIALE EN VILLE 2026">
+    <meta property="og:description" content="Vivez la Coupe du Monde en toute exclusivit&eacute; dans un lounge priv&eacute; &agrave; l'Optimhall, Gen&egrave;ve.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pitch: #1a7a45;
+            --pitch-deep: #0f5c30;
+            --pitch-soft: #2d9a5c;
+            --pitch-muted: #a3d4b5;
+            --accent: #c8102e;
+            --accent-soft: #e8384f;
+            --gold: #b8960c;
+            --gold-soft: #d4af37;
+            --bone: #faf9f6;
+            --warm-white: #f5f4f0;
+            --card-white: #ffffff;
+            --navy: #0c1a2e;
+            --navy-mid: #142238;
+            --navy-light: #1c2d45;
+            --text-primary: #1a1a2e;
+            --text-secondary: #5a6070;
+            --text-tertiary: #8a8f9c;
+            --text-on-dark: #e8e6e1;
+            --text-muted-dark: #8a9ab0;
+            --border-light: rgba(0,0,0,0.06);
+            --border-dark: rgba(255,255,255,0.08);
+            --shadow-card: 0 1px 3px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.03);
+            --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.06), 0 20px 48px rgba(0,0,0,0.06);
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
+            --ff-display: 'Instrument Serif', serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            background: var(--bone);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 9000;
+            pointer-events: none;
+            opacity: 0.02;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        /* NAVIGATION */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            padding: 0 8px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 32px;
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 100px;
+            width: max-content;
+            max-width: calc(100vw - 32px);
+            transition: all 0.5s var(--ease-spring);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+        }
+        nav.scrolled {
+            background: rgba(255,255,255,0.92);
+            box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+        }
+        .nav-logo {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 0 16px;
+            white-space: nowrap;
+            text-transform: uppercase;
+        }
+        .nav-links { display: flex; gap: 4px; list-style: none; }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            padding: 8px 14px;
+            border-radius: 100px;
+            transition: all 0.3s var(--ease-out-expo);
+        }
+        .nav-links a:hover { color: var(--text-primary); background: rgba(0,0,0,0.04); }
+        .nav-links a.active { color: var(--text-primary); background: rgba(0,0,0,0.05); }
+        .nav-cta {
+            background: var(--text-primary);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 100px;
+            transition: all 0.4s var(--ease-spring);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+        .nav-cta:hover { transform: scale(0.97); }
+        .nav-cta:active { transform: scale(0.95); }
+        .nav-cta .arrow {
+            width: 22px; height: 22px;
+            background: rgba(255,255,255,0.12);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 10px;
+            transition: transform 0.3s var(--ease-spring);
+        }
+        .nav-cta:hover .arrow { transform: translate(1px, -1px) scale(1.05); }
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 101; padding: 16px; }
+        .hamburger span { width: 20px; height: 1.5px; background: var(--text-primary); transition: all 0.3s var(--ease-out-expo); display: block; }
+
+        /* HERO */
+        .page-hero {
+            min-height: 70dvh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: var(--navy);
+            color: var(--text-on-dark);
+            text-align: center;
+        }
+        .page-hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1920&q=80') center/cover;
+            opacity: 0.12;
+        }
+        .page-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 60% 50% at 40% 60%, rgba(184,150,12,0.08) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 70% 30%, rgba(200,16,46,0.06) 0%, transparent 70%),
+                linear-gradient(180deg, rgba(12,26,46,0.3) 0%, rgba(12,26,46,0.95) 100%);
+        }
+        .page-hero-lines {
+            position: absolute;
+            inset: 0;
+            opacity: 0.03;
+            background-image:
+                linear-gradient(rgba(255,255,255,1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px);
+            background-size: 100px 100px;
+        }
+        .page-hero-content {
+            position: relative;
+            max-width: 700px;
+            padding: 0 24px;
+            padding-top: 100px;
+        }
+        .page-hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 16px 6px 8px;
+            background: rgba(184,150,12,0.1);
+            border: 1px solid rgba(184,150,12,0.2);
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold-soft);
+            margin-bottom: 32px;
+        }
+        .page-hero-eyebrow .dot {
+            width: 8px; height: 8px;
+            background: var(--gold-soft);
+            border-radius: 50%;
+            animation: breathe 3s ease-in-out infinite;
+        }
+        @keyframes breathe { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.4;transform:scale(0.8);} }
+
+        .page-hero h1 {
+            font-family: var(--ff-display);
+            font-size: clamp(42px, 7vw, 80px);
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+        .page-hero .subtitle {
+            font-size: 17px;
+            color: var(--text-muted-dark);
+            font-weight: 300;
+            line-height: 1.8;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: var(--text-muted-dark);
+            text-decoration: none;
+            transition: color 0.3s var(--ease-out-expo);
+            position: absolute;
+            top: 100px;
+            left: 24px;
+        }
+        .back-link:hover { color: var(--text-on-dark); }
+        .back-link .back-arrow {
+            width: 28px; height: 28px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 12px;
+            transition: all 0.3s var(--ease-spring);
+        }
+        .back-link:hover .back-arrow { background: rgba(255,255,255,0.1); transform: translateX(-2px); }
+
+        /* SHARED LAYOUT */
+        section { padding: 120px 24px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        .s-eyebrow {
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .s-title {
+            font-family: var(--ff-display);
+            font-size: clamp(32px, 4.5vw, 56px);
+            letter-spacing: -0.03em;
+            line-height: 1.05;
+            margin-bottom: 16px;
+            font-weight: 400;
+            text-wrap: balance;
+        }
+        .s-desc {
+            font-size: 15px;
+            line-height: 1.7;
+            font-weight: 300;
+            max-width: 540px;
+        }
+        .s-header { margin-bottom: 64px; }
+
+        .sec-bone { background: var(--bone); color: var(--text-primary); }
+        .sec-bone .s-eyebrow { color: var(--pitch); }
+        .sec-bone .s-desc { color: var(--text-secondary); }
+
+        .sec-navy { background: var(--navy); color: var(--text-on-dark); }
+        .sec-navy .s-eyebrow { color: var(--pitch-muted); }
+        .sec-navy .s-desc { color: var(--text-muted-dark); }
+
+        .sec-navymid { background: var(--navy-mid); color: var(--text-on-dark); }
+        .sec-navymid .s-eyebrow { color: var(--pitch-muted); }
+        .sec-navymid .s-desc { color: var(--text-muted-dark); }
+
+        /* LOUNGE OFFER */
+        .offer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+        .offer-visual {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+        }
+        .offer-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .offer-visual-badge {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(12,26,46,0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 14px;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .offer-visual-badge .loc-icon {
+            width: 36px; height: 36px;
+            background: rgba(184,150,12,0.15);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px;
+        }
+        .offer-visual-badge .loc-name {
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--text-on-dark);
+        }
+        .offer-visual-badge .loc-meta {
+            font-size: 11px;
+            color: var(--text-muted-dark);
+            margin-top: 2px;
+        }
+        .offer-content { padding: 16px 0; }
+        .offer-price-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(184,150,12,0.1);
+            border: 1px solid rgba(184,150,12,0.2);
+            border-radius: 100px;
+            padding: 8px 20px;
+            margin-bottom: 24px;
+        }
+        .offer-price-tag span {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--gold-soft);
+        }
+        .offer-price-tag strong {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 20px;
+            color: #fff;
+        }
+        .offer-title {
+            font-family: var(--ff-display);
+            font-size: clamp(28px, 3.5vw, 42px);
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            color: var(--text-on-dark);
+        }
+        .offer-desc {
+            color: var(--text-muted-dark);
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 32px;
+            max-width: 460px;
+        }
+        .offer-features {
+            list-style: none;
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .offer-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-on-dark);
+            font-size: 14px;
+        }
+        .offer-check {
+            width: 22px; height: 22px;
+            background: rgba(26,122,69,0.12);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--pitch-soft);
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        .wa-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: #25D366;
+            color: #fff;
+            font-weight: 700;
+            font-size: 14px;
+            padding: 18px 40px;
+            border-radius: 100px;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.2s;
+            letter-spacing: 0.3px;
+        }
+        .wa-btn:hover { background: #1ebe5a; transform: translateY(-2px); }
+        .wa-btn svg { flex-shrink: 0; }
+
+        /* WHO IS IT FOR */
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        .audience-shell {
+            background: rgba(0,0,0,0.02);
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: 5px;
+            transition: all 0.5s var(--ease-spring);
+        }
+        .audience-shell:hover {
+            box-shadow: var(--shadow-card-hover);
+            transform: translateY(-3px);
+        }
+        .audience-card {
+            background: var(--card-white);
+            border-radius: 16px;
+            padding: 36px 28px;
+            text-align: center;
+        }
+        .audience-icon {
+            width: 56px; height: 56px;
+            background: rgba(184,150,12,0.08);
+            border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px;
+            margin: 0 auto 20px;
+        }
+        .audience-card h3 {
+            font-family: var(--ff-display);
+            font-size: 22px;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        .audience-card p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        /* INCLUSIONS */
+        .inclusions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        .incl-shell {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border-dark);
+            border-radius: 20px;
+            padding: 5px;
+        }
+        .incl-card {
+            background: var(--navy-mid);
+            border-radius: 16px;
+            padding: 32px 28px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            box-shadow: inset 0 1px 1px rgba(255,255,255,0.04);
+        }
+        .incl-icon {
+            width: 48px; height: 48px;
+            background: rgba(26,122,69,0.1);
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        .incl-card h3 {
+            font-family: var(--ff-display);
+            font-size: 20px;
+            letter-spacing: -0.01em;
+            margin-bottom: 6px;
+            color: var(--text-on-dark);
+        }
+        .incl-card p {
+            font-size: 13px;
+            color: var(--text-muted-dark);
+            line-height: 1.65;
+        }
+
+        /* CTA BOTTOM */
+        .cta-section {
+            text-align: center;
+            background: var(--navy);
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(184,150,12,0.06) 0%, transparent 70%);
+        }
+        .cta-inner {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .cta-inner .s-eyebrow { color: var(--gold-soft); }
+        .cta-inner .s-title { color: var(--text-on-dark); margin-bottom: 12px; }
+        .cta-inner .s-desc { color: var(--text-muted-dark); margin: 0 auto 40px; }
+
+        /* FOOTER */
+        footer {
+            background: var(--navy);
+            color: var(--text-on-dark);
+            padding: 64px 24px 32px;
+            border-top: 1px solid var(--border-dark);
+        }
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .f-brand {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .f-tagline { color: var(--text-muted-dark); font-size: 13px; line-height: 1.65; }
+        .f-title {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted-dark);
+            margin-bottom: 14px;
+            font-weight: 700;
+        }
+        .f-link {
+            display: block;
+            color: var(--text-muted-dark);
+            text-decoration: none;
+            font-size: 13px;
+            margin-bottom: 8px;
+            transition: color 0.3s;
+        }
+        .f-link:hover { color: var(--text-on-dark); }
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .f-copy { font-size: 11px; color: var(--text-muted-dark); }
+        .f-socials { display: flex; gap: 8px; }
+        .f-socials a {
+            width: 32px; height: 32px;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid var(--border-dark);
+            color: var(--text-muted-dark);
+            text-decoration: none;
+            font-size: 11px; font-weight: 700;
+            border-radius: 8px;
+            transition: all 0.3s var(--ease-out-expo);
+        }
+        .f-socials a:hover { border-color: var(--pitch-soft); color: var(--pitch-soft); }
+
+        /* MOBILE MENU */
+        .mobile-menu {
+            display: none; position: fixed; inset: 0;
+            background: rgba(250,249,246,0.97);
+            backdrop-filter: blur(24px);
+            z-index: 100;
+            flex-direction: column; align-items: center; justify-content: center; gap: 24px;
+        }
+        .mobile-menu.active { display: flex; }
+        .mobile-menu a {
+            font-family: var(--ff-display);
+            font-size: 36px;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .mobile-menu.active a {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.5s var(--ease-out-expo);
+        }
+        .mobile-menu.active a:nth-child(1) { transition-delay: 0.05s; }
+        .mobile-menu.active a:nth-child(2) { transition-delay: 0.1s; }
+        .mobile-menu.active a:nth-child(3) { transition-delay: 0.15s; }
+        .mobile-menu.active a:nth-child(4) { transition-delay: 0.2s; }
+        .mobile-menu.active a:nth-child(5) { transition-delay: 0.25s; }
+        .mobile-menu a:hover { color: var(--pitch); }
+
+        /* ANIMATIONS */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            filter: blur(4px);
+            transition: all 0.8s var(--ease-out-expo);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 968px) {
+            nav { top: 12px; }
+            .nav-links, .nav-cta { display: none; }
+            .hamburger { display: flex; }
+            section { padding: 80px 20px; }
+            .offer-grid { grid-template-columns: 1fr; }
+            .audience-grid { grid-template-columns: 1fr; }
+            .inclusions-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+            .back-link { top: 80px; left: 16px; }
+        }
+        @media (max-width: 600px) {
+            .footer-grid { grid-template-columns: 1fr; }
+            nav { padding: 0 4px; }
+            .offer-visual { aspect-ratio: 16/10; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav id="navbar">
+    <a href="index.html" class="nav-logo">Mondiale en Ville</a>
+    <ul class="nav-links">
+        <li><a href="index.html#venues">Fanzones</a></li>
+        <li><a href="index.html#schedule">Programme</a></li>
+        <li><a href="billetterie.html">Billetterie</a></li>
+        <li><a href="index.html#partners">Partenaires</a></li>
+    </ul>
+    <a href="https://wa.me/41765931227?text=Bonjour%2C%20je%20souhaite%20r%C3%A9server%20un%20lounge%20priv%C3%A9%20pour%20la%20Fanzone%20Mondiale%20en%20Ville." class="nav-cta" target="_blank" rel="noopener">R&eacute;server<span class="arrow">&nearr;</span></a>
+    <div class="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+    </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" onclick="toggleMenu()">Accueil</a>
+    <a href="index.html#venues" onclick="toggleMenu()">Fanzones</a>
+    <a href="index.html#schedule" onclick="toggleMenu()">Programme</a>
+    <a href="billetterie.html" onclick="toggleMenu()">Billetterie</a>
+    <a href="index.html#partners" onclick="toggleMenu()">Partenaires</a>
+</div>
+
+<!-- HERO -->
+<section class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-lines"></div>
+    <a href="billetterie.html" class="back-link">
+        <span class="back-arrow">&larr;</span>
+        Billetterie
+    </a>
+    <div class="page-hero-content">
+        <div class="page-hero-eyebrow">
+            <span class="dot"></span>Exp&eacute;rience exclusive
+        </div>
+        <h1>Lounge Priv&eacute;</h1>
+        <p class="subtitle">Vivez chaque match dans un cadre intimiste et sur mesure, &agrave; l'Optimhall de Gen&egrave;ve. Discr&eacute;tion, confort et exclusivit&eacute;.</p>
+    </div>
+</section>
+
+<!-- OFFER -->
+<section class="sec-navy">
+    <div class="container">
+        <div class="offer-grid reveal">
+            <div class="offer-visual">
+                <img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=800&q=80" alt="Lounge priv&eacute; Optimhall">
+                <div class="offer-visual-badge">
+                    <div class="loc-icon">&#9906;</div>
+                    <div>
+                        <div class="loc-name">Optimhall</div>
+                        <div class="loc-meta">Gen&egrave;ve &mdash; M&eacute;tro &amp; Concerts</div>
+                    </div>
+                </div>
+            </div>
+            <div class="offer-content">
+                <div class="offer-price-tag">
+                    <span>D&egrave;s</span>
+                    <strong>CHF 300.-</strong>
+                </div>
+                <h2 class="offer-title">Votre espace priv&eacute; pour la Coupe du Monde</h2>
+                <p class="offer-desc">Un lounge ferm&eacute; et intimiste au c&oelig;ur de l'Optimhall, avec tout le n&eacute;cessaire pour profiter du match en toute s&eacute;r&eacute;nit&eacute;. Boissons, food et &eacute;cran priv&eacute; inclus.</p>
+                <ul class="offer-features">
+                    <li><span class="offer-check">&#10003;</span> Diffusion du match sur &eacute;cran priv&eacute;</li>
+                    <li><span class="offer-check">&#10003;</span> Boissons incluses</li>
+                    <li><span class="offer-check">&#10003;</span> Food &amp; snacks inclus</li>
+                    <li><span class="offer-check">&#10003;</span> Espace ferm&eacute; et discret</li>
+                    <li><span class="offer-check">&#10003;</span> Capacit&eacute; modulable (groupes &amp; entreprises)</li>
+                </ul>
+                <a href="https://wa.me/41765931227?text=Bonjour%2C%20je%20souhaite%20r%C3%A9server%20un%20lounge%20priv%C3%A9%20pour%20la%20Fanzone%20Mondiale%20en%20Ville." class="wa-btn" target="_blank" rel="noopener">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    R&eacute;server via WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WHO IS IT FOR -->
+<section class="sec-bone">
+    <div class="container">
+        <div class="s-header reveal">
+            <div class="s-eyebrow">Pour qui ?</div>
+            <h2 class="s-title">L'exclusivit&eacute; pour chaque occasion</h2>
+            <p class="s-desc">Le lounge priv&eacute; s'adapte &agrave; vos besoins, que vous soyez entre amis, en famille ou en &eacute;quipe.</p>
+        </div>
+
+        <div class="audience-grid">
+            <div class="audience-shell reveal">
+                <div class="audience-card">
+                    <div class="audience-icon">&#127970;</div>
+                    <h3>Entreprises</h3>
+                    <p>Organisez un team building ou un &eacute;v&eacute;nement client autour d'un match dans un cadre premium et discret.</p>
+                </div>
+            </div>
+            <div class="audience-shell reveal">
+                <div class="audience-card">
+                    <div class="audience-icon">&#127881;</div>
+                    <h3>C&eacute;l&eacute;brations</h3>
+                    <p>Anniversaires, enterrements de vie, f&ecirc;tes priv&eacute;es &mdash; ajoutez une touche football &agrave; votre soir&eacute;e.</p>
+                </div>
+            </div>
+            <div class="audience-shell reveal">
+                <div class="audience-card">
+                    <div class="audience-icon">&#128274;</div>
+                    <h3>Discr&eacute;tion</h3>
+                    <p>Pour celles et ceux qui pr&eacute;f&egrave;rent vivre le match loin de la foule, dans un espace ferm&eacute; et intime.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- INCLUSIONS -->
+<section class="sec-navymid">
+    <div class="container">
+        <div class="s-header reveal">
+            <div class="s-eyebrow">Tout inclus</div>
+            <h2 class="s-title">Ce qui vous attend</h2>
+            <p class="s-desc">Chaque lounge est &eacute;quip&eacute; pour que vous n'ayez &agrave; vous soucier de rien.</p>
+        </div>
+
+        <div class="inclusions-grid">
+            <div class="incl-shell reveal">
+                <div class="incl-card">
+                    <div class="incl-icon">&#128250;</div>
+                    <div>
+                        <h3>&Eacute;cran priv&eacute;</h3>
+                        <p>Diffusion en direct du match sur votre propre &eacute;cran HD, avec le son d&eacute;di&eacute; &agrave; votre espace.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="incl-shell reveal">
+                <div class="incl-card">
+                    <div class="incl-icon">&#127863;</div>
+                    <div>
+                        <h3>Boissons</h3>
+                        <p>S&eacute;lection de boissons incluse tout au long de la soir&eacute;e &mdash; soft, bi&egrave;res et cocktails.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="incl-shell reveal">
+                <div class="incl-card">
+                    <div class="incl-icon">&#127829;</div>
+                    <div>
+                        <h3>Food &amp; snacks</h3>
+                        <p>Plateau de snacks et finger food servi directement dans votre lounge.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="incl-shell reveal">
+                <div class="incl-card">
+                    <div class="incl-icon">&#128272;</div>
+                    <div>
+                        <h3>Espace ferm&eacute;</h3>
+                        <p>Salon priv&eacute; s&eacute;par&eacute; de la fanzone principale, pour une intimit&eacute; totale.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA BOTTOM -->
+<section class="cta-section">
+    <div class="cta-inner reveal">
+        <div class="s-eyebrow">Pr&ecirc;t &agrave; r&eacute;server ?</div>
+        <h2 class="s-title">Contactez-nous sur WhatsApp</h2>
+        <p class="s-desc">R&eacute;ponse rapide et r&eacute;servation confirm&eacute;e en quelques messages. Places limit&eacute;es par soir&eacute;e.</p>
+        <a href="https://wa.me/41765931227?text=Bonjour%2C%20je%20souhaite%20r%C3%A9server%20un%20lounge%20priv%C3%A9%20pour%20la%20Fanzone%20Mondiale%20en%20Ville." class="wa-btn" target="_blank" rel="noopener">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            R&eacute;server via WhatsApp
+        </a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-grid">
+        <div>
+            <div class="f-brand">Mondiale en Ville</div>
+            <p class="f-tagline">L'exp&eacute;rience fanzone football de r&eacute;f&eacute;rence &agrave; Gen&egrave;ve pour la Coupe du Monde FIFA 2026. Trois lieux, un &eacute;t&eacute; inoubliable.</p>
+        </div>
+        <div>
+            <div class="f-title">Fanzones</div>
+            <a href="index.html#venues" class="f-link">Cercle des Bains</a>
+            <a href="index.html#venues" class="f-link">Uptown Geneva</a>
+            <a href="index.html#venues" class="f-link">Optimhall</a>
+        </div>
+        <div>
+            <div class="f-title">Exp&eacute;rience</div>
+            <a href="index.html#groups" class="f-link">Phase de groupes</a>
+            <a href="index.html#schedule" class="f-link">Programme des matchs</a>
+            <a href="lounge.html" class="f-link">Lounge priv&eacute;</a>
+            <a href="billetterie.html" class="f-link">Billetterie</a>
+        </div>
+        <div>
+            <div class="f-title">Contact</div>
+            <a href="index.html#partners" class="f-link">Devenir partenaire</a>
+            <a href="mailto:info@mondiale-en-ville.ch" class="f-link">info@mondiale-en-ville.ch</a>
+            <a href="#" class="f-link">Dossier de presse</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span class="f-copy">&copy; 2026 Mondiale en Ville. Tous droits r&eacute;serv&eacute;s. Gen&egrave;ve, Suisse.</span>
+        <div class="f-socials">
+            <a href="https://www.instagram.com/mondialenville/" title="Instagram" target="_blank" rel="noopener">IG</a>
+            <a href="#" title="TikTok">TK</a>
+            <a href="#" title="X">X</a>
+            <a href="#" title="Facebook">FB</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    window.addEventListener('scroll', () => {
+        document.getElementById('navbar').classList.toggle('scrolled', scrollY > 60);
+    });
+
+    function toggleMenu() {
+        document.getElementById('mobileMenu').classList.toggle('active');
+    }
+
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
