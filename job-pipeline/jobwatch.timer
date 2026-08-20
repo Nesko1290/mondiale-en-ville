@@ -1,0 +1,11 @@
+# systemd : ~/.config/systemd/user/jobwatch.timer
+# Activation : systemctl --user enable --now jobwatch.timer
+[Unit]
+Description=Lance la veille emploi chaque matin a 7h15
+
+[Timer]
+OnCalendar=*-*-* 07:15:00
+Persistent=true          # rattrape l'execution si la machine etait eteinte
+
+[Install]
+WantedBy=timers.target

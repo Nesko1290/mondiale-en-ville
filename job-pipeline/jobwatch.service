@@ -1,0 +1,9 @@
+# systemd : ~/.config/systemd/user/jobwatch.service
+[Unit]
+Description=Veille emploi communication / marketing / evenementiel (Suisse romande)
+After=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/job-pipeline
+ExecStart=%h/job-pipeline/run_daily.sh

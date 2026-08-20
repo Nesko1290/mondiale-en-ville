@@ -1,0 +1,237 @@
+# ---------------------------------------------------------------------------
+# jobwatch - veille emploi communication / marketing / evenementiel
+# Suisse romande (GE, VD, VS, FR, NE)
+# ---------------------------------------------------------------------------
+
+profile:
+  # Annees d'experience : sert a noter le critere "niveau demande" (20 pts).
+  experience_years: 4
+  experience_ok_range: [1, 5]      # fourchette d'annonces qui me correspondent
+  # Niveaux CEFR de mes langues. L'allemand au-dela de B2 est penalisant.
+  languages:
+    fr: NATIVE
+    en: C1
+    de: B1
+  german_max_comfortable: B2       # au-dela, penalite progressive
+
+http:
+  # User-Agent identifiable, avec un moyen de me contacter (exige par la
+  # netiquette de crawl et par plusieurs sites suisses).
+  user_agent: "JobWatchBot/1.0 (veille emploi personnelle; +mailto:briankalya@gmail.com)"
+  delay_seconds: 2.0               # delai minimum entre 2 requetes sur un meme hote
+  api_delay_seconds: 0.7           # API publique job-room : delai plus court
+  timeout_seconds: 30
+  respect_robots: true
+  max_retries: 3
+
+jobroom:
+  enabled: true
+  base_url: "https://api.job-room.ch/jobadservice/api/jobAdvertisements"
+  keywords:
+    - communication
+    - marketing
+    - evenementiel
+    - "chargé de communication"
+    - brand
+    - "relations publiques"
+    - sponsoring
+  cantons: [GE, VD, VS, FR, NE]
+  page_size: 50
+  max_pages_per_keyword: 4         # 4 x 50 = 200 annonces max par mot-cle
+  # On ne telecharge le detail complet (pour le scoring) que des annonces
+  # qui passent un premier filtre de pertinence sur le titre.
+  fetch_details: true
+  max_details: 60
+  max_age_days: 45
+
+# ---------------------------------------------------------------------------
+# Employeurs cibles. Trois types de sources :
+#   type: rss     -> flux RSS/Atom
+#   type: career  -> page carriere HTML (extraction generique des liens
+#                    d'annonces ; `selector` CSS optionnel pour affiner)
+#   type: ats     -> API publique d'un ATS (greenhouse | lever | smartrecruiters
+#                    | recruitee | personio), `company` = identifiant du board
+#
+# Commande utile pour ajouter un employeur :
+#   python -m jobwatch discover https://www.exemple.ch
+# ---------------------------------------------------------------------------
+employers:
+  # --- Evenementiel / salons -----------------------------------------------
+  - name: Palexpo
+    location: "Genève"
+    canton: GE
+    category: evenementiel
+    enabled: true
+    sources:
+      - type: career
+        url: "https://www.palexpo.ch/carrieres/"
+
+  - name: Beaulieu Lausanne
+    location: "Lausanne"
+    canton: VD
+    category: evenementiel
+    enabled: true
+    sources:
+      - type: career
+        url: "https://beaulieu-lausanne.com/beaulieu-sa/emplois/"
+
+  - name: Paleo Festival Nyon
+    location: "Nyon"
+    canton: VD
+    category: evenementiel
+    enabled: true
+    sources:
+      - type: career
+        url: "https://yeah.paleo.ch/fr/jobs"
+
+  - name: Montreux Jazz Festival
+    location: "Montreux"
+    canton: VD
+    category: evenementiel
+    enabled: true
+    sources:
+      - type: career
+        url: "https://www.montreuxjazzfestival.com/fr/jobs/"
+
+  # --- Institutions / destination ------------------------------------------
+  - name: Grand Theatre de Geneve
+    location: "Genève"
+    canton: GE
+    category: institution_culturelle
+    enabled: true
+    sources:
+      - type: career
+        url: "https://www.gtg.ch/emploi/"
+
+  - name: Geneve Aeroport
+    location: "Genève"
+    canton: GE
+    category: grande_entreprise
+    enabled: true
+    sources:
+      - type: career
+        url: "https://www.gva.ch/fr/carrieres"
+
+  - name: Ville de Geneve
+    location: "Genève"
+    canton: GE
+    category: secteur_public
+    enabled: true
+    sources:
+      - type: career
+        url: "https://www.geneve.ch/autorites-administration/administration-municipale/travailler-ville-geneve/offres-emploi"
+
+  - name: Etat de Geneve
+    location: "Genève"
+    canton: GE
+    category: secteur_public
+    enabled: true
+    sources:
+      - type: career
+        url: "https://www.ge.ch/offres-emploi-etat-geneve/liste-offres"
+
+  # --- Etudes d'avocats -----------------------------------------------------
+  - name: Lenz & Staehelin
+    location: "Genève"
+    canton: GE
+    category: etude_avocats
+    enabled: true
+    sources:
+      - type: career
+        url: "https://www.lenzstaehelin.com/careers/job-openings/"
+
+  # --- A completer ----------------------------------------------------------
+  # Fondation Geneve Tourisme ne publie pas de page carriere stable : ses
+  # postes passent par jobup.ch. Activer des que l'URL est connue.
+  - name: Fondation Geneve Tourisme
+    location: "Genève"
+    canton: GE
+    category: institution_culturelle
+    enabled: false
+    sources:
+      - type: career
+        url: "https://www.geneve.com/fr"
+
+  # Exemple d'employeur horloger sur un ATS (a adapter) :
+  # - name: Maison horlogere X
+  #   category: horlogerie
+  #   enabled: false
+  #   sources:
+  #     - type: ats
+  #       platform: smartrecruiters
+  #       company: NomDuBoard
+
+scoring:
+  weights:
+    missions: 40
+    experience: 20
+    allemand: 15
+    localisation: 15
+    employeur: 10
+  # Localisation : score sur 1.0, multiplie par le poids ci-dessus.
+  location_tiers:
+    1.0: [geneve, geneve aeroport, grand saconnex, meyrin, vernier, carouge,
+          lancy, plan les ouates, versoix, chene bourg, chene bougeries,
+          thonex, onex, vandoeuvres, cologny, bellevue, satigny, bernex,
+          nyon, rolle, morges, lausanne, prilly, renens, ecublens, pully,
+          gland, coppet, aubonne, crissier, epalinges, saint sulpice]
+    0.85: [montreux, vevey, la tour de peilz, yverdon, yverdon les bains,
+           payerne, aigle, bex, monthey, martigny, sion, villeneuve, moudon]
+    0.6: [fribourg, bulle, neuchatel, la chaux de fonds, le locle, delemont,
+          sierre, brig, romont, estavayer]
+    0.3: [berne, bern, bale, basel, zurich, zuerich, lucerne, saint gall]
+  cantons_tiers:
+    1.0: [GE, VD]
+    0.6: [VS, FR, NE]
+    0.2: [JU, BE]
+  employer_tiers:
+    1.0: [evenementiel, institution_culturelle, horlogerie, luxe]
+    0.85: [etude_avocats, organisation_internationale, agence_communication,
+           grande_entreprise, tourisme]
+    0.7: [secteur_public, ong, association, pme]
+    0.3: [interim]                 # agences de placement : bruit
+  # Republicateurs : ces "employeurs" sont en fait des agregateurs. Leurs
+  # annonces sont fusionnees avec celles du vrai employeur quand il publie
+  # aussi de son cote, et conservees sinon.
+  aggregator_employers:
+    - jobup
+    - "jobs.ch"
+    - jobscout24
+    - indeed
+    - "job impulse"
+
+  # Employeurs a rejeter d'office (agences de placement et de travail temporaire).
+  blocklist_employers:
+    - adecco
+    - manpower
+    - randstad
+    - michael page
+    - page personnel
+    - hays
+    - interiman
+    - kelly services
+    - robert walters
+    - "one agency"
+    - careerplus
+    - "academic work"
+    - "gi group"
+    - finders
+    - albedis
+    - "swisslinx"
+    - "wisenumbers"
+    - "experis"
+    - "nexus personal"
+    - "job impulse"
+
+filters:
+  # Une annonce doit toucher au moins un de ces univers pour etre retenue.
+  min_score: 45
+  max_age_days: 45
+
+output:
+  dir: "out"
+  state_file: "state/seen.json"
+  csv_name: "offres_{date}.csv"
+  markdown_name: "offres_{date}.md"
+  latest_markdown: "latest.md"
+  keep_days: 90                    # purge des entrees d'etat plus vieilles

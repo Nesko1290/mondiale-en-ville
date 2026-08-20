@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- macOS : ~/Library/LaunchAgents/ch.jobwatch.daily.plist
+     Activation : launchctl load ~/Library/LaunchAgents/ch.jobwatch.daily.plist -->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>ch.jobwatch.daily</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>-lc</string>
+    <string>$HOME/job-pipeline/run_daily.sh</string>
+  </array>
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Hour</key><integer>7</integer>
+    <key>Minute</key><integer>15</integer>
+  </dict>
+  <!-- Rattrape l'execution si le Mac etait endormi a 7h15 -->
+  <key>RunAtLoad</key><false/>
+  <key>StandardOutPath</key><string>/tmp/jobwatch.out</string>
+  <key>StandardErrorPath</key><string>/tmp/jobwatch.err</string>
+</dict>
+</plist>
