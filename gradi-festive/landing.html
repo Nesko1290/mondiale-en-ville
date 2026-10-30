@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liste Privée | Gradi Festive Experience</title>
+<meta name="description" content="Gradi Festive Experience ouvre le [DATE OUVERTURE] à Genève. Rejoignez la Liste Privée : cocktail offert, accès prioritaire, Preview Night.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- [PLACEHOLDER] Meta Pixel + GA4 snippets go here (fire Lead on form submit) -->
+<style>
+  :root {
+    --night: #120d0b;
+    --ember: #e0782f;
+    --gold: #d4af6a;
+    --cream: #f6efe4;
+    --muted: #b9ab98;
+    --line: rgba(212, 175, 106, .25);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--night);
+    color: var(--cream);
+    line-height: 1.6;
+  }
+  .glow {
+    background: radial-gradient(ellipse at 50% 0%, rgba(224,120,47,.28), transparent 60%);
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+  .eyebrow {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold);
+  }
+  h1, h2 { font-family: 'Instrument Serif', serif; font-weight: 400; line-height: 1.05; }
+  h1 { font-size: clamp(44px, 9vw, 92px); margin: 18px 0; }
+  h1 em { color: var(--ember); }
+  h2 { font-size: clamp(32px, 5vw, 52px); margin-bottom: 16px; }
+  .hero { padding: 72px 0 56px; text-align: center; }
+  .hero p { color: var(--muted); max-width: 560px; margin: 0 auto; font-size: 17px; }
+  .counter { margin-top: 22px; font-size: 14px; color: var(--gold); }
+  .perks { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 40px 0; }
+  .perk { border: 1px solid var(--line); border-radius: 14px; padding: 22px; background: rgba(255,255,255,.02); }
+  .perk b { display: block; font-size: 17px; margin-bottom: 4px; }
+  .perk span { color: var(--muted); font-size: 14px; }
+  .forms { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding-bottom: 64px; }
+  form { border: 1px solid var(--line); border-radius: 18px; padding: 28px; background: rgba(255,255,255,.03); }
+  form.b2b { border-color: rgba(224,120,47,.45); }
+  form h3 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 30px; margin-bottom: 4px; }
+  form > p { color: var(--muted); font-size: 14px; margin-bottom: 18px; }
+  label { display: block; font-size: 13px; font-weight: 600; margin: 12px 0 6px; }
+  input, select {
+    width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--line);
+    background: #1c1512; color: var(--cream); font: inherit; font-size: 15px;
+  }
+  input:focus, select:focus { outline: 2px solid var(--gold); outline-offset: 1px; }
+  .consent { display: flex; gap: 10px; align-items: flex-start; font-size: 12px; color: var(--muted); margin-top: 14px; font-weight: 400; }
+  .consent input { width: auto; margin-top: 3px; }
+  button {
+    margin-top: 18px; width: 100%; padding: 15px; border: 0; border-radius: 999px; cursor: pointer;
+    background: var(--gold); color: var(--night); font: inherit; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+  form.b2b button { background: var(--ember); color: #fff; }
+  .ok { display: none; margin-top: 16px; padding: 14px; border-radius: 10px; background: rgba(212,175,106,.12); font-size: 14px; }
+  .dm { text-align: center; padding: 0 0 72px; color: var(--muted); }
+  .dm a { color: var(--gold); }
+  footer { border-top: 1px solid var(--line); padding: 24px 0; font-size: 12px; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+<div class="glow">
+  <header class="wrap hero">
+    <div class="eyebrow">Genève · Ouverture le [DATE OUVERTURE]</div>
+    <h1>Plus qu'un dîner.<br><em>Une soirée.</em></h1>
+    <p>Gradi Festive Experience : le nouveau lieu pour fêter décembre à Genève. Menu des fêtes, ambiance de feu, moment signature à minuit.</p>
+    <div class="counter">✦ <span id="count">[N]</span> personnes déjà sur la Liste Privée</div>
+  </header>
+</div>
+
+<main class="wrap">
+  <section class="perks">
+    <div class="perk"><b>🥂 Cocktail offert</b><span>À votre première visite, jusqu'au 31 décembre.</span></div>
+    <div class="perk"><b>🗓️ Accès prioritaire</b><span>Réservez 24h avant tout le monde, dont le week-end d'ouverture.</span></div>
+    <div class="perk"><b>🎟️ Preview Night</b><span>20 duos tirés au sort pour la soirée privée du [DATE PREVIEW].</span></div>
+  </section>
+
+  <section class="forms">
+    <form id="liste" data-type="b2c">
+      <h3>Rejoindre la Liste Privée</h3>
+      <p>Gratuit. On vous écrit sur WhatsApp avant l'ouverture des réservations.</p>
+      <label for="l-name">Prénom</label>
+      <input id="l-name" name="first_name" required autocomplete="given-name">
+      <label for="l-phone">WhatsApp</label>
+      <input id="l-phone" name="phone" type="tel" required placeholder="+41 79 000 00 00" autocomplete="tel">
+      <label for="l-email">Email (facultatif)</label>
+      <input id="l-email" name="email" type="email" autocomplete="email">
+      <label for="l-party">Vous viendriez plutôt…</label>
+      <select id="l-party" name="party_type">
+        <option>En couple</option><option>Entre amis</option><option>En famille</option><option>Pour le Nouvel An</option>
+      </select>
+      <label class="consent"><input type="checkbox" name="consent" required> <span>J'accepte de recevoir les invitations et offres de Gradi par WhatsApp/email. Désinscription à tout moment. <a href="[POLITIQUE]" style="color:inherit">Confidentialité</a></span></label>
+      <button type="submit">Je rejoins la liste ✨</button>
+      <div class="ok" role="status">C'est noté ✅ Vous êtes sur la Liste Privée. Surveillez WhatsApp.</div>
+    </form>
+
+    <form id="kit" class="b2b" data-type="b2b">
+      <h3>Fête d'entreprise ?</h3>
+      <p>Recevez le Kit Fêtes d'Entreprise 2026 : menus, prix, capacités et dates encore libres.</p>
+      <label for="k-company">Entreprise</label>
+      <input id="k-company" name="company" required autocomplete="organization">
+      <label for="k-email">Email professionnel</label>
+      <input id="k-email" name="email" type="email" required autocomplete="email">
+      <label for="k-phone">Téléphone</label>
+      <input id="k-phone" name="phone" type="tel" autocomplete="tel">
+      <label for="k-size">Nombre de personnes</label>
+      <select id="k-size" name="group_size">
+        <option>10-20</option><option>20-50</option><option>50-100</option><option>100+</option>
+      </select>
+      <label for="k-when">Période souhaitée</label>
+      <select id="k-when" name="period">
+        <option>Fin novembre</option><option>1-10 décembre</option><option>11-20 décembre</option><option>Pas encore fixé</option>
+      </select>
+      <label class="consent"><input type="checkbox" name="consent" required> <span>J'accepte d'être recontacté·e par Gradi au sujet de mon événement.</span></label>
+      <button type="submit">Recevoir le kit 📄</button>
+      <div class="ok" role="status">Le kit arrive dans votre boîte mail. Notre responsable événements vous rappelle sous 24h.</div>
+    </form>
+  </section>
+
+  <p class="dm">Plus rapide : écrivez <b>FÊTE</b> en DM à <a href="https://instagram.com/[HANDLE]">@[HANDLE]</a> ou sur <a href="https://wa.me/[WHATSAPP]?text=FETE">WhatsApp</a>.</p>
+</main>
+
+<footer>Gradi Festive Experience · [ADRESSE] · Genève · L'abus d'alcool est dangereux pour la santé. 18+</footer>
+
+<script>
+  // [PLACEHOLDER] Zapier / Make webhook that writes to the leads sheet + sends the kit email
+  const WEBHOOK_URL = '';
+  const params = new URLSearchParams(location.search);
+
+  document.querySelectorAll('form').forEach(form => {
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form));
+      data.lead_type = form.dataset.type;
+      data.utm_source = params.get('utm_source') || 'direct';
+      data.utm_campaign = params.get('utm_campaign') || '';
+      data.consent_at = new Date().toISOString();
+      try {
+        if (WEBHOOK_URL) await fetch(WEBHOOK_URL, { method: 'POST', body: JSON.stringify(data) });
+      } catch (err) { /* keep the confirmation; the lead is retried from the pixel/CRM side */ }
+      if (window.fbq) fbq('track', 'Lead', { content_category: data.lead_type });
+      form.querySelector('button').disabled = true;
+      form.querySelector('.ok').style.display = 'block';
+    });
+  });
+</script>
+</body>
+</html>
