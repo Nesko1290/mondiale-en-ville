@@ -1,4 +1,4 @@
-# GRADI FESTIVE EXPERIENCE — Lead Magnets & Nurture
+# GRADI FESTIF EXPÉRIENCE — Lead Magnets & Nurture
 
 The goal of a lead magnet is not "free stuff". It has to be something **only a future customer
 would want**, and that gets us a phone number or email we can reach again.
@@ -45,7 +45,7 @@ A 6-page PDF, designed in the brand style:
 ### B2C (WhatsApp Business, opt-in only, max 1 message every 3-4 days)
 | When | Message |
 |------|---------|
-| Instantly | « Bienvenue sur la Liste Privée de Gradi ✨ Vous êtes le n° {n}. On vous écrit avant tout le monde. » |
+| Instantly | « Bienvenue sur la Liste Privée de GRADI 🌙 Vous êtes le n° {n}. On vous écrit avant tout le monde. » |
 | Sun 1 Nov | Chef video message 20 s + « Lequel vous fait le plus envie ? » (menu photo) |
 | Mon 2 Nov 19:00 | « Demain 18h, les réservations s'ouvrent pour vous uniquement. Mettez une alarme ⏰ » |
 | Tue 3 Nov 18:00 | **Priority booking link** (valid 24h) |
@@ -70,12 +70,12 @@ A 6-page PDF, designed in the brand style:
 - Email + LinkedIn DM:
   > Objet : Votre fête de fin d'année à Genève, encore des vendredis libres
   >
-  > Bonjour {prénom}, nous ouvrons Gradi Festive Experience le jeudi 5 novembre au [ADRESSE] :
+  > Bonjour {prénom}, nous ouvrons GRADI Festif Expérience le jeudi 5 novembre au [ADRESSE] :
   > un lieu pensé pour les fêtes de groupe (20 à [CAP] personnes), menus et animation inclus.
   > Je vous envoie notre kit 2026 avec les dates encore disponibles ? Et si vous préférez goûter
   > avant de choisir, je vous invite à notre soirée découverte du mercredi 11 novembre.
   > Il reste [N] vendredis.
-  > Valbon, Gradi Festive Experience · [WHATSAPP]
+  > Valbon, GRADI Festif Expérience · [WHATSAPP]
 - 3 touches: Mon 2 Nov email, Wed 4 Nov LinkedIn, Fri 6 Nov call
 
 ---

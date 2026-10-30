@@ -1,4 +1,4 @@
-# GRADI FESTIVE EXPERIENCE — Launch Playbook
+# GRADI FESTIF EXPÉRIENCE — Launch Playbook
 
 Goal: the most talked-about festive restaurant opening in Geneva this season. That means a
 **packed opening on Thursday 5 November 2026** and **a full book for December** (corporate
@@ -15,6 +15,7 @@ captured → retargeting + WhatsApp nurture → booking (table, group, corporate
 | File | What it is |
 |------|------------|
 | `README.md` | Strategy, 6-day sprint, December plan, KPIs, owners (this file) |
+| `brand.md` | Brand guide from the moodboard: signatures, colours, type, emblem, photo & tone rules |
 | `ads-structure.md` | Meta / Google / LinkedIn campaign architecture, budgets, audiences, creatives |
 | `dm-automation.md` | Instagram DM flows (follow, comment keyword, story reply, click-to-DM ads), full scripts |
 | `lead-magnet.md` | The 3 lead magnets, the offer stack, nurture sequence |
@@ -25,9 +26,13 @@ captured → retargeting + WhatsApp nurture → booking (table, group, corporate
 
 ## Positioning
 
-**Gradi Festive Experience: plus qu'un dîner, une soirée.**
-Not "a new restaurant". It's *the* place to celebrate the holidays in Geneva: a festive set,
-live moments (fire, music, a midnight show), menus made for sharing and for groups.
+**GRADI Festif Expérience: *the art of dining, dancing and living the moment.***
+Not "a new restaurant": a **late-night supper club**. You come for dinner and stay for the
+music and the dancing. Velvet, lamplight, Persian rugs, champagne coupes, and the moon as an
+emblem. *Eat late, stay later.* (See `brand.md`.)
+
+That positioning works on its own in November and becomes *the* place to celebrate in
+December: a company party or New Year's Eve at GRADI is a whole night, not just a meal.
 
 Three audiences, three entry doors:
 

@@ -1,4 +1,4 @@
-# GRADI FESTIVE EXPERIENCE — Ads Structure
+# GRADI FESTIF EXPÉRIENCE — Ads Structure
 
 Reference budget: **CHF 8,000 for 31 Oct → 31 Dec**. It scales linearly: keep the
 percentages, change the totals. All customer-facing copy in French.
@@ -40,9 +40,14 @@ optional channels, or CHF 8,000 if LinkedIn is replaced by more Meta B2B.
 ### C1 — Reveal / Awareness (build the warm pool fast, 31 Oct–4 Nov only)
 - **One ad set:** Broad Geneva 18-45, Advantage+ placements (Reels + Stories priority)
 - Creatives: 3 vertical reels, 6-12 s, all from the 31 Oct shoot
-  - *R1 Reveal:* dark room, a match strikes, candles light up one by one → « Gradi s'allume. Jeudi 5 novembre. »
-  - *R2 Chef:* hands, fire, plating in slow motion → « Le menu des fêtes que Genève attendait. »
-  - *R3 Countdown:* fast cuts of decor, team, cocktails → « Dans 5 jours. Une adresse. Vos fêtes. »
+  - *R1 Reveal:* the velvet curtain opens on a room lit by table lamps, the moon emblem
+    appears, then the logo → « Eat late, stay later. GRADI · Jeudi 5 novembre. »
+  - *R2 Table:* truffle shaved over pasta, a coupe set down on velvet, a hand turns the rug-
+    patterned menu → « music · food · drinks » (handwritten) → « Ouverture jeudi. »
+  - *R3 Night:* dinner → the lights drop → dancing, in 10 s → « L'art de dîner, de danser et
+    de vivre l'instant. »
+  - Visual rules: the moodboard look, see `brand.md` (lamplight, bordeaux/forest/cream, no
+    Christmas clichés)
 - KPI: CPM < CHF 8, ThruPlay < CHF 0.04, profile visits. **No booking expected.** C1 exists
   to feed C2/C3/C7. Stop it on 4 Nov and move the budget to C5.
 
@@ -54,8 +59,9 @@ optional channels, or CHF 8,000 if LinkedIn is replaced by more Meta B2B.
 - Instant Form "higher intent": first name, phone, email, *« Avec qui viendrez-vous ? »*,
   WhatsApp opt-in checkbox. Thank-you screen → `landing.html` / Instagram profile
 - Creatives:
-  - *Static:* « Liste Privée · Cocktail offert · Accès prioritaire » on a warm festive table shot
-  - *Reel UGC-style:* creator: « J'ai pu visiter le nouveau resto des fêtes à Genève… »
+  - *Static:* bordeaux background, the moon emblem, cream type: « Liste Privée · Cocktail offert · Réservation prioritaire mardi 18h »
+  - *Static 2:* the photo of the guest hiding behind the menu + « Une table vous attend. La nuit aussi. »
+  - *Reel UGC-style:* creator: « J'ai découvert le nouveau supper club de Genève avant tout le monde… »
   - *Counter:* « 843 Genevois sont déjà sur la liste. » (update weekly, real numbers only)
 - KPI: CPL < CHF 2.50. Kill an ad above CHF 4 after CHF 40 spend.
 - After 4 Nov: stop C2 and move leftovers into C3 (DM) and C5 (bookings).
@@ -75,7 +81,8 @@ optional channels, or CHF 8,000 if LinkedIn is replaced by more Meta B2B.
 - Offer: *Kit Fêtes d'Entreprise 2026* (PDF) + « Venez goûter avant de réserver » (invitation to
   the Soirée Découverte Entreprises, Wed 11 Nov) + « Les vendredis de décembre partent en premier »
 - Form: company, group size, preferred dates, pro email, phone → alert to Valbon < 1 min
-- Creatives: group table of 30 guests laughing; carousel « Menu · Ambiance · Facture entreprise · Zéro stress »
+- Creatives: forest-green static « Votre fête de fin d'année. Le dîner, puis la piste. »; carousel
+  « Le dîner · La musique · La piste · Facture entreprise »
 - KPI: CPL < CHF 25, lead → quote call 90%, quote → booking 30%
 
 ### C5 — Opening & bookings (Nov + Dec)

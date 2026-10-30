@@ -1,4 +1,4 @@
-# GRADI FESTIVE EXPERIENCE — Instagram DM Automation
+# GRADI FESTIF EXPÉRIENCE — Instagram DM Automation
 
 Tool: **ManyChat Pro** (official Meta partner). Alternatives: Inro, CreatorFlow. Use only
 official Meta API tools.
@@ -53,8 +53,9 @@ So we get the same effect in compliant ways:
 
 ```
 A1  Bonsoir {first_name} ✨
-    Bienvenue chez Gradi Festive Experience, le nouveau lieu pour fêter
-    décembre à Genève.
+    Bienvenue chez GRADI Festif Expérience 🌙
+    Dîner, musique, danse : le nouveau supper club de Genève.
+    Eat late, stay later.
 
     On ouvre le jeudi 5 novembre. Les membres de la Liste Privée ont :
     🥂 un cocktail de bienvenue offert
@@ -62,9 +63,10 @@ A1  Bonsoir {first_name} ✨
     🎟️ une chance d'être invité·e à la Preview Night (mardi 3 nov.)
 
     Tu veux en faire partie ?
-    [ Oui, je m'inscris ✨ ]   [ C'est quoi Gradi ? ]
+    [ Oui, je m'inscris ✦ ]   [ C'est quoi GRADI ? ]
 
-A1b (C'est quoi Gradi ?) → 3-line pitch + 1 video reel link → back to [ Oui, je m'inscris ]
+A1b (C'est quoi GRADI ?) → « On dîne tard, on reste plus tard encore. Une table, puis la
+    musique, puis la piste. » + reveal reel link → back to [ Oui, je m'inscris ]
 
 A2  Condition: follows @[HANDLE]?
     NO  → « Dernière étape : abonne-toi à @[HANDLE] pour débloquer ton
@@ -73,7 +75,7 @@ A2  Condition: follows @[HANDLE]?
     YES → A3
 
 A3  Parfait. À quel numéro WhatsApp on t'envoie ton invitation ?
-    (On l'utilise uniquement pour Gradi, promis.)
+    (On l'utilise uniquement pour GRADI, promis.)
     → Collect phone (validate +41 / +33 / 07x format)  → tag: lead_b2c
     [ Je préfère l'email ] → collect email
 
@@ -125,8 +127,8 @@ a 24h follow-up task. If group_size ≥ 50 → **priority, call within 2h**.
 ## Flow C — Nouvel An, triggered by `NOUVEL AN`, T5 button 3, NYE ads
 
 ```
-C1  Le 31 décembre chez Gradi : dîner festif, show de minuit, DJ jusqu'au bout
-    de la nuit 🎆  Places limitées à [CAPACITÉ].
+C1  Le 31 décembre chez GRADI : le dîner, minuit, puis la piste jusqu'au
+    bout de la nuit 🎆  Places limitées à [CAPACITÉ].
     [ Voir les formules ]  [ Me prévenir de la pré-vente ]
 C2  (pré-vente) → collect phone → tag nye_interest
     « Tu seras prévenu·e 1h avant tout le monde. Early-bird : -20% pendant 48h. »
@@ -148,7 +150,7 @@ D1  📍 [ADRESSE] · 🕖 [HORAIRES]
 
 ## Human welcome DM to new followers (manual, ≤ 30/day, vary wording)
 
-> Hello {prénom} 👋 Merci pour le follow ! On ouvre Gradi ce jeudi 5 novembre à Genève.
+> Hello {prénom} 👋 Merci pour le follow ! On ouvre GRADI ce jeudi 5 novembre à Genève.
 > Si tu veux être sur la Liste Privée (cocktail offert + accès prioritaire), réponds juste
 > « FÊTE » ici 🎁
 
