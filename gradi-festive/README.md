@@ -16,6 +16,7 @@ captured → retargeting + WhatsApp nurture → booking (table, group, corporate
 |------|------------|
 | `README.md` | Strategy, 6-day sprint, December plan, KPIs, owners (this file) |
 | `brand.md` | Brand guide from the moodboard: signatures, colours, type, emblem, photo & tone rules |
+| `charte-graphique.html` | Visual brand book (FR), self-contained page to share with designers, printers, creators |
 | `ads-structure.md` | Meta / Google / LinkedIn campaign architecture, budgets, audiences, creatives |
 | `dm-automation.md` | Instagram DM flows (follow, comment keyword, story reply, click-to-DM ads), full scripts |
 | `lead-magnet.md` | The 3 lead magnets, the offer stack, nurture sequence |
