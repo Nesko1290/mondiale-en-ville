@@ -56,10 +56,10 @@ A1  Bonsoir {first_name} ✨
     Bienvenue chez Gradi Festive Experience, le nouveau lieu pour fêter
     décembre à Genève.
 
-    On ouvre le [DATE OUVERTURE]. Les membres de la Liste Privée ont :
+    On ouvre le jeudi 5 novembre. Les membres de la Liste Privée ont :
     🥂 un cocktail de bienvenue offert
-    🗓️ 24h d'accès prioritaire aux réservations
-    🎟️ une chance d'être invité·e à la Preview Night
+    🗓️ un accès prioritaire aux réservations dès mardi 3 nov. à 18h
+    🎟️ une chance d'être invité·e à la Preview Night (mardi 3 nov.)
 
     Tu veux en faire partie ?
     [ Oui, je m'inscris ✨ ]   [ C'est quoi Gradi ? ]
@@ -82,10 +82,12 @@ A4  Tu viendrais plutôt…
     → set custom field party_type  (« Pour le boulot » → jump to Flow B)
 
 A5  C'est noté {first_name} ✅ Tu es sur la Liste Privée (n° {list_number}).
-    On t'écrit sur WhatsApp 48h avant l'ouverture des réservations.
+    On t'envoie ton lien de réservation prioritaire sur WhatsApp
+    mardi 3 novembre à 18h, avant tout le monde.
 
     Un bonus : partage notre dernier post en story et identifie @[HANDLE].
-    On tire au sort 20 duos pour la Preview Night du [DATE PREVIEW] 🎟️
+    On tire au sort 10 duos pour la Preview Night de mardi 🎟️
+    (tirage lundi 2 nov. à 20h)
 
     [ Voir le menu des fêtes ]  → landing.html?utm_source=ig_dm&utm_campaign=liste
 ```
@@ -100,14 +102,16 @@ B1  Organiser la fête de fin d'année, c'est souvent un casse-tête.
     On s'occupe de tout : menu, ambiance, animation, facture entreprise.
 
     Je t'envoie notre Kit Fêtes d'Entreprise 2026 (menus, prix,
-    capacités, dates encore libres) ?
+    capacités, dates encore libres) ? Et si tu veux goûter avant de
+    réserver, on t'invite à notre Soirée Découverte Entreprises
+    le mercredi 11 novembre.
     [ Oui, envoie le kit 📄 ]
 
 B2  Pour quelle entreprise ?          → field company
 B3  Combien de personnes environ ?
     [ 10-20 ] [ 20-50 ] [ 50-100 ] [ 100+ ]   → field group_size
 B4  Quelle période ?
-    [ Fin novembre ] [ 1-10 déc ] [ 11-20 déc ] [ Pas encore fixé ]
+    [ Novembre ] [ 1-10 déc ] [ 11-20 déc ] [ Pas encore fixé ]
 B5  Ton email pro pour recevoir le kit ?  → field email  → tag lead_b2b
 B6  C'est envoyé 📩 Valbon, notre responsable événements, te rappelle sous
     24h pour bloquer une date (les vendredis partent en premier).
@@ -144,7 +148,7 @@ D1  📍 [ADRESSE] · 🕖 [HORAIRES]
 
 ## Human welcome DM to new followers (manual, ≤ 30/day, vary wording)
 
-> Hello {prénom} 👋 Merci pour le follow ! On ouvre Gradi le [DATE OUVERTURE] à Genève.
+> Hello {prénom} 👋 Merci pour le follow ! On ouvre Gradi ce jeudi 5 novembre à Genève.
 > Si tu veux être sur la Liste Privée (cocktail offert + accès prioritaire), réponds juste
 > « FÊTE » ici 🎁
 
@@ -159,10 +163,11 @@ liked or commented, creators, company profiles.
 |------|---------|---------|
 | +2h if flow not finished | IG DM | « Ton invitation t'attend encore ✨ [Terminer] » (once only) |
 | +23h if no booking & no phone | IG DM | Last message in the window: menu teaser + [Rejoindre la liste] |
-| J-3 | WhatsApp (opt-in) | « Les réservations ouvrent demain 18h pour la Liste Privée. Ton lien : … » |
-| J-2 18:00 | WhatsApp | Priority booking link (24h, before public) |
-| J+1 if not booked | WhatsApp | « Il reste 6 tables ce samedi… » |
-| 1 Dec | WhatsApp | NYE pre-sale (to tag nye_interest first, then everyone) |
+| Mon 2 Nov 19:00 | WhatsApp (opt-in) | « Demain 18h, les réservations s'ouvrent pour la Liste Privée uniquement. Mets une alarme ⏰ » |
+| Tue 3 Nov 18:00 | WhatsApp | Priority booking link (24h, before public) |
+| Wed 4 Nov 12:00 if not booked | WhatsApp | « Ouverture demain. Il reste quelques tables pour le week-end. » |
+| Fri 6 Nov if not booked | WhatsApp | « Il reste 6 tables ce samedi… » |
+| 16 Nov | WhatsApp | NYE pre-sale (to tag nye_interest first, then everyone) |
 
 Instagram rule: outside the 24h window, a business account can only send messages with an
 approved tag (e.g. `HUMAN_AGENT` for manual replies within 7 days). **Never use tags for promos.**
