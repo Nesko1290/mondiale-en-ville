@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Gloock&family=Outfit:wght@300;400;600;800&display=swap">
+<style>:root{--w:1080px;--h:1350px;--bg:var(--profond);}
+:root { --bordeaux:#631c21; --profond:#3e1014; --forest:#1f3627; --cream:#efe2cc; --ink:#1a1414;
+        --logo:'Outfit',sans-serif; --serif:'Gloock',serif; --script:'Caveat',cursive; }
+* { box-sizing:border-box; margin:0; padding:0; }
+html, body { width:var(--w); height:var(--h); overflow:hidden; }
+body { background:var(--bg, var(--bordeaux)); color:var(--cream); font-family:var(--logo); position:relative; }
+/* soft vignette + paper grain, like the printed moodboard tiles */
+body::before { content:""; position:absolute; inset:0; z-index:5; pointer-events:none;
+  background: radial-gradient(ellipse 80% 70% at 50% 45%, rgba(255,255,255,.05), rgba(0,0,0,.32) 100%); }
+body::after { content:""; position:absolute; inset:0; z-index:6; pointer-events:none; opacity:.22; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+.stage { position:absolute; inset:0; z-index:2; display:flex; flex-direction:column; align-items:center; text-align:center; }
+.emblem { border-radius:50%; -webkit-mask-image:radial-gradient(circle, #000 58%, transparent 71%); mask-image:radial-gradient(circle, #000 58%, transparent 71%); }
+.mark b { display:block; font-weight:800; letter-spacing:.02em; line-height:1; font-size:var(--s); }
+.mark span { display:block; font-weight:400; font-size:calc(var(--s)*.118); letter-spacing:.42em; padding-left:.42em; text-transform:uppercase; margin-top:calc(var(--s)*.15); }
+.label { font-weight:600; letter-spacing:.32em; text-transform:uppercase; padding-left:.32em; }
+.rule { width:120px; height:1px; background:rgba(239,226,204,.5); }
+.frame { position:absolute; inset:var(--fi, 36px); border:1.5px solid rgba(239,226,204,.35); z-index:3; pointer-events:none; }
+.photo { object-fit:cover; display:block; filter:contrast(1.05) saturate(.95); }
+
+    .stage { padding:84px 76px 80px; justify-content:space-between; align-items:stretch; text-align:left; }
+    .top { display:flex; justify-content:space-between; align-items:flex-start; }
+    .num { font-family:var(--serif); font-size:400px; line-height:.78; }
+    .pic { width:400px; height:500px; border:1.5px solid rgba(239,226,204,.45); padding:10px; }
+    .pic img { width:100%; height:100%; }
+    .day { font-family:var(--serif); font-size:96px; line-height:1; }
+    .title { font-weight:800; font-size:64px; letter-spacing:.01em; margin-top:10px; }
+    .line { font-family:var(--serif); font-size:44px; margin-top:26px; opacity:.92; }
+    .foot { display:flex; justify-content:space-between; font-size:20px; letter-spacing:.3em; font-weight:600; opacity:.75; }
+    </style></head>
+<body><div class="stage">
+      <div class="top">
+        <div><div class="label" style="font-size:22px;padding-left:0">November</div><div class="num">7</div></div>
+        <div class="pic"><img class="photo" src="file:///home/user/mondiale-en-ville/gradi-festive/img/pasta.webp"></div>
+      </div>
+      <div>
+        <div class="day">Samedi 7</div>
+        <div class="title">SATURDAY NIGHT</div>
+        <div class="line">Eat late, stay later.</div>
+      </div>
+      <div class="foot"><span>GRADI</span><span>BIG OPENING · GENÈVE</span></div>
+    </div></body></html>
