@@ -70,7 +70,7 @@ A 6-page PDF, designed in the brand style:
 - Email + LinkedIn DM:
   > Objet : Votre fête de fin d'année à Genève, encore des vendredis libres
   >
-  > Bonjour {prénom}, nous ouvrons GRADI Festif Expérience le jeudi 5 novembre au [ADRESSE] :
+  > Bonjour {prénom}, nous ouvrons GRADI Festif Expérience le jeudi 5 novembre route de la Galaise 24 à Plan-les-Ouates :
   > un lieu pensé pour les fêtes de groupe (20 à [CAP] personnes), menus et animation inclus.
   > Je vous envoie notre kit 2026 avec les dates encore disponibles ? Et si vous préférez goûter
   > avant de choisir, je vous invite à notre soirée découverte du mercredi 11 novembre.

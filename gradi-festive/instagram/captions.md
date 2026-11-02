@@ -1,6 +1,6 @@
 # GRADI — Textes Instagram · Big Opening 5 · 6 · 7 novembre
 
-Mot-clé DM relié à ManyChat : **FÊTE**. Remplacer `[ADRESSE]` et `[@HANDLE]` avant de publier.
+Mot-clé DM relié à ManyChat : **FÊTE**. Adresse : Route de la Galaise 24, 1228 Plan-les-Ouates (Genève).
 
 ---
 
@@ -20,12 +20,12 @@ BIG OPENING THIS WEEK
 Trois soirs pour ouvrir les portes, rencontrer Genève et lancer la fête ensemble.
 music · food · drinks
 
-📍 [ADRESSE], Genève
+📍 Route de la Galaise 24, 1228 Plan-les-Ouates · Genève
 👉 Commentez **FÊTE** et recevez votre invitation en DM : cocktail de bienvenue offert + réservation prioritaire.
 
 Eat late, stay later.
 
-#GRADI #Geneve #GeneveRestaurant #RestaurantGeneve #NouveauRestaurant #SortirAGeneve #GeneveNightlife #SupperClub #BigOpening #Geneva
+#GRADI #Geneve #PlanLesOuates #GeneveRestaurant #RestaurantGeneve #NouveauRestaurant #SortirAGeneve #GeneveNightlife #SupperClub #BigOpening #Geneva
 
 ---
 
@@ -42,9 +42,9 @@ Trois soirs pour lancer la fête avec vous.
 
 Commentez **FÊTE** 👇 on vous envoie votre invitation en DM.
 
-📍 [ADRESSE], Genève
+📍 Route de la Galaise 24, 1228 Plan-les-Ouates · Genève
 
-#GRADI #Geneve #RestaurantGeneve #NouveauRestaurant #SortirAGeneve #FeteGeneve #BigOpening
+#GRADI #Geneve #PlanLesOuates #RestaurantGeneve #NouveauRestaurant #SortirAGeneve #FeteGeneve #BigOpening
 
 ---
 
@@ -60,9 +60,9 @@ GRADI, c'est le nouveau restaurant festif de Genève : une belle table, de la mu
 
 Swipez jusqu'au bout ➡️ et commentez **FÊTE** pour rejoindre la Liste Privée (cocktail offert + réservation prioritaire).
 
-📍 [ADRESSE], Genève
+📍 Route de la Galaise 24, 1228 Plan-les-Ouates · Genève
 
-#GRADI #Geneve #BigOpening #RestaurantGeneve #SortirAGeneve #SupperClub
+#GRADI #Geneve #PlanLesOuates #BigOpening #RestaurantGeneve #SortirAGeneve #SupperClub
 
 ---
 
@@ -75,7 +75,7 @@ Genève a enfin son restaurant festif. On vous garde une place ?
 BIG OPENING · 5 · 6 · 7 novembre
 Commentez **FÊTE** pour recevoir votre invitation.
 
-#GRADI #Geneve #BigOpening #NouveauRestaurant
+#GRADI #Geneve #PlanLesOuates #BigOpening #NouveauRestaurant
 
 ---
 
@@ -89,7 +89,7 @@ Enfin un restaurant où l'on vient faire la fête.
 
 Commentez **FÊTE** 🥂 invitation en DM.
 
-#GRADI #Geneve #BigOpening #RestaurantGeneve #SortirAGeneve #Reels
+#GRADI #Geneve #PlanLesOuates #BigOpening #RestaurantGeneve #SortirAGeneve #Reels
 
 ---
 
@@ -112,4 +112,5 @@ Commentez **FÊTE** 🥂 invitation en DM.
 GRADI · Festif Expérience 🌙
 Le restaurant festif de Genève · dîner, musique, danse
 BIG OPENING 5 · 6 · 7 nov.
+📍 Route de la Galaise 24, Plan-les-Ouates
 Écrivez FÊTE en DM 👇 invitation + cocktail offert

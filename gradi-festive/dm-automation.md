@@ -139,7 +139,7 @@ C2  (pré-vente) → collect phone → tag nye_interest
 ## Flow D — Infos & réservation (T5 button 4, default reply T6)
 
 ```
-D1  📍 [ADRESSE] · 🕖 [HORAIRES]
+D1  📍 Route de la Galaise 24, 1228 Plan-les-Ouates (Genève) · 🕖 [HORAIRES]
     [ Réserver une table ] → booking link with UTM
     [ Voir le menu ]  [ Parler à quelqu'un 👋 ]
 ```

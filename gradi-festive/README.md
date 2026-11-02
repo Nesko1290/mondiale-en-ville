@@ -4,7 +4,7 @@ Goal: the most talked-about festive restaurant opening in Geneva this season. Th
 **packed opening on Thursday 5 November 2026** and **a full book for December** (corporate
 parties + New Year's Eve).
 
-> Placeholders to fill before anything goes live: `[ADRESSE]`, `[@HANDLE]`, `[WHATSAPP]`,
+> Placeholders to fill before anything goes live: `[@HANDLE]`, `[WHATSAPP]`,
 > `[SITE]`, `[CHEF]`, menu prices, capacity.
 
 ## The machine in one line
