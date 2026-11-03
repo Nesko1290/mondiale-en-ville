@@ -1,5 +1,7 @@
 # GRADI FESTIF EXPÉRIENCE — Instagram DM Automation
 
+> **Version à monter cette semaine (Big Opening 5 · 6 · 7 nov.) : voir `manychat-sequence-fete.md`**, guide pas à pas en français.
+
 Tool: **ManyChat Pro** (official Meta partner). Alternatives: Inro, CreatorFlow. Use only
 official Meta API tools.
 
