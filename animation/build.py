@@ -170,7 +170,9 @@ def build_world():
         (120, -90, 75, 26), (60, -140, 90, 30), (190, -120, 110, 34),
         (0, -200, 120, 40), (110, -230, 150, 45), (230, -60, 85, 24),
     ]
-    for cxx, cyy, czz, r in clouds:
+    # Nuages desactives : Genjutsu les recopiait en blocs a facettes.
+    # Le ciel reste vide dans le blockout, les nuages sont decrits dans le prompt.
+    for cxx, cyy, czz, r in clouds[:0]:
         blob("cloud", 1.0, (r, r * 0.7, r * 0.28), (cxx, cyy, czz), COL["cloud"])
 
 
