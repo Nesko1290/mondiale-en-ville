@@ -33,13 +33,18 @@ def main(src, dst, text=TEXT):
         return
 
     # Ecrit le texte en capitales espacees, legerement incline comme le bandeau.
-    font = ImageFont.truetype(FONT, 24)
     layer = Image.new("RGBA", im.size, (0, 0, 0, 0))
     d = ImageDraw.Draw(layer)
-    spacing = 14
-    widths = [d.textlength(ch, font=font) for ch in text]
-    total = sum(widths) + spacing * (len(text) - 1)
-    x = (X0 + X1) / 2 - total / 2 + 20
+    size = 24
+    while True:  # reduit la police jusqu'a ce que le texte tienne sur le bandeau
+        font = ImageFont.truetype(FONT, size)
+        spacing = size * 0.3 if len(text) <= 8 else size * 0.08
+        widths = [d.textlength(ch, font=font) for ch in text]
+        total = sum(widths) + spacing * (len(text) - 1)
+        if total <= (X1 - X0) - 30 or size <= 8:
+            break
+        size -= 1
+    x = (X0 + X1) / 2 - total / 2
     for ch, w in zip(text, widths):
         d.text((x, 496), ch, font=font, fill=COLOR + (235,), anchor="lm")
         x += w + spacing
