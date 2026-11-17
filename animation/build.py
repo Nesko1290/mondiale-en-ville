@@ -1,7 +1,16 @@
-"""Blockout Blender : bus jamaicain, plongee du ciel -> travelling -> rasta -> 180 vers le ciel.
+"""Blockout Blender v3 : bus jamaicain "FROM THE CARIBBEAN TO GENEVA".
 
-Formes grossieres, une couleur par chose, un seul mouvement de camera continu.
-Sert de "Video 1" (camera, timing, placement) pour Higgsfield Genjutsu.
+Un seul plan continu de 15,5 s :
+  0.0-1.9   dans le ciel : nuage "GENEVA ARE YOU READY?", la camera le traverse
+  1.9-4.0   plongee du ciel vers le bus
+  4.0-5.4   rase le toit (valises sur la galerie), glisse sur le flanc cote mer
+  5.4-8.0   travelling lateral : lettrage du bus, stands de fruits qui defilent
+  8.0-9.0   la camera entre par une fenetre laterale
+  9.0-10.6  traverse le bus dans l'allee, passagers avec valises, sort par l'arriere
+  10.6-12.7 pivote sur le rasta au bord de la route, qui se retourne vers la camera
+  12.7-15.5 fonce le long de la route jusqu'au panneau geant avec les infos
+
+Formes grossieres, une couleur par chose. Sert de "Video 1" pour Higgsfield Genjutsu.
 
 Lancer :
     blender -b -P build.py -- --out out
@@ -9,7 +18,8 @@ ou, avec le module Python de Blender :
     python build.py --out out
 Options : --stills 1,75,135   (images de controle seulement)
           --res 720x1280      --step 1
-Les images sortent dans <out>/frames ; assembler avec ffmpeg (voir README).
+Les images sortent dans <out>/frames ; le rendu saute les images deja presentes,
+donc on peut relancer la commande si Blender plante en cours de route.
 """
 
 import argparse
@@ -23,16 +33,36 @@ import bmesh
 from mathutils import Vector
 
 FPS = 30
-DURATION = 12.0
-N_FRAMES = int(FPS * DURATION)  # 360
+INTRO = 1.5  # secondes dans le ciel avant la plongee
+DURATION = 14.0 + INTRO
+N_FRAMES = int(FPS * DURATION)  # 465
 BUS_SPEED = 20.0  # m/s, le long de +X
+BUS_Y = 1.0  # roule a gauche (Jamaique), cote terre
+
+BUS_TEXT = "FROM THE CARIBBEAN TO GENEVA"
+CLOUD_LINES = [("GENEVA", 7.0, 9.5), ("ARE YOU", 5.5, 0.0), ("READY?", 7.0, -9.5)]  # texte, hauteur, decalage
+SIGN_LINES = [  # (texte, hauteur des lettres en m, altitude du centre en m)
+    ("Bubble", 1.9, 13.1),  # logo jaune
+    ("SAT 28 NOV", 1.1, 11.3),
+    ("KULTURE BAR", 0.95, 9.7),
+    ("GENEVA", 0.95, 8.4),
+    ("DJ BLITZ & GOLD UP", 0.62, 7.1),
+    ("22H - 04H", 0.8, 6.0),
+]
+SIGN_X = 320.0
 
 # ---------------------------------------------------------------- couleurs
 # Une couleur = une chose. A decoder mot pour mot dans le prompt Genjutsu.
 COL = {
     "bus": (1.0, 1.0, 1.0),  # BLANC   = le bus (sujet principal)
     "bus_front": (0.02, 0.02, 0.02),  # noir = pare-brise (donne le sens de marche)
+    "bus_text": (0.05, 0.25, 0.08),  # vert fonce = lettrage du bus
     "wheel": (0.1, 0.1, 0.1),  # noir    = roues
+    "seat": (0.0, 0.8, 0.8),  # CYAN    = sieges du bus
+    "passenger": (1.0, 0.4, 0.7),  # ROSE = passagers
+    "suitcase": (0.9, 0.05, 0.05),  # ROUGE = valises (sur les genoux et sur le toit)
+    "cloud_text": (0.75, 0.72, 0.9),  # lavande = lettres de nuage dans le ciel
+    "logo": (1.0, 0.83, 0.0),  # JAUNE = logo Bubble sur le panneau
     "road": (0.25, 0.25, 0.27),  # gris    = route goudronnee
     "dash": (0.8, 0.8, 0.8),  # gris clair = ligne centrale
     "sand": (0.93, 0.85, 0.55),  # jaune pale = plage
@@ -44,7 +74,9 @@ COL = {
     "stand": (1.0, 0.45, 0.0),  # ORANGE  = stands de fruits
     "stand_roof": (0.9, 0.1, 0.6),  # MAGENTA = toits des stands
     "rasta": (0.5, 0.1, 0.8),  # VIOLET  = le rasta
-    "cloud": (0.75, 0.72, 0.9),  # lavande = nuages
+    "sign": (0.03, 0.03, 0.03),  # NOIR    = panneau geant
+    "sign_text": (1.0, 1.0, 1.0),  # blanc = texte et cadre du panneau
+    "sign_post": (0.5, 0.5, 0.55),  # gris = poteaux du panneau
 }
 SKY = (0.45, 0.7, 0.95)
 
@@ -54,7 +86,7 @@ def frame_of(t):
 
 
 def bus_x(frame):
-    return BUS_SPEED * (frame - 1) / FPS
+    return BUS_SPEED * ((frame - 1) / FPS - INTRO)
 
 
 # ---------------------------------------------------------------- geometrie
@@ -110,10 +142,34 @@ def empty(name, loc=(0, 0, 0)):
     return obj
 
 
-# ---------------------------------------------------------------- scene
+def text(name, body, height, loc, rot, color, max_width=None, parent=None):
+    """Texte 3D centre sur loc. height = hauteur approximative des capitales."""
+    curve = bpy.data.curves.new(name, "FONT")
+    curve.body = body
+    curve.align_x = "CENTER"
+    curve.align_y = "CENTER"
+    curve.size = height / 0.7
+    curve.extrude = 0.01
+    obj = bpy.data.objects.new(name, curve)
+    obj.location = loc
+    obj.rotation_euler = rot
+    obj.color = (*color, 1.0)
+    bpy.context.scene.collection.objects.link(obj)
+    if parent is not None:
+        obj.parent = parent
+    if max_width:
+        bpy.context.view_layer.update()
+        width = obj.dimensions.x
+        if width > max_width:
+            s = max_width / width
+            obj.scale = (s, s, s)
+    return obj
+
+
+# ---------------------------------------------------------------- decor
 def build_world():
     rnd = random.Random(7)
-    x0, x1 = -150.0, 450.0
+    x0, x1 = -150.0, 520.0
     length = x1 - x0
     cx = (x0 + x1) / 2
 
@@ -127,9 +183,8 @@ def build_world():
         box("dash", (3.0, 0.2, 0.02), (x, 0, 0.05), COL["dash"])
         x += 8.0
 
-    # Collines au fond, cote terre
-    for i in range(14):
-        hx = x0 + i * (length / 13) + rnd.uniform(-15, 15)
+    for i in range(16):
+        hx = x0 + i * (length / 15) + rnd.uniform(-15, 15)
         blob(
             "hill",
             1.0,
@@ -138,7 +193,6 @@ def build_world():
             COL["hill"],
         )
 
-    # Palmiers : denses cote terre, clairsemes sur la plage (hors trajet camera)
     def palm(px, py):
         h = rnd.uniform(6, 11)
         cone("trunk", 0.28, 0.18, h, (px, py, 0), COL["trunk"], segments=5)
@@ -155,8 +209,8 @@ def build_world():
         x += rnd.uniform(22, 38)
 
     # Stands de fruits : bord de route cote terre, serres pendant le travelling
-    x = 78.0
-    while x < 172.0:
+    x = 70.0
+    while x < 150.0:
         sy = 7.6 + rnd.uniform(-0.4, 0.4)
         box("stand", (3.0, 1.6, 1.1), (x, sy, 0), COL["stand"])
         box("stand_roof", (3.6, 2.4, 0.15), (x, sy, 2.3), COL["stand_roof"])
@@ -164,33 +218,93 @@ def build_world():
             box("stand_post", (0.1, 0.1, 2.3), (x + dx, sy - 1.0, 0), COL["stand"])
         x += rnd.uniform(6.5, 9.5)
 
-    # Nuages : traverses pendant la plongee, et fond du plan final
-    clouds = [
-        (-25, -30, 95, 22), (20, 25, 80, 18), (-5, -55, 60, 16), (60, 30, 70, 20),
-        (120, -90, 75, 26), (60, -140, 90, 30), (190, -120, 110, 34),
-        (0, -200, 120, 40), (110, -230, 150, 45), (230, -60, 85, 24),
-    ]
-    # Nuages desactives : Genjutsu les recopiait en blocs a facettes.
-    # Le ciel reste vide dans le blockout, les nuages sont decrits dans le prompt.
-    for cxx, cyy, czz, r in clouds[:0]:
-        blob("cloud", 1.0, (r, r * 0.7, r * 0.28), (cxx, cyy, czz), COL["cloud"])
+
+def build_sign():
+    """Panneau geant au-dessus de la route, face au trafic (tourne vers -X)."""
+    w, z0, z1 = 7.4, 4.8, 14.8
+    for py in (-4.6, 4.6):
+        box("sign_post", (0.5, 0.5, z1), (SIGN_X + 0.3, py, 0), COL["sign_post"])
+    box("sign_beam", (0.4, 9.7, 0.5), (SIGN_X + 0.3, 0, z0 - 0.5), COL["sign_post"])
+    box("sign_board", (0.3, w, z1 - z0), (SIGN_X, 0, z0), COL["sign"])
+    # cadre blanc
+    fx = SIGN_X - 0.17
+    for py in (-w / 2 + 0.15, w / 2 - 0.15):
+        box("sign_frame", (0.04, 0.12, z1 - z0 - 0.3), (fx, py, z0 + 0.15), COL["sign_text"])
+    for pz in (z0 + 0.15, z1 - 0.27):
+        box("sign_frame", (0.04, w - 0.3, 0.12), (fx, 0, pz), COL["sign_text"])
+    rot = (math.pi / 2, 0, -math.pi / 2)  # face a -X, se lit de gauche a droite
+    for body, height, z in SIGN_LINES:
+        color = COL["logo"] if body == "Bubble" else COL["sign_text"]
+        text("sign_text", body, height, (SIGN_X - 0.2, 0, z), rot, color, max_width=6.3)
+
+
+# ---------------------------------------------------------------- bus
+BUS_L, BUS_W = 7.0, 2.3
+FLOOR_Z, SILL_Z, HEAD_Z, ROOF_Z = 0.45, 1.35, 2.25, 2.75
 
 
 def build_bus():
+    """Bus creux : on peut entrer par les fenetres laterales et sortir par l'arriere."""
     root = empty("bus_root")
-    y = 1.0  # roule a gauche (Jamaique), cote terre
-    box("bus_body", (7.0, 2.3, 2.3), (0, 0, 0.45), COL["bus"], parent=root)
-    box("bus_front", (0.08, 1.9, 0.9), (3.52, 0, 1.6), COL["bus_front"], parent=root)
+    c = COL["bus"]
+    hl, hw = BUS_L / 2, BUS_W / 2
+    box("bus_floor", (BUS_L, BUS_W, 0.12), (0, 0, FLOOR_Z - 0.12), c, parent=root)
+    box("bus_roof", (BUS_L, BUS_W, 0.12), (0, 0, ROOF_Z - 0.12), c, parent=root)
+    for side in (-1, 1):
+        y = side * (hw - 0.04)
+        box("bus_side_low", (BUS_L, 0.08, SILL_Z - FLOOR_Z), (0, y, FLOOR_Z), c, parent=root)
+        box("bus_side_band", (BUS_L, 0.08, ROOF_Z - HEAD_Z), (0, y, HEAD_Z), c, parent=root)
+        for px in (-3.44, -2.1, -0.7, 0.7, 2.1, 3.44):
+            box("bus_pillar", (0.12, 0.08, HEAD_Z - SILL_Z), (px, y, SILL_Z), c, parent=root)
+        # lettrage sur le bandeau, des deux cotes
+        rot = (math.pi / 2, 0, 0) if side < 0 else (math.pi / 2, 0, math.pi)
+        text(
+            "bus_text", BUS_TEXT, 0.27, (0, side * (hw + 0.02), (HEAD_Z + ROOF_Z) / 2),
+            rot, COL["bus_text"], max_width=BUS_L - 0.5, parent=root,
+        )
+    # avant plein avec pare-brise ; arriere ouvert a hauteur de fenetre
+    box("bus_front_wall", (0.08, BUS_W, ROOF_Z - FLOOR_Z), (hl - 0.04, 0, FLOOR_Z), c, parent=root)
+    box("bus_front", (0.08, 1.9, 0.9), (hl + 0.02, 0, 1.45), COL["bus_front"], parent=root)
+    box("bus_rear_low", (0.08, BUS_W, SILL_Z - FLOOR_Z), (-hl + 0.04, 0, FLOOR_Z), c, parent=root)
+    box("bus_rear_band", (0.08, BUS_W, ROOF_Z - HEAD_Z), (-hl + 0.04, 0, HEAD_Z), c, parent=root)
     for wx in (-2.3, 2.3):
         for wy in (-1.1, 1.1):
             box("wheel", (0.9, 0.3, 0.9), (wx, wy, 0.0), COL["wheel"], parent=root)
+
+    # sieges et passagers de part et d'autre de l'allee centrale
+    rnd = random.Random(3)
+    sx = -2.9
+    while sx < 2.0:
+        for side in (-1, 1):
+            y = side * 0.72
+            box("seat", (0.45, 0.7, 0.42), (sx, y, FLOOR_Z), COL["seat"], parent=root)
+            box("seat_back", (0.1, 0.7, 0.95), (sx - 0.22, y, FLOOR_Z), COL["seat"], parent=root)
+            if rnd.random() < 0.8:
+                box("passenger", (0.3, 0.42, 0.62), (sx, y, FLOOR_Z + 0.42), COL["passenger"], parent=root)
+                box("passenger_head", (0.22, 0.22, 0.24), (sx + 0.02, y, FLOOR_Z + 1.04), COL["passenger"], parent=root)
+                # valise sur les genoux
+                box("suitcase", (0.16, 0.46, 0.32), (sx + 0.25, y, FLOOR_Z + 0.5), COL["suitcase"], parent=root)
+                if rnd.random() < 0.4:  # bras leves : ils dansent
+                    for ay in (-0.17, 0.17):
+                        box("passenger_arm", (0.08, 0.08, 0.5), (sx + 0.05, y + ay, FLOOR_Z + 0.95), COL["passenger"], parent=root)
+        sx += 0.95
+
+    # galerie de toit chargee de valises et de malles
+    lx = -2.9
+    while lx < 2.6:
+        lw, ld, lh = rnd.uniform(0.6, 1.0), rnd.uniform(0.5, 0.9), rnd.uniform(0.25, 0.5)
+        box("suitcase", (lw, ld, lh), (lx, rnd.uniform(-0.45, 0.45), ROOF_Z), COL["suitcase"], parent=root)
+        lx += lw + 0.15
+
     for f in range(1, N_FRAMES + 1):  # une cle par image : vitesse strictement constante
-        root.location = (bus_x(f), y, 0)
+        root.location = (bus_x(f), BUS_Y, 0)
         root.keyframe_insert("location", frame=f)
     return root
 
 
-RASTA_POS = Vector((176.0, -5.0, 0.0))
+# ---------------------------------------------------------------- rasta
+RASTA_POS = Vector((186.5, -4.6, 0.0))
+RASTA_CAM = Vector((185.4, -3.0, 1.65))  # ou se pose la camera pour le cadrer
 
 
 def build_rasta():
@@ -200,29 +314,32 @@ def build_rasta():
     box("rasta_hat", (0.45, 0.45, 0.25), (0, 0, 1.8), COL["rasta"], parent=root)
     arms = []
     for side in (-1, 1):
-        arm = box("rasta_arm", (0.14, 0.14, 0.7), (0, side * 0.3, 0), COL["rasta"], parent=root)
+        arm = box("rasta_arm", (0.14, 0.14, 0.7), (0, 0, 0), COL["rasta"], parent=root)
         arm.location = (0, side * 0.3, 1.35)
         arm.rotation_euler = (math.pi, 0, 0)  # bras le long du corps
         arms.append((arm, side))
 
-    # Il regarde le bus arriver (face a -X), sursaute, puis le suit du regard (+X).
-    t_pass = (RASTA_POS.x - 0) / BUS_SPEED  # instant ou le bus le croise
-    keys = [
+    # Il regarde le bus arriver (-X), le suit du regard (+X), puis se retourne vers la camera.
+    t_pass = RASTA_POS.x / BUS_SPEED + INTRO
+    to_cam = RASTA_CAM - RASTA_POS
+    face_cam = math.atan2(to_cam.y, to_cam.x)
+    for t, rz in [
         (0.0, math.pi),
         (t_pass - 0.5, math.pi),
-        (t_pass + 0.5, math.pi / 2),
-        (t_pass + 1.3, 0.25),
-        (DURATION, 0.1),
-    ]
-    for t, rz in keys:
+        (t_pass + 0.1, math.pi / 2),
+        (t_pass + 0.5, 0.2),
+        (t_pass + 0.8, 0.2),
+        (t_pass + 1.2, face_cam),
+        (DURATION, face_cam),
+    ]:
         root.rotation_euler = (0, 0, rz)
         root.keyframe_insert("rotation_euler", frame=frame_of(t))
     # Sursaut : petit recul + bras en l'air
     for t, dy, raised in (
         (t_pass - 0.6, 0.0, 0.0),
-        (t_pass - 0.2, -0.5, 1.0),
-        (t_pass + 1.6, -0.6, 1.0),
-        (DURATION, -0.6, 0.6),
+        (t_pass - 0.2, -0.4, 1.0),
+        (t_pass + 2.0, -0.4, 1.0),
+        (DURATION, -0.4, 0.7),
     ):
         root.location = RASTA_POS + Vector((0, dy, 0))
         root.keyframe_insert("location", frame=frame_of(t))
@@ -234,47 +351,63 @@ def build_rasta():
 
 # ---------------------------------------------------------------- camera
 def bus_at(t):
-    return Vector((BUS_SPEED * t, 1.0, 0.0))
+    return Vector((BUS_SPEED * (t - INTRO), BUS_Y, 0.0))
 
 
 def camera_keys():
-    """(temps s, position camera, point vise) en coordonnees monde.
-
-    0.0-2.5  plongee du ciel vers le bus
-    2.5-4.0  rase le toit, dans l'axe de la route
-    4.0-5.0  glisse sur le cote (cote mer), a hauteur de fenetre
-    5.0-7.8  travelling lateral : les stands defilent derriere le bus
-    7.8-9.6  la camera lache le bus et cadre le rasta, le bus file au fond
-    9.6-12.0 demi-tour (180) vers la mer et montee dans le ciel
-    """
+    """(temps s, position camera, point vise) en coordonnees monde."""
     r = RASTA_POS
+    head = (r.x, r.y - 0.4, 1.65)
     k = []
 
-    def rel(t, cam_off, tgt_off):
-        b = bus_at(t)
-        k.append((t, b + Vector(cam_off), b + Vector(tgt_off)))
+    def rel(t, cam_off, tgt_off):  # t = temps apres l'intro
+        b = bus_at(t + INTRO)
+        k.append((t + INTRO, b + Vector(cam_off), b + Vector(tgt_off)))
 
     def world(t, cam, tgt):
-        k.append((t, Vector(cam), Vector(tgt)))
+        k.append((t + INTRO, Vector(cam), Vector(tgt)))
 
+    # intro : approche lente du nuage de lettres, tres haut dans le ciel
+    b0 = bus_at(0.0)
+    k.append((0.0, b0 + Vector((-36, -28, 192)), b0 + Vector((4, 0, 1))))
+    # plongee, toit, flanc
     rel(0.0, (-30, -22, 150), (4, 0, 1))
     rel(1.2, (-22, -12, 78), (5, 0, 1))
     rel(2.5, (-9, -1.5, 9.5), (4, 0, 2.2))
     rel(3.3, (-3.5, -1.0, 4.4), (9, 0, 1.5))
-    rel(4.0, (1.0, -3.0, 3.6), (8, 0.5, 1.5))
-    rel(5.0, (6.5, -7.5, 1.6), (0.5, 0, 1.5))
-    rel(6.4, (5.5, -7.8, 1.5), (0.0, 0, 1.5))
-    rel(7.6, (3.0, -8.0, 1.5), (0.5, 0, 1.5))
-    world(8.6, (r.x - 5.2, r.y - 2.6, 1.55), (r.x, r.y, 1.55))
-    world(9.5, (r.x - 3.6, r.y - 2.9, 1.6), (r.x + 0.5, r.y, 1.6))
-    world(10.2, (r.x - 4.5, r.y - 6.0, 4.0), (r.x - 2, r.y - 40, 6))
-    world(11.0, (r.x - 6.5, r.y - 10.0, 16.0), (r.x - 60, r.y - 70, 50))
-    world(12.0, (r.x - 9.0, r.y - 14.0, 42.0), (r.x - 90, r.y - 110, 190))
+    rel(3.9, (1.0, -3.5, 3.4), (7, 0.5, 1.5))
+    # travelling lateral cote mer : lettrage + stands
+    rel(4.7, (6.0, -7.5, 1.7), (0.3, 0, 1.7))
+    rel(5.8, (5.0, -7.2, 1.7), (0.0, 0, 1.8))
+    # approche et entree par la fenetre avant droite
+    rel(6.5, (4.2, -4.0, 1.9), (0.5, 0, 1.8))
+    rel(7.0, (3.15, -1.7, 1.93), (-2.0, 0.3, 1.8))
+    rel(7.3, (2.75, -0.95, 1.93), (-6.0, 0.2, 1.7))
+    # traversee de l'allee, regard vers l'arriere, sortie par la lunette arriere
+    rel(7.7, (1.8, 0.0, 1.9), (-10, 0, 1.6))
+    rel(8.3, (-0.6, 0.0, 1.9), (-10, 0, 1.6))
+    rel(8.9, (-3.0, 0.0, 1.9), (-10, 0, 1.6))
+    rel(9.15, (-4.0, 0.0, 1.9), (-10, -1.5, 1.6))
+    # pivot par le cote mer vers le rasta, qui se retourne vers la camera
+    world(9.5, (182.3, 0.2, 1.8), (180.5, -10, 1.5))
+    world(9.9, (184.2, -1.2, 1.68), head)
+    world(10.4, (RASTA_CAM.x, RASTA_CAM.y, RASTA_CAM.z), head)
+    world(11.1, (RASTA_CAM.x + 0.3, RASTA_CAM.y - 0.1, RASTA_CAM.z), head)
+    # repart vers l'avant, depasse le bus par au-dessus, fonce sur le panneau
+    world(11.6, (189.5, 0.0, 2.4), (232, 1, 3))
+    world(12.4, (226, 0.0, 5.0), (SIGN_X, 0, 9.5))
+    world(13.3, (286, 0.0, 8.8), (SIGN_X, 0, 9.8))
+    world(14.0, (SIGN_X - 6.8, 0.0, 9.8), (SIGN_X, 0, 9.8))
     return k
 
 
 def hermite(keys, t, idx):
-    """Interpolation Catmull-Rom (temps non uniformes) de la composante idx."""
+    """Interpolation cubique monotone (sans depassement) de la composante idx.
+
+    Tangentes de Catmull-Rom, bridees composante par composante : nulles quand la
+    valeur fait une pause ou change de sens, sinon limitees a 3x la pente voisine.
+    Evite que la camera "prenne son elan" a l'envers avant une acceleration.
+    """
     n = len(keys)
     i = 0
     while i < n - 2 and t > keys[i + 1][0]:
@@ -282,10 +415,21 @@ def hermite(keys, t, idx):
     t0, t1 = keys[i][0], keys[i + 1][0]
     p0, p1 = keys[i][idx], keys[i + 1][idx]
 
-    def tangent(j):
-        a = max(j - 1, 0)
-        b = min(j + 1, n - 1)
+    def slope(a, b):
         return (keys[b][idx] - keys[a][idx]) / (keys[b][0] - keys[a][0])
+
+    def tangent(j):
+        if j == 0:
+            return slope(0, 1)
+        if j == n - 1:
+            return slope(n - 2, n - 1)
+        d0, d1, m = slope(j - 1, j), slope(j, j + 1), slope(j - 1, j + 1)
+        out = Vector((0.0, 0.0, 0.0))
+        for c in range(3):
+            if d0[c] * d1[c] > 0:
+                lim = 3 * min(abs(d0[c]), abs(d1[c]))
+                out[c] = max(-lim, min(lim, m[c]))
+        return out
 
     m0, m1 = tangent(i), tangent(i + 1)
     dt = t1 - t0
@@ -302,7 +446,7 @@ def build_camera():
     cam_data.lens = 16
     cam_data.sensor_fit = "VERTICAL"
     cam_data.sensor_height = 36
-    cam_data.clip_start = 0.1
+    cam_data.clip_start = 0.05
     cam_data.clip_end = 3000
     cam = bpy.data.objects.new("cam", cam_data)
     cam.rotation_mode = "QUATERNION"
@@ -325,6 +469,24 @@ def build_camera():
         cam.keyframe_insert("location", frame=f)
         cam.keyframe_insert("rotation_quaternion", frame=f)
     return cam
+
+
+def build_cloud_text():
+    """Lettres de nuage "GENEVA ARE YOU READY?" placees sur la trajectoire de la camera."""
+    keys = camera_keys()
+    t_hit = INTRO + 0.4  # instant ou la camera traverse les lettres
+    pos = hermite(keys, t_hit, 1)
+    aim = hermite(keys, 0.8, 2) - hermite(keys, 0.8, 1)
+    root = empty("cloud_text_root", pos)
+    root.rotation_mode = "QUATERNION"
+    root.rotation_quaternion = aim.to_track_quat("-Z", "Y")  # face a la camera
+    for body, height, dy in CLOUD_LINES:
+        obj = text("cloud_text", body, height, (0, dy, 0), (0, 0, 0), COL["cloud_text"], max_width=34, parent=root)
+        # disparait une fois traverse, pour ne pas reapparaitre a l'envers dans le ciel
+        for f, hidden in ((1, False), (int(frame_of(t_hit)) + 2, True)):
+            obj.hide_render = hidden
+            obj.keyframe_insert("hide_render", frame=f)
+    return root
 
 
 # ---------------------------------------------------------------- rendu
@@ -365,14 +527,15 @@ def main():
     args = ap.parse_args(argv)
 
     bpy.ops.wm.read_factory_settings(use_empty=True)
-    bpy.context.preferences.edit.keyframe_new_interpolation_type = "LINEAR"
     scene = bpy.context.scene
     res = tuple(int(v) for v in args.res.split("x"))
     setup_render(scene, res)
     build_world()
+    build_sign()
     build_bus()
     build_rasta()
     build_camera()
+    build_cloud_text()
 
     out = os.path.abspath(args.out)
     if args.stills:
