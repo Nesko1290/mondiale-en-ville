@@ -1,6 +1,7 @@
 """Remplace l'inscription du bandeau du bus par "BUBBLE" sur la photo de reference.
 
-Usage : python make_bus_reference.py photo_source.jpg bus_reference_bubble.jpg
+Usage : python make_bus_reference.py photo_source.jpg sortie.jpg [TEXTE]
+Sans TEXTE (ou TEXTE vide), le bandeau reste vert uni, sans inscription.
 """
 
 import sys
@@ -14,7 +15,7 @@ TEXT = "BUBBLE"
 COLOR = (22, 84, 30)
 
 
-def main(src, dst):
+def main(src, dst, text=TEXT):
     im = Image.open(src).convert("RGB")
     px = im.load()
     # Efface l'ancien texte : degrade vertical entre le vert au-dessus et en dessous.
@@ -27,15 +28,19 @@ def main(src, dst):
     band = im.crop((X0, Y_TOP, X1, 512)).filter(ImageFilter.GaussianBlur(1.2))
     im.paste(band, (X0, Y_TOP))
 
-    # Ecrit BUBBLE en capitales espacees, legerement incline comme le bandeau.
+    if not text:
+        im.save(dst, quality=95)
+        return
+
+    # Ecrit le texte en capitales espacees, legerement incline comme le bandeau.
     font = ImageFont.truetype(FONT, 24)
     layer = Image.new("RGBA", im.size, (0, 0, 0, 0))
     d = ImageDraw.Draw(layer)
     spacing = 14
-    widths = [d.textlength(ch, font=font) for ch in TEXT]
-    total = sum(widths) + spacing * (len(TEXT) - 1)
+    widths = [d.textlength(ch, font=font) for ch in text]
+    total = sum(widths) + spacing * (len(text) - 1)
     x = (X0 + X1) / 2 - total / 2 + 20
-    for ch, w in zip(TEXT, widths):
+    for ch, w in zip(text, widths):
         d.text((x, 496), ch, font=font, fill=COLOR + (235,), anchor="lm")
         x += w + spacing
     layer = layer.rotate(-0.5, center=((X0 + X1) / 2, 496), resample=Image.BICUBIC)
@@ -45,4 +50,4 @@ def main(src, dst):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1], sys.argv[2])
+    main(sys.argv[1], sys.argv[2], sys.argv[3] if len(sys.argv) > 3 else "")
