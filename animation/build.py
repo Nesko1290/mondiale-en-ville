@@ -127,7 +127,7 @@ def cone(name, r1, r2, depth, loc, color, segments=6, parent=None):
 
 def blob(name, radius, scale, loc, color):
     bm = bmesh.new()
-    bmesh.ops.create_icosphere(bm, subdivisions=1, radius=radius)
+    bmesh.ops.create_icosphere(bm, subdivisions=3, radius=radius)  # lisse : sinon Genjutsu recopie les facettes
     for v in bm.verts:
         v.co.x *= scale[0]
         v.co.y *= scale[1]
