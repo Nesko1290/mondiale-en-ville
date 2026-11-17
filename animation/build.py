@@ -142,7 +142,7 @@ def empty(name, loc=(0, 0, 0)):
     return obj
 
 
-def text(name, body, height, loc, rot, color, max_width=None, parent=None):
+def text(name, body, height, loc, rot, color, max_width=None, parent=None, puffy=False):
     """Texte 3D centre sur loc. height = hauteur approximative des capitales."""
     curve = bpy.data.curves.new(name, "FONT")
     curve.body = body
@@ -150,6 +150,11 @@ def text(name, body, height, loc, rot, color, max_width=None, parent=None):
     curve.align_y = "CENTER"
     curve.size = height / 0.7
     curve.extrude = 0.01
+    if puffy:  # lettres gonflees et arrondies, sans aretes : lues comme du nuage, pas de la pierre
+        curve.extrude = 0.0
+        curve.bevel_depth = height * 0.16
+        curve.bevel_resolution = 4
+        curve.offset = -height * 0.05
     obj = bpy.data.objects.new(name, curve)
     obj.location = loc
     obj.rotation_euler = rot
@@ -481,7 +486,7 @@ def build_cloud_text():
     root.rotation_mode = "QUATERNION"
     root.rotation_quaternion = aim.to_track_quat("-Z", "Y")  # face a la camera
     for body, height, dy in CLOUD_LINES:
-        obj = text("cloud_text", body, height, (0, dy, 0), (0, 0, 0), COL["cloud_text"], max_width=34, parent=root)
+        obj = text("cloud_text", body, height, (0, dy, 0), (0, 0, 0), COL["cloud_text"], max_width=34, parent=root, puffy=True)
         # disparait une fois traverse, pour ne pas reapparaitre a l'envers dans le ciel
         for f, hidden in ((1, False), (int(frame_of(t_hit)) + 2, True)):
             obj.hide_render = hidden
