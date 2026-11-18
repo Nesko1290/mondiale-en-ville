@@ -1,14 +1,14 @@
-"""Blockout Blender v3 : bus jamaicain "FROM THE CARIBBEAN TO GENEVA".
+"""Blockout Blender v4 : bus aux couleurs TPG sur le quai du Mont-Blanc, Geneve.
 
 Un seul plan continu de 15,5 s :
   0.0-1.9   dans le ciel : nuage "GENEVA ARE YOU READY?", la camera le traverse
-  1.9-4.0   plongee du ciel vers le bus
-  4.0-5.4   rase le toit (valises sur la galerie), glisse sur le flanc cote mer
-  5.4-8.0   travelling lateral : lettrage du bus, stands de fruits qui defilent
+  1.9-4.0   plongee vers le quai : lac, Jet d'Eau, immeubles haussmanniens
+  4.0-5.4   rase le toit (valises sur la galerie), le feu est rouge droit devant
+  5.4-8.0   le bus grille le feu ; travelling lateral cote lac, facades qui defilent
   8.0-9.0   la camera entre par une fenetre laterale
   9.0-10.6  traverse le bus dans l'allee, passagers avec valises, sort par l'arriere
-  10.6-12.7 pivote sur le rasta au bord de la route, qui se retourne vers la camera
-  12.7-15.5 fonce le long de la route jusqu'au panneau geant avec les infos
+  10.6-12.7 pivote sur la femme au telephone sur la promenade, qui se retourne
+  12.7-15.5 fonce le long du quai jusqu'au panneau geant avec les infos
 
 Formes grossieres, une couleur par chose. Sert de "Video 1" pour Higgsfield Genjutsu.
 
@@ -37,7 +37,7 @@ INTRO = 1.5  # secondes dans le ciel avant la plongee
 DURATION = 14.0 + INTRO
 N_FRAMES = int(FPS * DURATION)  # 465
 BUS_SPEED = 20.0  # m/s, le long de +X
-BUS_Y = 1.0  # roule a gauche (Jamaique), cote terre
+BUS_Y = -1.5  # roule a droite (Suisse), voie cote lac
 
 BUS_TEXT = "FROM THE CARIBBEAN TO GENEVA"
 CLOUD_LINES = [("GENEVA", 7.0, 9.5), ("ARE YOU", 5.5, 0.0), ("READY?", 7.0, -9.5)]  # texte, hauteur, decalage
@@ -60,20 +60,25 @@ COL = {
     "wheel": (0.1, 0.1, 0.1),  # noir    = roues
     "seat": (0.0, 0.8, 0.8),  # CYAN    = sieges du bus
     "passenger": (1.0, 0.4, 0.7),  # ROSE = passagers
-    "suitcase": (0.9, 0.05, 0.05),  # ROUGE = valises (sur les genoux et sur le toit)
+    "suitcase": (0.6, 0.33, 0.1),  # MARRON = valises (sur les genoux et sur le toit)
     "cloud_text": (0.75, 0.72, 0.9),  # lavande = lettres de nuage dans le ciel
     "logo": (1.0, 0.83, 0.0),  # JAUNE = logo Bubble sur le panneau
-    "road": (0.25, 0.25, 0.27),  # gris    = route goudronnee
-    "dash": (0.8, 0.8, 0.8),  # gris clair = ligne centrale
-    "sand": (0.93, 0.85, 0.55),  # jaune pale = plage
-    "sea": (0.05, 0.35, 0.8),  # bleu    = mer
-    "land": (0.25, 0.5, 0.2),  # vert    = vegetation au sol
-    "hill": (0.1, 0.3, 0.12),  # vert fonce = collines
-    "trunk": (0.45, 0.28, 0.12),  # brun    = troncs de palmiers
-    "palm": (0.1, 0.7, 0.25),  # vert vif = feuillage des palmiers
-    "stand": (1.0, 0.45, 0.0),  # ORANGE  = stands de fruits
-    "stand_roof": (0.9, 0.1, 0.6),  # MAGENTA = toits des stands
-    "rasta": (0.5, 0.1, 0.8),  # VIOLET  = le rasta
+    "road": (0.25, 0.25, 0.27),  # gris fonce = chaussee du quai
+    "dash": (0.8, 0.8, 0.8),  # gris clair = marquages et passages pietons
+    "sidewalk": (0.6, 0.6, 0.62),  # gris moyen = trottoirs et promenade du lac
+    "ground": (0.45, 0.45, 0.47),  # gris = sol de la ville
+    "lake": (0.05, 0.35, 0.8),  # BLEU    = lac Leman
+    "building": (0.85, 0.78, 0.62),  # BEIGE = immeubles haussmanniens
+    "window": (0.15, 0.15, 0.2),  # anthracite = fenetres et balcons
+    "roof": (0.3, 0.33, 0.42),  # ardoise = toits mansardes
+    "trunk": (0.45, 0.28, 0.12),  # brun    = troncs des platanes
+    "tree": (0.1, 0.7, 0.25),  # VERT     = feuillage des platanes
+    "pole": (0.12, 0.12, 0.12),  # noir   = poteaux et boitiers des feux
+    "red_light": (1.0, 0.0, 0.0),  # ROUGE VIF = feux rouges allumes
+    "car": (0.7, 0.9, 0.1),  # VERT-JAUNE = voitures arretees au feu
+    "jet": (0.85, 0.95, 1.0),  # blanc bleute = Jet d'Eau
+    "mountain": (0.5, 0.55, 0.7),  # bleu-gris = montagnes au loin
+    "rasta": (0.5, 0.1, 0.8),  # VIOLET  = la femme au telephone
     "sign": (0.03, 0.03, 0.03),  # NOIR    = panneau geant
     "sign_text": (1.0, 1.0, 1.0),  # blanc = texte et cadre du panneau
     "sign_post": (0.5, 0.5, 0.55),  # gris = poteaux du panneau
@@ -172,56 +177,106 @@ def text(name, body, height, loc, rot, color, max_width=None, parent=None, puffy
 
 
 # ---------------------------------------------------------------- decor
+CROSS_X = 85.0  # carrefour ou le bus grille le feu rouge
+
+
+def building(cx, w, h, front_y=9.0, depth=16.0, detailed=True):
+    """Immeuble haussmannien : corps beige, toit mansarde, rangees de fenetres et balcons."""
+    box("building", (w, depth, h), (cx, front_y + depth / 2, 0), COL["building"])
+    box("roof", (w * 0.97, depth * 0.94, 3.2), (cx, front_y + depth / 2, h), COL["roof"])
+    if not detailed:
+        return
+    bm = bmesh.new()
+
+    def add(size, loc):
+        geo = bmesh.ops.create_cube(bm, size=1.0)
+        for v in geo["verts"]:
+            v.co.x = v.co.x * size[0] + loc[0]
+            v.co.y = v.co.y * size[1] + loc[1]
+            v.co.z = v.co.z * size[2] + loc[2]
+
+    cols = max(2, int(w / 2.6))
+    step = w / cols
+    floors = int((h - 5.0) / 3.3)
+    for c in range(cols):
+        x = cx - w / 2 + step * (c + 0.5)
+        add((step * 0.7, 0.3, 3.0), (x, front_y, 2.1))  # vitrines du rez-de-chaussee
+        for f in range(floors):
+            add((1.1, 0.3, 2.0), (x, front_y, 6.4 + f * 3.3))
+    for f in (0, floors - 1):  # balcons filants
+        add((w, 0.7, 0.18), (cx, front_y - 0.3, 5.3 + f * 3.3))
+    new_obj("window", bm, COL["window"])
+
+
 def build_world():
     rnd = random.Random(7)
     x0, x1 = -150.0, 520.0
     length = x1 - x0
     cx = (x0 + x1) / 2
 
-    # Sol : mer (y < -34), plage (-34..-4), route (-4..4), terre (y > 4)
-    box("sea", (length + 800, 900, 0.1), (cx, -484, -0.3), COL["sea"])
-    box("sand", (length, 30, 0.1), (cx, -19, -0.12), COL["sand"])
+    # Lac cote -Y, promenade (-12..-4), chaussee (-4..4), trottoir (4..9), immeubles (y > 9)
+    box("lake", (length + 2400, 1500, 0.1), (cx, -762, -0.8), COL["lake"])
+    box("promenade", (length, 8, 0.15), (cx, -8, 0), COL["sidewalk"])
+    box("railing", (length, 0.12, 1.0), (cx, -11.9, 0.15), COL["pole"])
     box("road", (length, 8, 0.1), (cx, 0, -0.05), COL["road"])
-    box("land", (length + 800, 500, 0.1), (cx, 254, -0.1), COL["land"])
+    box("sidewalk", (length, 5, 0.15), (cx, 6.5, 0), COL["sidewalk"])
+    box("ground", (length + 800, 520, 0.1), (cx, 269, -0.1), COL["ground"])
     x = x0
     while x < x1:
         box("dash", (3.0, 0.2, 0.02), (x, 0, 0.05), COL["dash"])
         x += 8.0
 
-    for i in range(16):
-        hx = x0 + i * (length / 15) + rnd.uniform(-15, 15)
-        blob(
-            "hill",
-            1.0,
-            (rnd.uniform(40, 70), rnd.uniform(30, 50), rnd.uniform(14, 30)),
-            (hx, rnd.uniform(90, 140), 0),
-            COL["hill"],
-        )
-
-    def palm(px, py):
-        h = rnd.uniform(6, 11)
-        cone("trunk", 0.28, 0.18, h, (px, py, 0), COL["trunk"], segments=5)
-        cone("palm", 3.2, 0.3, 1.6, (px, py, h - 0.4), COL["palm"], segments=7)
-
+    # Premiere rangee : facades haussmanniennes le long du quai, rue transversale au carrefour
     x = x0
     while x < x1:
-        palm(x + rnd.uniform(-2, 2), rnd.uniform(13, 20))
-        palm(x + rnd.uniform(-4, 4), rnd.uniform(24, 45))
-        x += rnd.uniform(5, 9)
+        w = rnd.uniform(18, 28)
+        if x < CROSS_X + 7 and x + w > CROSS_X - 7:  # laisse la rue transversale libre
+            x = CROSS_X + 7.5
+            continue
+        if x < CROSS_X - 7 < x + w + 6:
+            w = CROSS_X - 7.5 - x
+        building(x + w / 2, w, rnd.uniform(19, 24))
+        x += w + 0.5
+    # Ilots de ville derriere, sans detail (vus seulement d'en haut)
+    for row in range(1, 7):
+        x = x0
+        while x < x1:
+            w = rnd.uniform(22, 40)
+            if not (x < CROSS_X + 7 and x + w > CROSS_X - 7):
+                building(x + w / 2, w, rnd.uniform(16, 24), front_y=9.0 + row * 34, depth=22, detailed=False)
+            x += w + rnd.uniform(6, 12)
+    box("cross_street", (14, 260, 0.1), (CROSS_X, 134, -0.03), COL["road"])
+
+    # Platanes sur la promenade du lac
     x = x0
     while x < x1:
-        palm(x + rnd.uniform(-4, 4), rnd.uniform(-26, -14))
-        x += rnd.uniform(22, 38)
+        if abs(x - CROSS_X) > 6 and abs(x - 186) > 9:  # degage le carrefour et la femme
+            h = rnd.uniform(4.5, 6)
+            cone("trunk", 0.3, 0.22, h, (x, -10.8, 0), COL["trunk"], segments=6)
+            blob("tree", 1.0, (2.8, 2.8, 2.2), (x, -10.8, h + 1.3), COL["tree"])
+        x += rnd.uniform(11, 15)
 
-    # Stands de fruits : bord de route cote terre, serres pendant le travelling
-    x = 70.0
-    while x < 150.0:
-        sy = 7.6 + rnd.uniform(-0.4, 0.4)
-        box("stand", (3.0, 1.6, 1.1), (x, sy, 0), COL["stand"])
-        box("stand_roof", (3.6, 2.4, 0.15), (x, sy, 2.3), COL["stand_roof"])
-        for dx in (-1.6, 1.6):
-            box("stand_post", (0.1, 0.1, 2.3), (x + dx, sy - 1.0, 0), COL["stand"])
-        x += rnd.uniform(6.5, 9.5)
+    # Carrefour : passages pietons, feux rouges face au bus, voitures a l'arret
+    for zx in (CROSS_X - 10, CROSS_X + 10):
+        for i in range(8):
+            box("zebra", (3.0, 0.5, 0.02), (zx, -3.5 + i, 0.06), COL["dash"])
+    lx = CROSS_X - 8.0
+    box("light_pole", (0.22, 0.22, 6.0), (lx, 4.4, 0), COL["pole"])
+    box("light_arm", (0.16, 6.2, 0.16), (lx, 1.4, 5.9), COL["pole"])
+    for ly, lz in ((-1.5, 4.9), (4.4, 2.6), (-4.4, 2.6)):
+        if ly < 0:
+            box("light_pole", (0.22, 0.22, 3.8), (lx, ly, 0), COL["pole"])
+        box("light_head", (0.4, 0.5, 1.3), (lx, ly, lz), COL["pole"])
+        box("red_light", (0.12, 0.38, 0.38), (lx - 0.25, ly, lz + 0.85), COL["red_light"])
+    for cy in (11.0, 17.5):  # dans la rue transversale, pretes a traverser
+        box("car", (1.8, 4.3, 1.4), (CROSS_X - 2.0, cy, 0.1), COL["car"])
+
+    # Au loin : Jet d'Eau dans la rade, rive opposee et montagnes
+    cone("jet", 4.0, 0.6, 140.0, (330, -380, 0), COL["jet"], segments=8)
+    box("far_shore", (length + 2400, 400, 6), (cx, -1700, 0), COL["tree"])
+    for i in range(9):
+        blob("mountain", 1.0, (rnd.uniform(260, 420), 200, rnd.uniform(140, 300)),
+             (x0 - 700 + i * 280, -2000, 0), COL["mountain"])
 
 
 def build_sign():
@@ -381,7 +436,7 @@ def camera_keys():
     rel(2.5, (-9, -1.5, 9.5), (4, 0, 2.2))
     rel(3.3, (-3.5, -1.0, 4.4), (9, 0, 1.5))
     rel(3.9, (1.0, -3.5, 3.4), (7, 0.5, 1.5))
-    # travelling lateral cote mer : lettrage + stands
+    # travelling lateral cote lac : lettrage + facades
     rel(4.7, (6.0, -7.5, 1.7), (0.3, 0, 1.7))
     rel(5.8, (5.0, -7.2, 1.7), (0.0, 0, 1.8))
     # approche et entree par la fenetre avant droite
@@ -452,7 +507,7 @@ def build_camera():
     cam_data.sensor_fit = "VERTICAL"
     cam_data.sensor_height = 36
     cam_data.clip_start = 0.05
-    cam_data.clip_end = 3000
+    cam_data.clip_end = 6000
     cam = bpy.data.objects.new("cam", cam_data)
     cam.rotation_mode = "QUATERNION"
     bpy.context.scene.collection.objects.link(cam)
