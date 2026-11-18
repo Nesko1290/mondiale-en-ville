@@ -35,14 +35,17 @@ def main():
     ap.add_argument("video")
     ap.add_argument("out")
     ap.add_argument("--music-volume", type=float, default=0.75)
+    ap.add_argument("--music", default=os.path.join(A, "music_geneve.mp3"), help="fichier musique")
+    ap.add_argument("--music-from", type=float, default=0.0, help="debut de l'extrait dans le morceau (s)")
+    ap.add_argument("--music-at", type=float, default=MUSIC_START, help="instant de la video ou la musique demarre (s)")
+    ap.add_argument("--card-at", type=float, default=CARD_AT, help="instant ou le carton apparait (s)")
     args = ap.parse_args()
 
     total = float(subprocess.run(
         ["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", args.video],
         capture_output=True, text=True, check=True).stdout.strip())
 
-    inputs = [args.video] + [os.path.join(A, f) for f in (
-        "music_geneve.mp3",  # 1
+    inputs = [args.video, args.music] + [os.path.join(A, f) for f in (
         "sfx_dive.mp3",  # 2
         "sfx_moteur.mp3",  # 3
         "sfx_trafic.mp3",  # 4
@@ -60,7 +63,8 @@ def main():
                 f"adelay={ms(start)}:all=1[{label}]")
 
     af = ";".join([
-        f"[1:a]adelay={ms(MUSIC_START)}:all=1,volume={args.music_volume}[mus]",
+        f"[1:a]atrim={args.music_from}:{args.music_from + total + 1},asetpts=PTS-STARTPTS,"
+        f"adelay={ms(args.music_at)}:all=1,volume={args.music_volume}[mus]",
         wind("w1", 0.0, 1.9, 2.4),  # monte jusqu'a la traversee du nuage
         f"[2:a]atrim=0:1.2,volume=5,adelay={ms(1.55)}:all=1[burst]",
         wind("w2", 1.9, 2.3, 0.35, rise=False),  # plongee
@@ -79,7 +83,7 @@ def main():
         f"[6:a]volume=1.2,afade=t=out:st=2.4:d=0.6,adelay={ms(10.5)}:all=1[rafale]",
         # course vers le panneau, impact sur le carton
         wind("w3", 12.7, 3.1, 0.45),
-        f"[7:a]volume=0.6,adelay={ms(CARD_AT - 1.3)}:all=1[impact]",
+        f"[7:a]volume=0.6,adelay={ms(args.card_at - 1.3)}:all=1[impact]",
         f"[mus][w1][burst][w2][mot1][mot2][pass][trafic][gens][rafale][w3][impact]"
         f"amix=inputs=12:normalize=0:duration=longest,atrim=0:{total},"
         f"afade=t=out:st={total - 0.6}:d=0.6,alimiter=limit=0.95,loudnorm=I=-14:TP=-1.0:LRA=11[a]",

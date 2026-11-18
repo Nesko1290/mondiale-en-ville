@@ -67,11 +67,12 @@ def main():
     ap.add_argument("out")
     ap.add_argument("--hold", type=float, default=3.0, help="duree du carton en secondes")
     ap.add_argument("--fade", type=float, default=0.35)
+    ap.add_argument("--trim-end", type=float, default=0.0, help="coupe la fin du rendu de tant de secondes")
     ap.add_argument("--card-only", help="ecrit seulement l'image du carton a ce chemin")
     args = ap.parse_args()
 
     width, height = (int(v) for v in probe(args.video, "stream=width,height").split(","))
-    duration = float(probe(args.video, "format=duration"))
+    duration = float(probe(args.video, "format=duration")) - args.trim_end
     if args.card_only:
         make_card(width, height, args.card_only)
         return
@@ -83,7 +84,7 @@ def main():
         # le carton avance lentement, pour prolonger la poussee de camera
         zoom = f"zoompan=z='1.0+0.05*min(1,on/{n})':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={n}:s={width}x{height}:fps=30"
         fc = (
-            f"[0:v]fps=30,format=yuv420p,setsar=1[v0];"
+            f"[0:v]trim=0:{duration:.3f},setpts=PTS-STARTPTS,fps=30,format=yuv420p,setsar=1[v0];"
             f"[1:v]{zoom},format=yuv420p,setsar=1[v1];"
             f"[v0][v1]xfade=transition=fade:duration={args.fade}:offset={duration - args.fade:.3f}[v]"
         )
