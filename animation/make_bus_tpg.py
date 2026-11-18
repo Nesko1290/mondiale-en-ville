@@ -14,7 +14,7 @@ def main(src, dst):
     hsv = np.array(Image.open(src).convert("RGB").convert("HSV")).astype(np.float32)
     h, s, v = hsv[..., 0] / 255 * 360, hsv[..., 1] / 255, hsv[..., 2] / 255
     rows = np.arange(h.shape[0])[:, None] * np.ones((1, h.shape[1]))
-    bus = rows > 452  # la carrosserie commence sous les arbres
+    bus = rows > 444  # la carrosserie commence sous les arbres
     green = bus & (h > 75) & (h < 160) & (s > 0.45) & (v > 0.25)
     yellow = bus & (h > 33) & (h <= 75) & (s > 0.3) & (v > 0.3)
     out = hsv.copy()

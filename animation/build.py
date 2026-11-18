@@ -56,7 +56,7 @@ SIGN_X = 320.0
 COL = {
     "bus": (1.0, 1.0, 1.0),  # BLANC   = le bus (sujet principal)
     "bus_front": (0.02, 0.02, 0.02),  # noir = pare-brise (donne le sens de marche)
-    "bus_text": (0.05, 0.25, 0.08),  # vert fonce = lettrage du bus
+    "bus_text": (0.08, 0.05, 0.03),  # brun-noir = lettrage du bus (pas de vert : l'IA peignait le toit en vert)
     "wheel": (0.1, 0.1, 0.1),  # noir    = roues
     "seat": (0.0, 0.8, 0.8),  # CYAN    = sieges du bus
     "passenger": (1.0, 0.4, 0.7),  # ROSE = passagers
@@ -328,6 +328,8 @@ def build_bus():
     # avant plein avec pare-brise ; arriere ouvert a hauteur de fenetre
     box("bus_front_wall", (0.08, BUS_W, ROOF_Z - FLOOR_Z), (hl - 0.04, 0, FLOOR_Z), c, parent=root)
     box("bus_front", (0.08, 1.9, 0.9), (hl + 0.02, 0, 1.45), COL["bus_front"], parent=root)
+    for hy in (-0.8, 0.8):  # phares : marquent l'avant sans ambiguite
+        box("bus_headlight", (0.06, 0.3, 0.2), (hl + 0.05, hy, 0.75), COL["logo"], parent=root)
     box("bus_rear_low", (0.08, BUS_W, SILL_Z - FLOOR_Z), (-hl + 0.04, 0, FLOOR_Z), c, parent=root)
     box("bus_rear_band", (0.08, BUS_W, ROOF_Z - HEAD_Z), (-hl + 0.04, 0, HEAD_Z), c, parent=root)
     for wx in (-2.3, 2.3):
