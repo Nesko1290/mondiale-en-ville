@@ -3,544 +3,548 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gradi — Festive Experience | Dîner, show &amp; fête</title>
-<meta name="description" content="Gradi Festive Experience : un dîner qui monte en degrés. Cuisine à partager, show, DJ set et fête jusqu'au bout de la nuit.">
+<title>Gradi — Festive Experience</title>
+<meta name="description" content="Gradi Festive Experience. Dîner, show et fête à la même table.">
 <meta property="og:title" content="Gradi — Festive Experience">
-<meta property="og:description" content="Le dîner qui monte en degrés. Table, show, fête.">
-<meta name="theme-color" content="#0b0908">
+<meta property="og:description" content="Dîner, show et fête à la même table.">
+<meta name="theme-color" content="#4a0d16">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
-<script>document.documentElement.classList.add('js');</script>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Archivo:wdth,wght@75..100,400..600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --night:#0b0908; --night-2:#14100e; --night-3:#1d1714;
-  --paper:#f4efe6; --paper-2:#eae3d6; --ink:#16120f; --ink-soft:#6d645a;
-  --ember:#e4572e; --ember-deep:#b8391a; --gold:#d8bf94;
-  --line-d:rgba(255,255,255,.14); --line-l:rgba(22,18,15,.14);
-  --ease:cubic-bezier(.16,1,.3,1);
-  --display:'Unbounded',system-ui,sans-serif;
-  --serif:'Instrument Serif',Georgia,serif;
-  --body:'Hanken Grotesk',system-ui,sans-serif;
-  --pad:clamp(20px,4.2vw,64px);
+  --cream:#f1eadc; --cream-2:#e6dcc9; --ink:#17110f; --mute:#75695d;
+  --wine:#4a0d16; --wine-2:#5f1420; --red:#c8321e; --rose:#e9b9a6;
+  --line:rgba(23,17,15,.2); --line-w:rgba(241,234,220,.22);
+  --didone:'Bodoni Moda','Didot',Georgia,serif;
+  --sans:'Archivo',system-ui,sans-serif;
+  --pad:clamp(18px,3.4vw,52px); --bar:64px;
+  --ease:cubic-bezier(.2,.8,.2,1);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{font-family:var(--body);font-weight:300;font-size:16px;line-height:1.55;background:var(--night);color:#f1ebe2;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-img{max-width:100%;display:block}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:var(--bar)}
+body{font-family:var(--sans);font-size:16px;line-height:1.5;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
-button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-:focus-visible{outline:2px solid var(--ember);outline-offset:3px}
-.skip{position:absolute;left:-999px;top:8px;background:#fff;color:#000;padding:10px 14px;z-index:999}
+button,input,select,textarea{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer;letter-spacing:inherit;text-transform:inherit}
+ul{list-style:none}
+:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:var(--cream);padding:10px 14px;z-index:999}
 .skip:focus{left:8px}
 
-/* ---------- type helpers ---------- */
-.eyebrow{font-family:var(--display);font-weight:400;font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold)}
-.light .eyebrow{color:var(--ember-deep)}
-.h-xl{font-family:var(--display);font-weight:300;text-transform:uppercase;line-height:.98;letter-spacing:-.01em;font-size:clamp(2.3rem,7.6vw,7.4rem)}
-.h-lg{font-family:var(--display);font-weight:300;line-height:1.08;letter-spacing:-.015em;font-size:clamp(1.7rem,3.6vw,3.1rem)}
-.it{font-family:var(--serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em;color:var(--ember);font-size:1.16em;line-height:.9}
-.lede{font-size:clamp(1rem,1.25vw,1.15rem);max-width:46ch;color:rgba(241,235,226,.78)}
-.light .lede{color:var(--ink-soft)}
-.link{font-family:var(--display);font-size:11px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;display:inline-flex;align-items:center;gap:10px;padding:6px 0;position:relative}
-.link::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform-origin:left;transition:transform .5s var(--ease)}
-.link:hover::after{transform:scaleX(.35)}
-.btn{font-family:var(--display);font-size:11px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 26px;border:1px solid var(--ember);background:var(--ember);color:#fff;transition:background .35s,color .35s,border-color .35s}
-.btn:hover{background:transparent;color:var(--ember)}
-.btn.ghost{background:transparent;border-color:currentColor;color:inherit}
-.btn.ghost:hover{background:#f1ebe2;color:var(--night);border-color:#f1ebe2}
-.light .btn.ghost:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+/* small caps label used for all UI text */
+.caps{font-stretch:75%;font-weight:500;font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+.didone{font-family:var(--didone);font-weight:400;letter-spacing:-.02em;line-height:.95}
 
-/* ---------- image slots ---------- */
-.ph{position:relative;overflow:hidden;background-color:var(--night-3);background-size:cover;background-position:center;isolation:isolate}
-.ph::before{content:'';position:absolute;inset:0;z-index:-1;background:
-  radial-gradient(60% 55% at var(--gx,30%) var(--gy,70%),rgba(228,87,46,.55),transparent 70%),
-  radial-gradient(50% 50% at calc(100% - var(--gx,30%)) 20%,rgba(216,191,148,.28),transparent 70%),
-  linear-gradient(160deg,#2a1a12,#0f0b09 70%)}
-.ph::after{content:attr(data-img);position:absolute;right:10px;top:10px;font-family:var(--display);font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:5px 8px;border:1px dashed rgba(255,255,255,.4);color:rgba(255,255,255,.75);background:rgba(0,0,0,.25)}
-.ph.has-img::before,.ph.has-img::after{display:none}
+/* ---------- photo slots: flat panel + cross, replaced automatically by img/<name> ---------- */
+.ph{position:relative;overflow:hidden;background-color:var(--wine);background-size:cover;background-position:center;color:var(--rose)}
+.ph:not(.has-img){background-image:
+  linear-gradient(to top right,transparent calc(50% - .5px),currentColor 50%,transparent calc(50% + .5px)),
+  linear-gradient(to top left,transparent calc(50% - .5px),currentColor 50%,transparent calc(50% + .5px));background-size:100% 100%}
+.ph:not(.has-img)::after{content:'Photo · ' attr(data-img);position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);white-space:nowrap;background:inherit;background-image:none;background-color:var(--wine);padding:6px 10px;font-stretch:75%;font-weight:500;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.ph.alt{background-color:var(--cream-2);color:var(--mute)}
+.ph.alt:not(.has-img)::after{background-color:var(--cream-2)}
 
-/* ---------- nav ---------- */
-.nav{position:fixed;inset:0 0 auto 0;z-index:60;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:18px var(--pad);transition:background .4s,padding .4s,border-color .4s;border-bottom:1px solid transparent}
-.nav.solid{background:rgba(11,9,8,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding-top:12px;padding-bottom:12px;border-color:var(--line-d)}
-.nav ul{display:flex;gap:clamp(16px,2.2vw,34px);list-style:none}
-.nav .r{justify-content:flex-end;align-items:center}
-.nav a.n{font-family:var(--display);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:400;opacity:.85;transition:opacity .3s}
-.nav a.n:hover{opacity:1;color:var(--gold)}
-.brand{font-family:var(--display);font-weight:500;font-size:clamp(20px,2vw,26px);letter-spacing:.34em;padding-left:.34em;text-align:center;line-height:1}
-.brand sup{color:var(--ember);font-size:.7em;letter-spacing:0;margin-left:-.2em}
-.brand small{display:block;font-weight:300;font-size:7.5px;letter-spacing:.42em;margin-top:6px;opacity:.75}
-.nav .btn{min-height:40px;padding:0 20px}
-.burger{display:none;width:44px;height:44px;align-items:center;justify-content:center;flex-direction:column;gap:6px}
-.burger i{display:block;width:22px;height:1px;background:currentColor;transition:transform .4s var(--ease)}
-.menu-open .burger i:first-child{transform:translateY(3.5px) rotate(45deg)}
-.menu-open .burger i:last-child{transform:translateY(-3.5px) rotate(-45deg)}
-.overlay{position:fixed;inset:0;z-index:55;background:var(--night);display:flex;flex-direction:column;justify-content:center;padding:90px var(--pad) 40px;gap:8px;opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s}
-.menu-open .overlay{opacity:1;visibility:visible}
-.overlay a{font-family:var(--display);font-weight:300;text-transform:uppercase;font-size:clamp(1.6rem,8vw,2.6rem);padding:8px 0;border-bottom:1px solid var(--line-d);display:flex;justify-content:space-between;align-items:baseline}
-.overlay a span{font-size:10px;letter-spacing:.2em;color:var(--gold)}
+/* ---------- top bar: ruled cells ---------- */
+.bar{position:fixed;inset:0 0 auto 0;height:var(--bar);z-index:60;display:grid;grid-template-columns:auto 1fr auto;background:var(--cream);border-bottom:1px solid var(--ink);transition:transform .45s var(--ease)}
+.bar.hide{transform:translateY(-100%)}
+.bar>*{display:flex;align-items:center}
+.bar .menu-btn{padding:0 var(--pad);gap:12px;border-right:1px solid var(--ink)}
+.menu-btn i{display:block;width:22px;height:8px;border-block:1.5px solid currentColor;transition:height .3s}
+[data-menu="open"] .menu-btn i{height:0;border-bottom:0}
+.bar nav{justify-content:space-between;padding:0 var(--pad);gap:24px}
+.bar nav ul{display:flex;gap:clamp(14px,2.2vw,34px)}
+.bar nav a{position:relative;padding:8px 0}
+.bar nav ul a::after{content:'';position:absolute;left:0;right:0;bottom:2px;height:1.5px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.bar nav ul a:hover::after,.bar nav ul a[aria-current]::after{transform:scaleX(1)}
+.logo{font-family:var(--didone);font-weight:500;font-size:28px;letter-spacing:.04em;line-height:1}
+.bar .book{padding:0 clamp(18px,3vw,44px);background:var(--red);color:#fff;border-left:1px solid var(--ink);transition:background .25s}
+.bar .book:hover{background:var(--ink)}
 
-/* ---------- degree gauge (signature) ---------- */
-.gauge{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:50;display:flex;flex-direction:column;align-items:center;gap:12px;mix-blend-mode:difference;color:#fff;pointer-events:none}
-.gauge b{font-family:var(--display);font-weight:400;font-size:11px;letter-spacing:.08em;font-variant-numeric:tabular-nums}
-.gauge .track{width:1px;height:150px;background:rgba(255,255,255,.3);position:relative}
-.gauge .fill{position:absolute;left:-1px;bottom:0;width:3px;height:0;background:#fff}
-.gauge small{font-family:var(--display);font-size:8px;letter-spacing:.2em;writing-mode:vertical-rl;text-transform:uppercase;opacity:.7}
+/* full-screen menu */
+.sheet{position:fixed;inset:var(--bar) 0 0 0;z-index:55;background:var(--wine);color:var(--cream);display:grid;grid-template-columns:1.4fr 1fr;visibility:hidden;clip-path:inset(0 0 100% 0);transition:clip-path .6s var(--ease),visibility .6s}
+[data-menu="open"] .sheet{visibility:visible;clip-path:inset(0)}
+.sheet ol{padding:var(--pad);display:flex;flex-direction:column;justify-content:center;list-style:none}
+.sheet ol a{display:flex;align-items:baseline;gap:18px;font-family:var(--didone);font-size:clamp(2.4rem,7vw,5.4rem);line-height:1.08;transition:color .2s,padding .35s var(--ease)}
+.sheet ol a:hover{color:var(--rose);padding-left:14px}
+.sheet ol a span{font-family:var(--sans);font-stretch:75%;font-size:12px;letter-spacing:.12em;opacity:.6}
+.sheet aside{border-left:1px solid var(--line-w);padding:var(--pad);display:flex;flex-direction:column;justify-content:flex-end;gap:22px}
+.sheet aside p{max-width:28ch}
+.sheet aside .caps{opacity:.6;display:block;margin-bottom:4px}
 
 /* ---------- hero ---------- */
-.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;padding:140px var(--pad) clamp(36px,6vh,72px)}
-.hero .ph{position:absolute;inset:0;--gx:68%;--gy:40%}
-.hero .ph::after{top:auto;bottom:14px}
-.hero .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,9,8,.55) 0%,rgba(11,9,8,.1) 35%,rgba(11,9,8,.88) 100%)}
-.hero-in{position:relative;width:100%;display:grid;grid-template-columns:1fr auto;align-items:end;gap:32px}
-.hero h1 span{display:block}
-.hero .lede{margin:22px 0 30px}
-.cta{display:flex;flex-wrap:wrap;gap:14px 26px;align-items:center}
-.hero-meta{font-family:var(--display);font-size:10px;letter-spacing:.2em;text-transform:uppercase;text-align:right;line-height:2.1;color:rgba(241,235,226,.8)}
-.hero-meta strong{font-weight:400;color:var(--gold)}
+.hero{position:relative;height:100svh;min-height:560px;padding-top:var(--bar);display:flex;flex-direction:column;background:var(--wine);color:var(--cream)}
+.hero .ph{position:absolute;inset:var(--bar) 0 0 0}
+.hero .ph.has-img::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,10,10,.25),rgba(23,10,10,.1) 40%,rgba(23,10,10,.75))}
+.hero-top{position:relative;display:flex;justify-content:space-between;gap:20px;padding:20px var(--pad)}
+.hero-word{position:relative;margin-top:auto;padding:0 var(--pad);display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+.hero h1{font-family:var(--didone);font-weight:400;font-size:clamp(5rem,25.5vw,26rem);line-height:.74;letter-spacing:-.035em;margin-left:-.05em;padding-bottom:.06em}
+.hero h1 small{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.hero-word p{writing-mode:vertical-rl;transform:rotate(180deg);padding-top:.5em;white-space:nowrap}
 
-/* ---------- marquee ---------- */
-.marquee{border-block:1px solid var(--line-d);overflow:hidden;padding:16px 0;background:var(--night)}
-.marquee div{display:flex;gap:44px;width:max-content;animation:mq 38s linear infinite;font-family:var(--display);font-weight:300;font-size:13px;letter-spacing:.24em;text-transform:uppercase;white-space:nowrap}
-.marquee span i{font-family:var(--serif);font-style:italic;color:var(--ember);text-transform:none;letter-spacing:0;font-size:1.5em;line-height:0}
-@keyframes mq{to{transform:translateX(-50%)}}
+/* booking strip */
+.strip{position:relative;display:grid;grid-template-columns:repeat(3,1fr) auto;background:var(--cream);color:var(--ink);border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.strip label{display:flex;flex-direction:column;justify-content:center;gap:2px;padding:12px var(--pad);border-right:1px solid var(--ink);min-height:72px;cursor:pointer;transition:background .2s}
+.strip label:hover{background:var(--cream-2)}
+.strip label span{font-size:11px;color:var(--mute)}
+.strip input,.strip select{background:transparent;border:0;font-size:18px;font-weight:500;width:100%;min-height:28px;cursor:pointer;appearance:none;-webkit-appearance:none;border-radius:0}
+.strip input:focus,.strip select:focus{outline:0}
+.strip label:focus-within{background:var(--cream-2);box-shadow:inset 0 -3px 0 var(--red)}
+.strip button{padding:0 clamp(24px,5vw,80px);background:var(--ink);color:var(--cream);display:flex;align-items:center;gap:14px;transition:background .25s}
+.strip button:hover{background:var(--red)}
+.arr{display:inline-block;width:22px;height:10px;position:relative;flex:none;transition:transform .35s var(--ease)}
+.arr::before{content:'';position:absolute;left:0;right:0;top:50%;height:1.5px;background:currentColor;margin-top:-.75px}
+.arr::after{content:'';position:absolute;right:0;top:50%;width:8px;height:8px;border-top:1.5px solid currentColor;border-right:1.5px solid currentColor;transform:translateY(-50%) rotate(45deg)}
+a:hover>.arr,button:hover>.arr,.row:hover .arr{transform:translateX(6px)}
 
 /* ---------- sections ---------- */
-section{padding:clamp(72px,10vw,150px) var(--pad);position:relative}
-.light{background:var(--paper);color:var(--ink)}
-.head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:clamp(30px,4vw,56px);flex-wrap:wrap}
-.head .eyebrow{display:block;margin-bottom:16px}
+section{border-bottom:1px solid var(--ink)}
+.sec-head{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:16px var(--pad);border-bottom:1px solid var(--ink)}
+.sec-head .n{color:var(--mute)}
+.under{border-bottom:1.5px solid currentColor;padding-bottom:3px;display:inline-flex;align-items:center;gap:12px}
 
-/* acts carousel */
-.acts{padding-right:0}
-.acts .head{padding-right:var(--pad)}
-.ctrl{display:flex;align-items:center;gap:18px}
-.ctrl .count{font-family:var(--display);font-size:11px;letter-spacing:.2em;font-variant-numeric:tabular-nums;color:var(--gold)}
-.arrow{width:48px;height:48px;border-radius:50%;border:1px solid var(--line-d);display:grid;place-items:center;transition:background .3s,color .3s,border-color .3s}
-.arrow:hover{background:#f1ebe2;color:var(--night);border-color:#f1ebe2}
-.arrow svg{width:16px;height:16px}
-.rail{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-right:var(--pad);scroll-padding-left:0}
-.rail::-webkit-scrollbar{display:none}
-.act{flex:0 0 min(78vw,430px);aspect-ratio:3/4.1;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:flex-end;padding:26px;color:#fff}
-.act:nth-child(2){--gx:70%;--gy:30%}.act:nth-child(3){--gx:50%;--gy:50%}.act:nth-child(4){--gx:20%;--gy:25%}
-.act .shade{position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(8,6,5,.9));z-index:0}
-.act>*:not(.shade){position:relative;z-index:1}
-.act .deg{position:absolute;top:22px;left:26px;font-family:var(--display);font-weight:300;font-size:clamp(2.4rem,4vw,3.4rem);line-height:1}
-.act .deg sup{font-size:.45em;color:var(--ember);vertical-align:top;margin-left:2px}
-.act time{font-family:var(--display);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
-.act h3{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,3vw,2.7rem);line-height:1;margin:8px 0 10px}
-.act p{font-size:15px;color:rgba(255,255,255,.8);max-width:32ch}
+/* intro */
+.intro{display:grid;grid-template-columns:1.9fr 1fr}
+.intro h2{padding:clamp(48px,8vw,120px) var(--pad);font-family:var(--didone);font-weight:400;font-size:clamp(2rem,4.6vw,4.6rem);line-height:1.04;letter-spacing:-.02em;max-width:17ch}
+.intro dl{border-left:1px solid var(--ink);display:grid;grid-template-rows:repeat(3,1fr)}
+.intro dl div{padding:22px var(--pad);border-bottom:1px solid var(--ink);display:flex;flex-direction:column;justify-content:center;gap:6px}
+.intro dl div:last-child{border-bottom:0}
+.intro dt{color:var(--mute);font-size:11px}
+.intro dd{font-size:clamp(1.05rem,1.5vw,1.3rem);font-weight:500;line-height:1.3}
+
+/* la soirée: list + sticky image */
+.night{display:grid;grid-template-columns:1.25fr 1fr}
+.night-list{border-right:1px solid var(--ink)}
+.act{display:block;width:100%;text-align:left;padding:clamp(20px,2.6vw,36px) var(--pad);border-bottom:1px solid var(--ink);display:grid;grid-template-columns:44px 1fr auto;align-items:baseline;gap:6px 12px;transition:background .3s,color .3s}
+.act:last-child{border-bottom:0}
+.act .i{color:var(--mute);transition:color .3s}
+.act h3{font-family:var(--didone);font-weight:400;font-size:clamp(2.2rem,5.4vw,5.4rem);line-height:1;letter-spacing:-.02em}
+.act p{grid-column:2/-1;max-width:44ch;color:var(--mute);display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease),color .3s}
+.act p>span{overflow:hidden}
+.act .ph{grid-column:1/-1;aspect-ratio:16/10;display:none;margin-top:14px}
+.act[aria-expanded="true"]{background:var(--wine);color:var(--cream)}
+.act[aria-expanded="true"] .i{color:var(--rose)}
+.act[aria-expanded="true"] p{grid-template-rows:1fr;color:var(--rose)}
+.act[aria-expanded="true"] p>span{padding-top:10px}
+.night-view{position:relative;min-height:520px}
+.night-view .ph{position:absolute;inset:0;opacity:0;transition:opacity .5s}
+.night-view .ph.on{opacity:1}
 
 /* carte */
-.carte-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,5vw,80px);align-items:start}
-.carte-side{position:sticky;top:110px}
-.carte-side .ph{aspect-ratio:4/5;margin-top:30px;--gx:40%;--gy:60%}
-.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
-.tab{font-family:var(--display);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;min-height:42px;padding:0 16px;border:1px solid var(--line-l);transition:all .3s}
-.tab[aria-selected="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-.dish{display:grid;grid-template-columns:1fr auto;gap:4px 20px;padding:18px 0;border-bottom:1px solid var(--line-l)}
-.dish h4{font-family:var(--serif);font-weight:400;font-size:1.6rem;line-height:1.1}
-.dish .p{font-family:var(--display);font-size:13px;font-weight:400;font-variant-numeric:tabular-nums;padding-top:8px}
-.dish p{grid-column:1;color:var(--ink-soft);font-size:15px}
-.note{margin-top:22px;font-size:13px;color:var(--ink-soft);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.tag{font-family:var(--display);font-size:9px;letter-spacing:.16em;text-transform:uppercase;border:1px dashed var(--ember-deep);color:var(--ember-deep);padding:4px 8px}
+.carte{display:grid;grid-template-columns:minmax(210px,1fr) 3.4fr}
+.tabs{border-right:1px solid var(--ink);display:flex;flex-direction:column;align-self:start;position:sticky;top:var(--bar)}
+.tab{text-align:left;padding:18px var(--pad);border-bottom:1px solid var(--ink);display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:56px;transition:background .2s,color .2s}
+.tab:hover{background:var(--cream-2)}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--cream)}
+.tab em{font-style:normal;opacity:.55;font-size:11px}
+.panel{padding:clamp(28px,4vw,60px) var(--pad) clamp(40px,5vw,72px)}
+.panel h3{font-family:var(--didone);font-weight:400;font-size:clamp(2.4rem,5vw,4.8rem);line-height:1;letter-spacing:-.02em;margin-bottom:clamp(20px,3vw,40px)}
+.dishes{columns:2;column-gap:clamp(28px,5vw,80px)}
+.dish{break-inside:avoid;padding:14px 0;border-top:1px solid var(--line)}
+.dish div{display:flex;align-items:baseline;gap:10px}
+.dish h4{font-weight:600;font-size:17px}
+.dish i{flex:1;border-bottom:1px dotted var(--mute);transform:translateY(-4px)}
+.dish b{font-weight:500;font-variant-numeric:tabular-nums}
+.dish p{color:var(--mute);font-size:15px;margin-top:2px;max-width:40ch}
+.draft{margin-top:26px;display:inline-block;border:1px dashed var(--red);color:var(--red);padding:6px 10px;font-size:11px}
 
-/* affiche */
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,28px)}
-.card .ph{aspect-ratio:4/5;margin-bottom:16px;transition:transform .8s var(--ease)}
-.card:nth-child(2) .ph{--gx:70%;--gy:30%}.card:nth-child(3) .ph{--gx:50%;--gy:85%}
-.card:hover .ph{transform:scale(.985)}
-.card .meta{font-family:var(--display);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:flex;justify-content:space-between;gap:10px}
-.card h3{font-family:var(--display);font-weight:300;font-size:clamp(1.15rem,1.7vw,1.5rem);margin:8px 0 6px;line-height:1.2}
-.card p{font-size:15px;color:rgba(241,235,226,.7)}
+/* agenda */
+.agenda{background:var(--wine);color:var(--cream)}
+.agenda .sec-head,.agenda .row{border-color:var(--line-w)}
+.agenda .sec-head .n{color:var(--rose)}
+.row{display:grid;grid-template-columns:minmax(90px,1fr) 3fr 2fr auto;align-items:center;gap:16px;padding:clamp(18px,2.4vw,32px) var(--pad);border-bottom:1px solid;width:100%;text-align:left;transition:background .3s,color .3s}
+.row:last-child{border-bottom:0}
+.row:hover{background:var(--cream);color:var(--wine)}
+.row h3{font-family:var(--didone);font-weight:400;font-size:clamp(1.7rem,3.6vw,3.4rem);line-height:1;letter-spacing:-.02em}
+.row p{font-size:15px;opacity:.8;max-width:36ch}
+.row .day{color:var(--rose);transition:color .3s}
+.row:hover .day{color:var(--red)}
 
-/* manifesto */
-.manifesto{text-align:center;padding-block:clamp(110px,17vw,240px);background:radial-gradient(60% 60% at 50% 100%,rgba(228,87,46,.22),transparent 70%),var(--night)}
-.manifesto .h-xl{margin:26px auto;max-width:14ch}
-.manifesto p{color:rgba(241,235,226,.7)}
-
-/* events */
-.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,6vw,96px);align-items:center}
-.split .ph{aspect-ratio:4/5;--gx:60%;--gy:35%}
-.split .lede{margin:22px 0 28px}
-.facts{display:grid;grid-template-columns:repeat(3,auto);gap:28px;justify-content:start;margin-bottom:34px;list-style:none}
-.facts b{display:block;font-family:var(--display);font-weight:300;font-size:1.9rem;line-height:1.1}
-.facts span{font-size:13px;color:var(--ink-soft)}
+/* privatiser */
+.priv{display:grid;grid-template-columns:1fr 1fr}
+.priv .ph{min-height:clamp(380px,48vw,680px)}
+.priv-txt{border-left:1px solid var(--ink);display:flex;flex-direction:column}
+.priv-txt h2{font-family:var(--didone);font-weight:400;font-size:clamp(2.2rem,4.4vw,4.4rem);line-height:1;letter-spacing:-.02em;padding:clamp(32px,5vw,72px) var(--pad) 18px}
+.priv-txt>p{padding:0 var(--pad);max-width:50ch;color:var(--mute);font-size:17px}
+.figs{margin-top:auto;display:grid;grid-template-columns:repeat(3,1fr);border-block:1px solid var(--ink)}
+.figs li{padding:18px var(--pad);border-right:1px solid var(--ink)}
+.figs li:last-child{border-right:0}
+.figs b{display:block;font-family:var(--didone);font-weight:400;font-size:clamp(2rem,3.4vw,3.2rem);line-height:1}
+.figs span{font-size:11px;color:var(--mute)}
+.big-btn{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:0 var(--pad);min-height:76px;width:100%;background:var(--ink);color:var(--cream);transition:background .25s}
+.big-btn:hover{background:var(--red)}
+.priv-txt .big-btn{margin-top:clamp(28px,4vw,56px)}
 
 /* galerie */
-.gal{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:clamp(120px,15vw,230px);gap:10px}
-.gal .ph:nth-child(1){grid-column:span 2;grid-row:span 2}
-.gal .ph:nth-child(2){grid-column:span 2;--gx:75%}
-.gal .ph:nth-child(3){grid-column:span 2;--gy:20%}
-.gal .ph:nth-child(4){grid-column:span 1;--gx:50%}
-.gal .ph:nth-child(5){grid-column:span 2;--gx:80%;--gy:80%}
-.gal .ph:nth-child(6){grid-column:span 1;--gy:30%}
-
-/* reservation */
-.resa{background:var(--night-2);border-top:1px solid var(--line-d)}
-.resa-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(30px,6vw,96px)}
-.info{list-style:none;margin-top:34px;border-top:1px solid var(--line-d)}
-.info li{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--line-d);font-size:15px}
-.info span{font-family:var(--display);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);padding-top:4px}
-form{display:grid;grid-template-columns:1fr 1fr;gap:22px 20px}
-.f{display:flex;flex-direction:column;gap:8px}
-.f.full{grid-column:1/-1}
-.f label{font-family:var(--display);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
-.f input,.f select,.f textarea{font:inherit;color:#f1ebe2;background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.3);padding:10px 0;min-height:46px;border-radius:0;width:100%;color-scheme:dark}
-.f textarea{min-height:70px;resize:vertical}
-.f select option{background:var(--night-2)}
-.f input:focus,.f select:focus,.f textarea:focus{outline:0;border-color:var(--ember)}
-.f input::placeholder,.f textarea::placeholder{color:rgba(241,235,226,.35)}
-.form-msg{grid-column:1/-1;font-size:14px;color:var(--gold);min-height:1.4em}
+.strip-g{display:flex;gap:1px;background:var(--ink);overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none}
+.strip-g::-webkit-scrollbar{display:none}
+.strip-g .ph{flex:0 0 clamp(240px,28vw,440px);aspect-ratio:3/4;scroll-snap-align:start}
+.strip-g .ph:nth-child(even){flex-basis:clamp(300px,38vw,600px);aspect-ratio:auto}
 
 /* footer */
-footer{background:var(--paper);color:var(--ink);padding:clamp(48px,6vw,84px) var(--pad) 110px}
-.foot{display:grid;grid-template-columns:1.3fr 1fr 1fr 1.4fr;gap:36px;padding-bottom:44px;border-bottom:1px solid var(--line-l)}
-.foot .brand{text-align:left;padding-left:0;font-size:28px}
-.foot h5{font-family:var(--display);font-weight:400;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:16px}
-.foot ul{list-style:none;display:grid;gap:9px}
-.foot a:hover{color:var(--ember-deep)}
-.news{display:flex;border-bottom:1px solid var(--ink);margin-top:12px}
-.news input{flex:1;min-width:0;font:inherit;background:transparent;border:0;padding:12px 0;color:var(--ink)}
-.news input:focus{outline:0}
-.news button{font-family:var(--display);font-size:10px;letter-spacing:.2em;text-transform:uppercase;padding:0 4px}
-.legal{display:flex;flex-wrap:wrap;gap:10px 28px;padding-top:22px;font-family:var(--display);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft)}
+footer{background:var(--ink);color:var(--cream)}
+.f-cols{display:grid;grid-template-columns:repeat(4,1fr)}
+.f-cols>div{padding:28px var(--pad) 36px;border-right:1px solid var(--line-w);border-bottom:1px solid var(--line-w);display:flex;flex-direction:column;gap:8px}
+.f-cols>div:last-child{border-right:0}
+.f-cols h5{font-size:11px;font-weight:500;opacity:.55;margin-bottom:8px}
+.f-cols a:hover{color:var(--rose)}
+.f-cols form{display:flex;border-bottom:1px solid var(--cream);margin-top:6px}
+.f-cols input{flex:1;min-width:0;background:transparent;border:0;padding:10px 0;min-height:44px}
+.f-cols input:focus{outline:0}
+.f-word{font-family:var(--didone);font-size:clamp(5rem,25.5vw,26rem);line-height:.74;letter-spacing:-.035em;padding:.16em var(--pad) .05em;margin-left:-.05em;color:var(--cream);overflow:hidden}
+.legal{display:flex;flex-wrap:wrap;gap:8px 28px;padding:16px var(--pad) 22px;border-top:1px solid var(--line-w);font-size:11px;opacity:.6}
 
-/* mobile bar */
-.mbar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:58;grid-template-columns:1fr 1fr;background:var(--night);border-top:1px solid var(--line-d);padding-bottom:env(safe-area-inset-bottom)}
-.mbar a{font-family:var(--display);font-size:11px;letter-spacing:.18em;text-transform:uppercase;min-height:54px;display:grid;place-items:center}
-.mbar a:last-child{background:var(--ember);color:#fff}
+/* ---------- reservation drawer ---------- */
+dialog{position:fixed;inset:0 0 0 auto;margin:0;height:100dvh;max-height:none;width:min(520px,100vw);max-width:none;border:0;border-left:1px solid var(--ink);background:var(--cream);color:var(--ink);overflow-y:auto;transform:translateX(100%);transition:transform .5s var(--ease),overlay .5s allow-discrete,display .5s allow-discrete}
+dialog[open]{transform:none}
+@starting-style{dialog[open]{transform:translateX(100%)}}
+dialog::backdrop{background:rgba(23,10,10,.55);opacity:0;transition:opacity .5s,overlay .5s allow-discrete,display .5s allow-discrete}
+dialog[open]::backdrop{opacity:1}
+@starting-style{dialog[open]::backdrop{opacity:0}}
+.d-head{display:flex;justify-content:space-between;align-items:stretch;border-bottom:1px solid var(--ink);position:sticky;top:0;background:var(--cream);z-index:2}
+.d-head span{padding:20px var(--pad)}
+.d-head button{padding:0 var(--pad);border-left:1px solid var(--ink);min-width:64px}
+.d-head button:hover{background:var(--ink);color:var(--cream)}
+dialog h2{font-family:var(--didone);font-weight:400;font-size:clamp(2.2rem,6vw,3.2rem);line-height:1;letter-spacing:-.02em;padding:28px var(--pad) 22px}
+.fields{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--ink)}
+.fld{display:flex;flex-direction:column;gap:2px;padding:12px var(--pad);border-bottom:1px solid var(--ink);min-height:70px;justify-content:center}
+.fld:nth-child(odd):not(.w){border-right:1px solid var(--ink)}
+.fld.w{grid-column:1/-1}
+.fld span{font-size:11px;color:var(--mute)}
+.fld input,.fld select,.fld textarea{background:transparent;border:0;font-size:17px;font-weight:500;width:100%;min-height:30px;border-radius:0;appearance:none;-webkit-appearance:none}
+.fld textarea{min-height:64px;resize:vertical;font-weight:400}
+.fld input:focus,.fld select:focus,.fld textarea:focus{outline:0}
+.fld:focus-within{box-shadow:inset 3px 0 0 var(--red);background:var(--cream-2)}
+.fld.err{box-shadow:inset 3px 0 0 var(--red)}
+.fld.err span{color:var(--red)}
+.fld ::placeholder{color:rgba(23,17,15,.32);font-weight:400}
+.d-note{padding:16px var(--pad);font-size:14px;color:var(--mute);min-height:56px}
+.d-note.bad{color:var(--red)}
 
-/* reveal */
-.js .rv{opacity:0;transform:translateY(26px);transition:opacity 1s var(--ease),transform 1s var(--ease);transition-delay:var(--d,0s)}
-.js .rv.in{opacity:1;transform:none}
+/* mobile action bar */
+.mbar{display:none}
 
-@media (max-width:980px){
-  .nav{grid-template-columns:44px 1fr 44px}
-  .nav ul{display:none}.burger{display:flex}
-  .gauge{display:none}
-  .hero-in{grid-template-columns:1fr}.hero-meta{text-align:left;display:flex;flex-wrap:wrap;gap:0 18px}
-  .carte-grid,.split,.resa-grid{grid-template-columns:1fr}
-  .carte-side{position:static}.carte-side .ph{display:none}
-  .cards{grid-template-columns:1fr}.card .ph{aspect-ratio:4/3}
-  .gal{grid-template-columns:repeat(2,1fr);grid-auto-rows:42vw}
-  .gal .ph{grid-column:span 1!important;grid-row:span 1!important}
-  .foot{grid-template-columns:1fr 1fr}
-  .mbar{display:grid}
-  .hero{padding-bottom:92px}
-  .split .ph{order:-1;aspect-ratio:4/3}
+@media (max-width:900px){
+  :root{--bar:56px}
+  .bar nav ul{display:none}.bar nav{justify-content:center}
+  .bar .book{display:none}
+  .menu-btn b{display:none}
+  .bar{grid-template-columns:auto 1fr 56px}
+  .sheet{grid-template-columns:1fr;grid-template-rows:1fr auto;overflow-y:auto}
+  .sheet aside{border-left:0;border-top:1px solid var(--line-w);padding-bottom:calc(var(--pad) + 70px)}
+  .hero{height:auto;min-height:100svh}
+  .strip{grid-template-columns:1fr 1fr 1fr}
+  .strip label{padding:10px 14px;min-height:64px}
+  .strip label:nth-child(3){border-right:0}
+  .strip input,.strip select{font-size:15px}
+  .strip button{grid-column:1/-1;min-height:60px;justify-content:space-between;padding:0 var(--pad);border-top:1px solid var(--ink)}
+  .intro,.night,.priv{grid-template-columns:1fr}
+  .intro dl{border-left:0;border-top:1px solid var(--ink)}
+  .night-list{border-right:0}.night-view{display:none}
+  .act[aria-expanded="true"] .ph{display:block}
+  .carte{grid-template-columns:1fr}
+  .tabs{flex-direction:row;overflow-x:auto;border-right:0;border-bottom:1px solid var(--ink);background:var(--cream);z-index:5;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{border-bottom:0;border-right:1px solid var(--ink);white-space:nowrap;padding:0 18px;flex:none}
+  .tab em{display:none}
+  .dishes{columns:1}
+  .row{grid-template-columns:1fr auto;gap:6px 12px}
+  .row .day{grid-column:1/-1}.row p{grid-column:1}.row .arr{grid-row:2;grid-column:2}
+  .priv .ph{min-height:0;aspect-ratio:4/3}
+  .priv-txt{border-left:0;border-top:1px solid var(--ink)}
+  .f-cols{grid-template-columns:1fr 1fr}
+  .f-cols>div:nth-child(2){border-right:0}
+  footer{padding-bottom:60px}
+  .mbar{display:grid;grid-template-columns:1fr 1.4fr;position:fixed;inset:auto 0 0 0;z-index:58;border-top:1px solid var(--ink);padding-bottom:env(safe-area-inset-bottom);background:var(--cream);transition:transform .4s var(--ease)}
+  .mbar.off{transform:translateY(100%)}
+  .mbar>*{min-height:58px;display:flex;align-items:center;justify-content:center;gap:12px}
+  .mbar button{background:var(--red);color:#fff;border-left:1px solid var(--ink)}
 }
-@media (max-width:560px){
-  form{grid-template-columns:1fr}
-  .foot{grid-template-columns:1fr}
-  .facts{gap:18px}.facts b{font-size:1.4rem}
-  .info li{grid-template-columns:92px 1fr}
-  .arrow{width:44px;height:44px}
+@media (max-width:520px){
+  .f-cols{grid-template-columns:1fr}.f-cols>div{border-right:0}
+  .figs li{padding:14px 12px}
+  .hero-top span:last-child{display:none}
+  .act{grid-template-columns:30px 1fr auto}
 }
-@media (prefers-reduced-motion:reduce){
-  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
-  .js .rv{opacity:1;transform:none}
-}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
 <a class="skip" href="#contenu">Aller au contenu</a>
 
-<header class="nav" id="nav">
-  <ul>
-    <li><a class="n" href="#soiree">La soirée</a></li>
-    <li><a class="n" href="#carte">La carte</a></li>
-    <li><a class="n" href="#affiche">À l'affiche</a></li>
-  </ul>
-  <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="overlay"><i></i><i></i></button>
-  <a class="brand" href="#top" aria-label="Gradi Festive Experience — accueil">GRADI<sup>°</sup><small>FESTIVE EXPERIENCE</small></a>
-  <ul class="r">
-    <li><a class="n" href="#events">Privatiser</a></li>
-    <li><a class="n" href="#infos">Infos</a></li>
-    <li><a class="btn" href="#reserver">Réserver</a></li>
-  </ul>
-  <span aria-hidden="true"></span>
+<header class="bar caps" id="bar">
+  <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="sheet" aria-label="Menu"><i></i><b>Menu</b></button>
+  <nav aria-label="Navigation principale">
+    <ul><li><a href="#soiree">La soirée</a></li><li><a href="#carte">La carte</a></li></ul>
+    <a class="logo" href="#top" aria-label="Gradi — accueil">GRADI</a>
+    <ul><li><a href="#agenda">Agenda</a></li><li><a href="#privatiser">Privatiser</a></li></ul>
+  </nav>
+  <button class="book" data-book>Réserver</button>
 </header>
 
-<nav class="overlay" id="overlay" aria-label="Menu principal">
-  <a href="#soiree">La soirée <span>01</span></a>
-  <a href="#carte">La carte <span>02</span></a>
-  <a href="#affiche">À l'affiche <span>03</span></a>
-  <a href="#events">Privatiser <span>04</span></a>
-  <a href="#reserver">Réserver <span>05</span></a>
-</nav>
-
-<div class="gauge" aria-hidden="true"><b id="deg">18°</b><div class="track"><div class="fill" id="fill"></div></div><small>La température monte</small></div>
+<div class="sheet" id="sheet">
+  <ol>
+    <li><a href="#soiree"><span class="caps">01</span>La soirée</a></li>
+    <li><a href="#carte"><span class="caps">02</span>La carte</a></li>
+    <li><a href="#agenda"><span class="caps">03</span>Agenda</a></li>
+    <li><a href="#privatiser"><span class="caps">04</span>Privatiser</a></li>
+    <li><a href="#top" data-book><span class="caps">05</span>Réserver</a></li>
+  </ol>
+  <aside>
+    <p><span class="caps">Adresse</span><span data-cfg="address">À préciser</span></p>
+    <p><span class="caps">Horaires</span><span data-cfg="hours">À préciser</span></p>
+    <p><span class="caps">Contact</span><a data-cfg="phone" data-href="tel" href="#">À préciser</a></p>
+  </aside>
+</div>
 
 <main id="contenu">
 <div class="hero" id="top">
   <div class="ph" data-img="hero.jpg"></div>
-  <div class="veil"></div>
-  <div class="hero-in">
-    <div>
-      <p class="eyebrow rv">Dîner · Show · Fête</p>
-      <h1 class="h-xl rv" style="--d:.08s;margin-top:18px"><span>La soirée</span><span>monte en <em class="it">degrés.</em></span></h1>
-      <p class="lede rv" style="--d:.16s">On s'attable à 19h. On ne sait jamais vraiment à quelle heure on repart.</p>
-      <div class="cta rv" style="--d:.24s">
-        <a class="btn" href="#reserver">Réserver une table</a>
-        <a class="link" href="#soiree">Découvrir la soirée</a>
-      </div>
-    </div>
-    <p class="hero-meta rv" style="--d:.3s"><strong data-cfg="days">Jeudi → Samedi</strong><br><span data-cfg="hoursShort">19h — 02h</span><br><span data-cfg="city">Ville à préciser</span></p>
+  <div class="hero-top caps"><span>Festive Experience</span><span data-cfg="city">Ville à préciser</span></div>
+  <div class="hero-word">
+    <h1>GRADI<small> Festive Experience</small></h1>
+    <p class="caps">Dîner — Show — Fête</p>
   </div>
+  <form class="strip caps" id="quick">
+    <label><span>Date</span><input type="date" name="date" id="qDate"></label>
+    <label><span>Heure</span><select name="heure" id="qHeure"></select></label>
+    <label><span>Convives</span><select name="pers" id="qPers"></select></label>
+    <button type="submit">Réserver<i class="arr"></i></button>
+  </form>
 </div>
 
-<div class="marquee" aria-hidden="true"><div id="mq"></div></div>
-
-<section class="acts" id="soiree">
-  <div class="head">
-    <div><span class="eyebrow rv">La soirée, acte par acte</span><h2 class="h-lg rv">Quatre temps, <em class="it">une seule</em> table.</h2></div>
-    <div class="ctrl"><span class="count" id="count">01 / 04</span>
-      <button class="arrow" id="prev" aria-label="Acte précédent"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor"><path d="M15 8H1m6-6L1 8l6 6"/></svg></button>
-      <button class="arrow" id="next" aria-label="Acte suivant"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor"><path d="M1 8h14M9 2l6 6-6 6"/></svg></button>
-    </div>
-  </div>
-  <div class="rail" id="rail" tabindex="0" aria-label="Les quatre actes de la soirée">
-    <article class="act ph" data-img="acte-1.jpg"><div class="shade"></div><div class="deg">18<sup>°</sup></div><time>19h00 · Acte I</time><h3>L'apéritif</h3><p>Cocktails signature au bar, lumière basse, premières assiettes à partager.</p></article>
-    <article class="act ph" data-img="acte-2.jpg"><div class="shade"></div><div class="deg">27<sup>°</sup></div><time>20h30 · Acte II</time><h3>Le dîner</h3><p>La grande tablée. Des plats généreux posés au centre, faits pour circuler.</p></article>
-    <article class="act ph" data-img="acte-3.jpg"><div class="shade"></div><div class="deg">36<sup>°</sup></div><time>22h30 · Acte III</time><h3>Le show</h3><p>Les artistes passent entre les tables. Les serviettes commencent à tourner.</p></article>
-    <article class="act ph" data-img="acte-4.jpg"><div class="shade"></div><div class="deg">45<sup>°</sup></div><time>00h00 · Acte IV</time><h3>La fête</h3><p>Le DJ prend la main, les chaises deviennent facultatives.</p></article>
-  </div>
+<section class="intro">
+  <h2>On vient pour dîner. Le spectacle arrive à table, et personne ne regarde plus l'heure.</h2>
+  <dl>
+    <div><dt class="caps">Ouvert</dt><dd data-cfg="hours">Jours et horaires à préciser</dd></div>
+    <div><dt class="caps">Adresse</dt><dd data-cfg="address">À préciser</dd></div>
+    <div><dt class="caps">Réservations</dt><dd><a class="under" data-cfg="phone" data-href="tel" href="#">Téléphone à préciser</a></dd></div>
+  </dl>
 </section>
 
-<section class="light" id="carte">
-  <div class="carte-grid">
-    <div class="carte-side">
-      <span class="eyebrow rv">La carte</span>
-      <h2 class="h-lg rv" style="margin:16px 0 18px">Une cuisine <em class="it">à partager,</em> comme la soirée.</h2>
-      <p class="lede rv">Des assiettes généreuses, pensées pour le centre de la table et pour durer jusqu'au show.</p>
-      <div class="ph rv" data-img="carte.jpg"></div>
+<section id="soiree">
+  <div class="sec-head caps"><span>La soirée</span><span class="n">Quatre temps</span></div>
+  <div class="night">
+    <div class="night-list" id="acts">
+      <button class="act" aria-expanded="true"><span class="i caps">01</span><h3>L'apéritif</h3><span class="caps">19:00</span><p><span>Cocktails au bar et premières assiettes à partager.</span></p><div class="ph" data-img="acte-1.jpg"></div></button>
+      <button class="act" aria-expanded="false"><span class="i caps">02</span><h3>Le dîner</h3><span class="caps">20:30</span><p><span>Des plats généreux posés au centre de la table.</span></p><div class="ph" data-img="acte-2.jpg"></div></button>
+      <button class="act" aria-expanded="false"><span class="i caps">03</span><h3>Le show</h3><span class="caps">22:30</span><p><span>Chanteurs et danseurs passent entre les tables.</span></p><div class="ph" data-img="acte-3.jpg"></div></button>
+      <button class="act" aria-expanded="false"><span class="i caps">04</span><h3>La fête</h3><span class="caps">00:00</span><p><span>Le DJ prend la main jusqu'à la fermeture.</span></p><div class="ph" data-img="acte-4.jpg"></div></button>
     </div>
-    <div>
-      <div class="tabs" role="tablist" id="tabs" aria-label="Catégories de la carte"></div>
-      <div id="dishes" role="tabpanel"></div>
-      <p class="note"><span class="tag">Carte provisoire</span> Exemples de mise en page — la vraie carte et les prix arrivent.</p>
+    <div class="night-view" id="view" aria-hidden="true">
+      <div class="ph on" data-img="acte-1.jpg"></div><div class="ph" data-img="acte-2.jpg"></div><div class="ph" data-img="acte-3.jpg"></div><div class="ph" data-img="acte-4.jpg"></div>
     </div>
   </div>
 </section>
 
-<section id="affiche">
-  <div class="head">
-    <div><span class="eyebrow rv">À l'affiche</span><h2 class="h-lg rv">Chaque soir a <em class="it">son tempo.</em></h2></div>
-    <a class="link" href="#reserver">Réserver une date</a>
-  </div>
-  <div class="cards">
-    <article class="card rv"><div class="ph" data-img="affiche-1.jpg"></div><div class="meta"><span>Jeudi</span><span>Dès 19h</span></div><h3>Jeudi Aperitivo</h3><p>Live acoustique, tables longues, la semaine se termine en avance.</p></article>
-    <article class="card rv" style="--d:.08s"><div class="ph" data-img="affiche-2.jpg"></div><div class="meta"><span>Vendredi</span><span>Dès 19h30</span></div><h3>Vendredi Show</h3><p>Dîner-spectacle : chanteurs, danseurs, puis DJ set jusqu'à la fermeture.</p></article>
-    <article class="card rv" style="--d:.16s"><div class="ph" data-img="affiche-3.jpg"></div><div class="meta"><span>Samedi</span><span>Dès 19h30</span></div><h3>Samedi Gradi</h3><p>La grande soirée de la maison. Réservation vivement conseillée.</p></article>
+<section id="carte">
+  <div class="sec-head caps"><span>La carte</span><span class="n" id="carteCount"></span></div>
+  <div class="carte">
+    <div class="tabs caps" role="tablist" aria-label="Catégories" id="tabs"></div>
+    <div class="panel" role="tabpanel" id="panel" aria-live="polite"></div>
   </div>
 </section>
 
-<section class="manifesto">
-  <span class="eyebrow rv">Notre promesse</span>
-  <h2 class="h-xl rv">On vient pour dîner. On reste pour <em class="it">la nuit.</em></h2>
-  <p class="rv">Le reste se décide à table.</p>
+<section class="agenda" id="agenda">
+  <div class="sec-head caps"><span>Agenda</span><span class="n">Chaque semaine</span></div>
+  <div id="rows"></div>
 </section>
 
-<section class="light" id="events">
-  <div class="split">
-    <div>
-      <span class="eyebrow rv">Privatisation &amp; groupes</span>
-      <h2 class="h-lg rv" style="margin-top:16px">Votre événement, <em class="it">à notre température.</em></h2>
-      <p class="lede rv">Anniversaire, dîner d'entreprise, lancement ou privatisation complète : on compose la soirée avec vous, du menu à la playlist.</p>
-      <ul class="facts rv"><li><b data-cfg="capSeated">—</b><span>couverts assis</span></li><li><b data-cfg="capStanding">—</b><span>en cocktail</span></li><li><b>100%</b><span>sur mesure</span></li></ul>
-      <a class="btn rv" href="#reserver" data-prefill="Privatisation">Parlez-nous de votre événement</a>
-    </div>
-    <div class="ph rv" data-img="events.jpg"></div>
+<section class="priv" id="privatiser">
+  <div class="ph" data-img="events.jpg"></div>
+  <div class="priv-txt">
+    <h2>Privatiser Gradi</h2>
+    <p>Anniversaire, dîner d'entreprise, lancement. Vous choisissez la date, on règle le menu, le show et la musique avec vous.</p>
+    <a class="under caps" href="#" data-href="mail" style="margin:22px var(--pad) 0;align-self:flex-start">Nous écrire</a>
+    <ul class="figs caps"><li><b data-cfg="capSeated">—</b><span>Assis</span></li><li><b data-cfg="capStanding">—</b><span>Cocktail</span></li><li><b data-cfg="capPrivate">—</b><span>Salon privé</span></li></ul>
+    <button class="big-btn caps" data-book="Privatisation" style="margin-top:0">Demander un devis<i class="arr"></i></button>
   </div>
 </section>
 
-<section id="galerie">
-  <div class="head">
-    <div><span class="eyebrow rv">Vu chez Gradi</span><h2 class="h-lg rv">Ce qui se passe <em class="it">après 22h.</em></h2></div>
-    <a class="link" data-cfg-href="instagram" href="#" target="_blank" rel="noopener">Instagram</a>
-  </div>
-  <div class="gal rv">
-    <div class="ph" data-img="galerie-1.jpg"></div><div class="ph" data-img="galerie-2.jpg"></div><div class="ph" data-img="galerie-3.jpg"></div>
-    <div class="ph" data-img="galerie-4.jpg"></div><div class="ph" data-img="galerie-5.jpg"></div><div class="ph" data-img="galerie-6.jpg"></div>
-  </div>
-</section>
-
-<section class="resa" id="reserver">
-  <div class="resa-grid">
-    <div id="infos">
-      <span class="eyebrow rv">Réservation</span>
-      <h2 class="h-lg rv" style="margin:16px 0 18px">Prenez place <em class="it">avant le lever de rideau.</em></h2>
-      <p class="lede rv">Envoyez votre demande, on vous confirme la table dans la journée.</p>
-      <ul class="info rv">
-        <li><span>Adresse</span><div data-cfg="address">Adresse à préciser</div></li>
-        <li><span>Horaires</span><div data-cfg="hours">Jeudi au samedi, 19h — 02h</div></li>
-        <li><span>Contact</span><div><a data-cfg="phone" data-cfg-href="tel" href="#">Téléphone à préciser</a><br><a data-cfg="email" data-cfg-href="mail" href="#">Email à préciser</a></div></li>
-      </ul>
-    </div>
-    <form id="form" class="rv" novalidate>
-      <div class="f"><label for="date">Date</label><input id="date" name="date" type="date" required></div>
-      <div class="f"><label for="heure">Heure</label><select id="heure" name="heure"><option>19h00</option><option>19h30</option><option>20h00</option><option selected>20h30</option><option>21h00</option><option>21h30</option><option>22h00</option></select></div>
-      <div class="f"><label for="pers">Convives</label><select id="pers" name="pers"><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9 et plus</option></select></div>
-      <div class="f"><label for="type">Occasion</label><select id="type" name="type"><option>Dîner</option><option>Anniversaire</option><option>Groupe</option><option>Privatisation</option></select></div>
-      <div class="f"><label for="nom">Nom</label><input id="nom" name="nom" autocomplete="name" placeholder="Votre nom" required></div>
-      <div class="f"><label for="tel">Téléphone</label><input id="tel" name="tel" type="tel" autocomplete="tel" placeholder="+.." required></div>
-      <div class="f full"><label for="msg">Un mot pour nous</label><textarea id="msg" name="msg" placeholder="Allergies, surprise, table souhaitée…"></textarea></div>
-      <button class="btn" type="submit">Envoyer la demande</button>
-      <p class="form-msg" id="formMsg" role="status" aria-live="polite"></p>
-    </form>
+<section aria-label="Galerie">
+  <div class="sec-head caps"><span>Vu chez Gradi</span><a class="under" data-href="instagram" href="#" target="_blank" rel="noopener">Instagram<i class="arr"></i></a></div>
+  <div class="strip-g" tabindex="0">
+    <div class="ph" data-img="galerie-1.jpg"></div><div class="ph alt" data-img="galerie-2.jpg"></div><div class="ph" data-img="galerie-3.jpg"></div>
+    <div class="ph alt" data-img="galerie-4.jpg"></div><div class="ph" data-img="galerie-5.jpg"></div><div class="ph alt" data-img="galerie-6.jpg"></div>
   </div>
 </section>
 </main>
 
 <footer>
-  <div class="foot">
-    <div><div class="brand">GRADI<sup>°</sup><small>FESTIVE EXPERIENCE</small></div></div>
-    <div><h5>La maison</h5><ul><li><a href="#soiree">La soirée</a></li><li><a href="#carte">La carte</a></li><li><a href="#affiche">À l'affiche</a></li><li><a href="#galerie">Galerie</a></li></ul></div>
-    <div><h5>Événements</h5><ul><li><a href="#events">Privatiser</a></li><li><a href="#reserver">Réserver</a></li><li><a data-cfg-href="instagram" href="#" target="_blank" rel="noopener">Instagram</a></li></ul></div>
-    <div><h5>Restons en contact</h5><p>Soirées spéciales et tables à ne pas manquer.</p>
-      <form class="news" id="news" style="display:flex"><input type="email" required placeholder="Votre e-mail" aria-label="Votre e-mail"><button type="submit">S'inscrire</button></form>
-      <p id="newsMsg" role="status" style="font-size:13px;margin-top:8px;color:var(--ink-soft)"></p></div>
+  <div class="f-cols">
+    <div><h5 class="caps">Adresse</h5><span data-cfg="address">À préciser</span></div>
+    <div><h5 class="caps">Horaires</h5><span data-cfg="hours">À préciser</span></div>
+    <div><h5 class="caps">Contact</h5><a data-cfg="phone" data-href="tel" href="#">Téléphone à préciser</a><a data-cfg="email" data-href="mail" href="#">E-mail à préciser</a><a data-href="instagram" href="#" target="_blank" rel="noopener">Instagram</a></div>
+    <div><h5 class="caps">Recevoir l'agenda</h5><form id="news" class="caps"><input type="email" required placeholder="Votre e-mail" aria-label="Votre e-mail" style="text-transform:none;letter-spacing:0"><button type="submit" aria-label="S'inscrire"><i class="arr"></i></button></form><span id="newsMsg" role="status" style="font-size:13px;opacity:.7"></span></div>
   </div>
-  <div class="legal"><span>© <span id="yr"></span> Gradi Festive Experience</span><a href="#">Mentions légales</a><a href="#">Confidentialité</a><span>L'abus d'alcool est dangereux pour la santé</span></div>
+  <div class="f-word" aria-hidden="true">GRADI</div>
+  <div class="legal caps"><span>© <span id="yr"></span> Gradi Festive Experience</span><a href="#">Mentions légales</a><a href="#">Confidentialité</a><span>L'abus d'alcool est dangereux pour la santé</span></div>
 </footer>
 
-<div class="mbar"><a href="#carte">La carte</a><a href="#reserver">Réserver</a></div>
+<div class="mbar caps" id="mbar"><a href="#carte">La carte</a><button data-book>Réserver<i class="arr"></i></button></div>
+
+<dialog id="resa" aria-labelledby="resaTitle">
+  <div class="d-head caps"><span>Réservation</span><button type="button" id="resaClose" aria-label="Fermer">Fermer</button></div>
+  <h2 id="resaTitle">Votre table</h2>
+  <form id="form" novalidate>
+    <div class="fields">
+      <label class="fld"><span class="caps">Date</span><input type="date" name="date" required></label>
+      <label class="fld"><span class="caps">Heure</span><select name="heure"></select></label>
+      <label class="fld"><span class="caps">Convives</span><select name="pers"></select></label>
+      <label class="fld"><span class="caps">Occasion</span><select name="type"><option>Dîner</option><option>Anniversaire</option><option>Groupe</option><option>Privatisation</option></select></label>
+      <label class="fld"><span class="caps">Nom</span><input name="nom" autocomplete="name" placeholder="Prénom Nom" required></label>
+      <label class="fld"><span class="caps">Téléphone</span><input name="tel" type="tel" autocomplete="tel" inputmode="tel" placeholder="Votre numéro" required></label>
+      <label class="fld w"><span class="caps">Un mot pour nous</span><textarea name="msg" placeholder="Allergies, surprise, table souhaitée"></textarea></label>
+    </div>
+    <p class="d-note" id="note" role="status" aria-live="polite">On vous confirme la table par message.</p>
+    <button class="big-btn caps" type="submit">Envoyer la demande<i class="arr"></i></button>
+  </form>
+</dialog>
 
 <script>
 /* =====================================================
    À COMPLÉTER — tout le contenu variable est ici
    ===================================================== */
 const CONFIG = {
-  city: '',            // ex. 'Genève'
-  address: '',         // ex. 'Rue …, 1201 Genève'
-  days: 'Jeudi → Samedi',
-  hoursShort: '19h — 02h',
-  hours: 'Jeudi au samedi, 19h — 02h',
-  phone: '',           // ex. '+41 22 000 00 00'
+  city: '',          // ex. 'Genève'
+  address: '',       // ex. 'Rue …, 1201 Genève'
+  hours: '',         // ex. 'Jeudi au samedi, 19h — 02h'
+  phone: '',         // ex. '+41 22 000 00 00'
   email: '',
-  whatsapp: '',        // numéro international sans + ni espaces, ex. '41790000000'
-  instagram: '',       // URL complète
-  capSeated: '',       // ex. '120'
-  capStanding: '',     // ex. '250'
-  currency: ''         // ex. 'CHF' ou '€'
+  whatsapp: '',      // international, sans + ni espaces, ex. '41790000000'
+  instagram: '',     // URL complète
+  capSeated: '', capStanding: '', capPrivate: '',
+  currency: '',      // ex. 'CHF'
+  slots: ['19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00'],
+  defaultSlot: '20:30'
 };
 
-/* CARTE PROVISOIRE — à remplacer par la vraie carte */
+/* AGENDA — exemples à remplacer */
+const AGENDA = [
+  ['Jeudi', 'Soirée à préciser', 'Description en une ligne.'],
+  ['Vendredi', 'Soirée à préciser', 'Description en une ligne.'],
+  ['Samedi', 'Soirée à préciser', 'Description en une ligne.']
+];
+
+/* CARTE — structure provisoire, à remplacer par la vraie carte */
 const CARTE = {
-  'À partager': [
-    ['Nom du plat', 'Description courte, deux ou trois ingrédients', '00'],
-    ['Nom du plat', 'Description courte, deux ou trois ingrédients', '00'],
-    ['Nom du plat', 'Description courte, deux ou trois ingrédients', '00']
-  ],
-  'Entrées': [
-    ['Nom du plat', 'Description courte, deux ou trois ingrédients', '00'],
-    ['Nom du plat', 'Description courte, deux ou trois ingrédients', '00']
-  ],
-  'Plats': [
-    ['Nom du plat', 'Description courte, deux ou trois ingrédients', '00'],
-    ['Nom du plat', 'Description courte, deux ou trois ingrédients', '00'],
-    ['Nom du plat', 'Description courte, deux ou trois ingrédients', '00']
-  ],
-  'Desserts': [
-    ['Nom du dessert', 'Description courte', '00'],
-    ['Nom du dessert', 'Description courte', '00']
-  ],
-  'Cocktails': [
-    ['Nom du cocktail', 'Alcool, agrume, signature', '00'],
-    ['Nom du cocktail', 'Alcool, agrume, signature', '00']
-  ]
+  'À partager': [['Nom du plat', 'Ingrédients principaux', '00'], ['Nom du plat', 'Ingrédients principaux', '00'], ['Nom du plat', 'Ingrédients principaux', '00'], ['Nom du plat', 'Ingrédients principaux', '00']],
+  'Entrées': [['Nom du plat', 'Ingrédients principaux', '00'], ['Nom du plat', 'Ingrédients principaux', '00'], ['Nom du plat', 'Ingrédients principaux', '00']],
+  'Plats': [['Nom du plat', 'Ingrédients principaux', '00'], ['Nom du plat', 'Ingrédients principaux', '00'], ['Nom du plat', 'Ingrédients principaux', '00'], ['Nom du plat', 'Ingrédients principaux', '00']],
+  'Desserts': [['Nom du dessert', 'Ingrédients principaux', '00'], ['Nom du dessert', 'Ingrédients principaux', '00']],
+  'Cocktails': [['Nom du cocktail', 'Alcool, agrume, signature', '00'], ['Nom du cocktail', 'Alcool, agrume, signature', '00']]
 };
+const CARTE_PROVISOIRE = true; // passer à false une fois la vraie carte en place
 
 const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
 /* config → page */
 $$('[data-cfg]').forEach(el => { const v = CONFIG[el.dataset.cfg]; if (v) el.textContent = v; });
-$$('[data-cfg-href]').forEach(el => {
-  const k = el.dataset.cfgHref;
-  const href = k === 'tel' ? (CONFIG.phone && 'tel:' + CONFIG.phone.replace(/[^\d+]/g, '')) : k === 'mail' ? (CONFIG.email && 'mailto:' + CONFIG.email) : CONFIG[k];
+$$('[data-href]').forEach(el => {
+  const k = el.dataset.href;
+  const href = k === 'tel' ? CONFIG.phone && 'tel:' + CONFIG.phone.replace(/[^\d+]/g, '') : k === 'mail' ? CONFIG.email && 'mailto:' + CONFIG.email : CONFIG[k];
   if (href) el.href = href; else { el.removeAttribute('target'); el.addEventListener('click', e => e.preventDefault()); }
 });
 $('#yr').textContent = new Date().getFullYear();
 
-/* photos : déposez les fichiers dans gradi/img/ — ils remplacent automatiquement les fonds */
+/* photos : déposer les fichiers dans gradi/img/ */
 $$('.ph[data-img]').forEach(el => {
   const src = 'img/' + el.dataset.img, im = new Image();
   im.onload = () => { el.style.backgroundImage = `url("${src}")`; el.classList.add('has-img'); };
   im.src = src;
 });
 
-/* marquee */
-const words = ['Dîner', 'Show', 'DJ set', 'Cocktails', 'Grandes tablées', 'Jusqu\'au bout de la nuit'];
-$('#mq').innerHTML = [...words, ...words, ...words, ...words].map(w => `<span>${w} <i>°</i></span>`).join('');
+/* selects */
+const today = new Date(), iso = d => new Date(d.getTime() - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 10);
+$$('select[name=heure]').forEach(s => s.innerHTML = CONFIG.slots.map(t => `<option${t === CONFIG.defaultSlot ? ' selected' : ''}>${t}</option>`).join(''));
+$$('select[name=pers]').forEach(s => s.innerHTML = [2, 3, 4, 5, 6, 7, 8, 10, 12].map(n => `<option${n === 2 ? ' selected' : ''} value="${n}">${n} pers.</option>`).join('') + '<option value="13+">13 et plus</option>');
+$$('input[type=date]').forEach(i => { i.min = iso(today); i.value = iso(today); });
 
-/* nav + gauge */
-const nav = $('#nav'), deg = $('#deg'), fill = $('#fill');
+/* top bar hides on scroll down, returns on scroll up; mobile bar appears after the hero */
+const bar = $('#bar'), mbar = $('#mbar'); let last = 0;
 function onScroll() {
-  const y = scrollY, max = document.documentElement.scrollHeight - innerHeight;
-  nav.classList.toggle('solid', y > 60);
-  const p = max > 0 ? Math.min(1, y / max) : 0;
-  deg.textContent = Math.round(18 + p * 27) + '°';
-  fill.style.height = (p * 100) + '%';
+  const y = scrollY;
+  bar.classList.toggle('hide', y > last && y > 300 && document.documentElement.dataset.menu !== 'open');
+  mbar.classList.toggle('off', y < innerHeight * .6);
+  last = y;
 }
 addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
-/* mobile menu */
-const burger = $('#burger');
+/* menu */
+const menuBtn = $('#menuBtn');
 function setMenu(open) {
-  document.body.classList.toggle('menu-open', open);
-  burger.setAttribute('aria-expanded', open);
-  burger.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+  document.documentElement.dataset.menu = open ? 'open' : '';
+  menuBtn.setAttribute('aria-expanded', open);
   document.body.style.overflow = open ? 'hidden' : '';
+  if (open) bar.classList.remove('hide');
 }
-burger.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
-$$('#overlay a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+menuBtn.addEventListener('click', () => setMenu(document.documentElement.dataset.menu !== 'open'));
+$$('#sheet a').forEach(a => a.addEventListener('click', () => setMenu(false)));
 addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
 
-/* carousel */
-const rail = $('#rail'), acts = $$('.act', rail), count = $('#count');
-const step = () => acts[1].offsetLeft - acts[0].offsetLeft;
-$('#next').addEventListener('click', () => rail.scrollBy({ left: step(), behavior: 'smooth' }));
-$('#prev').addEventListener('click', () => rail.scrollBy({ left: -step(), behavior: 'smooth' }));
-rail.addEventListener('scroll', () => {
-  const end = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 4;
-  const i = end ? acts.length : Math.min(acts.length, Math.round(rail.scrollLeft / step()) + 1);
-  count.textContent = String(i).padStart(2, '0') + ' / ' + String(acts.length).padStart(2, '0');
-}, { passive: true });
+/* la soirée */
+const acts = $$('#acts .act'), views = $$('#view .ph');
+function setAct(i) {
+  acts.forEach((a, j) => a.setAttribute('aria-expanded', j === i));
+  views.forEach((v, j) => v.classList.toggle('on', j === i));
+}
+acts.forEach((a, i) => { a.addEventListener('mouseenter', () => { if (matchMedia('(hover:hover)').matches) setAct(i); }); a.addEventListener('focus', () => setAct(i)); a.addEventListener('click', () => setAct(i)); });
 
 /* carte */
-const tabs = $('#tabs'), dishes = $('#dishes'), esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const tabs = $('#tabs'), panel = $('#panel'), cats = Object.keys(CARTE);
+$('#carteCount').textContent = cats.length + ' chapitres';
 function showCat(cat) {
-  $$('.tab', tabs).forEach(t => t.setAttribute('aria-selected', t.dataset.cat === cat));
-  dishes.innerHTML = CARTE[cat].map(([n, d, p]) => `<div class="dish"><h4>${esc(n)}</h4><span class="p">${esc(p)}${CONFIG.currency ? ' ' + esc(CONFIG.currency) : ''}</span><p>${esc(d)}</p></div>`).join('');
+  $$('.tab', tabs).forEach(t => { const on = t.dataset.cat === cat; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; });
+  panel.innerHTML = `<h3>${esc(cat)}</h3><div class="dishes">` + CARTE[cat].map(([n, d, p]) => `<div class="dish"><div><h4>${esc(n)}</h4><i></i><b>${esc(p)}${CONFIG.currency ? ' ' + esc(CONFIG.currency) : ''}</b></div><p>${esc(d)}</p></div>`).join('') + '</div>' + (CARTE_PROVISOIRE ? '<span class="draft caps">Carte provisoire — contenu à venir</span>' : '');
 }
-Object.keys(CARTE).forEach(cat => {
+cats.forEach((cat, i) => {
   const b = document.createElement('button');
-  b.className = 'tab'; b.type = 'button'; b.role = 'tab'; b.dataset.cat = cat; b.textContent = cat;
-  b.addEventListener('click', () => showCat(cat)); tabs.appendChild(b);
+  b.className = 'tab'; b.type = 'button'; b.setAttribute('role', 'tab'); b.dataset.cat = cat;
+  b.innerHTML = `${esc(cat)}<em>${String(CARTE[cat].length).padStart(2, '0')}</em>`;
+  b.addEventListener('click', () => showCat(cat));
+  b.addEventListener('keydown', e => { const d = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key]; if (d) { e.preventDefault(); const n = cats[(i + d + cats.length) % cats.length]; showCat(n); $(`.tab[data-cat="${n}"]`).focus(); } });
+  tabs.appendChild(b);
 });
-showCat(Object.keys(CARTE)[0]);
+showCat(cats[0]);
 
-/* réservation → WhatsApp (ou e-mail) */
-const form = $('#form'), msg = $('#formMsg');
-$('#date').min = new Date().toISOString().slice(0, 10);
-$$('[data-prefill]').forEach(a => a.addEventListener('click', () => { $('#type').value = a.dataset.prefill; }));
+/* agenda */
+$('#rows').innerHTML = AGENDA.map(([d, t, p]) => `<button class="row" data-book><span class="day caps">${esc(d)}</span><h3>${esc(t)}</h3><p>${esc(p)}</p><i class="arr"></i></button>`).join('');
+
+/* réservation */
+const dlg = $('#resa'), form = $('#form'), note = $('#note'), noteDefault = note.textContent;
+function openResa(preset = {}) {
+  setMenu(false);
+  Object.entries(preset).forEach(([k, v]) => { if (v && form.elements[k]) form.elements[k].value = v; });
+  note.textContent = noteDefault; note.classList.remove('bad');
+  dlg.showModal();
+}
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-book]'); if (!t) return;
+  e.preventDefault(); openResa({ type: t.dataset.book || 'Dîner' });
+});
+$('#quick').addEventListener('submit', e => { e.preventDefault(); const q = e.target.elements; openResa({ date: q.date.value, heure: q.heure.value, pers: q.pers.value }); });
+$('#resaClose').addEventListener('click', () => dlg.close());
+dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+form.addEventListener('input', e => e.target.closest('.fld')?.classList.remove('err'));
 form.addEventListener('submit', e => {
   e.preventDefault();
-  if (!form.checkValidity()) { msg.textContent = 'Merci de renseigner la date, votre nom et votre téléphone.'; form.reportValidity(); return; }
+  const bad = [...form.elements].filter(el => el.required && !el.value.trim());
+  $$('.fld', form).forEach(f => f.classList.remove('err'));
+  if (bad.length) { bad.forEach(el => el.closest('.fld').classList.add('err')); note.textContent = 'Il manque : ' + bad.map(el => el.closest('.fld').querySelector('span').textContent.toLowerCase()).join(', ') + '.'; note.classList.add('bad'); bad[0].focus(); return; }
+  note.classList.remove('bad');
   const d = Object.fromEntries(new FormData(form));
   const date = new Date(d.date + 'T12:00').toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
   const text = `Bonjour Gradi, je souhaite réserver.\n\nOccasion : ${d.type}\nDate : ${date}\nHeure : ${d.heure}\nConvives : ${d.pers}\nNom : ${d.nom}\nTéléphone : ${d.tel}` + (d.msg ? `\nMessage : ${d.msg}` : '');
-  if (CONFIG.whatsapp) { window.open('https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(text), '_blank', 'noopener'); msg.textContent = 'WhatsApp s\'ouvre avec votre demande — il ne reste qu\'à l\'envoyer.'; }
-  else if (CONFIG.email) { location.href = 'mailto:' + CONFIG.email + '?subject=' + encodeURIComponent('Réservation ' + date) + '&body=' + encodeURIComponent(text); msg.textContent = 'Votre messagerie s\'ouvre avec la demande.'; }
-  else msg.textContent = 'Réservation en ligne bientôt disponible — coordonnées à venir.';
+  if (CONFIG.whatsapp) { window.open('https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(text), '_blank', 'noopener'); note.textContent = 'WhatsApp s\'ouvre avec votre demande : il reste à l\'envoyer.'; }
+  else if (CONFIG.email) { location.href = 'mailto:' + CONFIG.email + '?subject=' + encodeURIComponent('Réservation ' + date) + '&body=' + encodeURIComponent(text); note.textContent = 'Votre messagerie s\'ouvre avec la demande.'; }
+  else { note.textContent = 'La réservation en ligne n\'est pas encore activée.'; note.classList.add('bad'); }
 });
-$('#news').addEventListener('submit', e => { e.preventDefault(); $('#newsMsg').textContent = 'Inscription bientôt disponible.'; });
+$('#news').addEventListener('submit', e => { e.preventDefault(); $('#newsMsg').textContent = 'Inscription pas encore activée.'; });
 
-/* reveal */
-const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12, rootMargin: '0px 0px -6% 0px' });
-$$('.rv').forEach(el => io.observe(el));
-setTimeout(() => $$('.rv').forEach(el => el.classList.add('in')), 4000);
+/* current section in nav */
+const links = $$('.bar nav ul a'), spy = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) links.forEach(l => l.toggleAttribute('aria-current', l.getAttribute('href') === '#' + e.target.id)); }), { rootMargin: '-45% 0px -50% 0px' });
+$$('main section[id]').forEach(s => spy.observe(s));
 </script>
 </body>
 </html>
