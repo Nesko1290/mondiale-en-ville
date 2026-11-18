@@ -3,8 +3,8 @@
 Un seul plan continu de 15,5 s :
   0.0-1.9   dans le ciel : nuage "GENEVA ARE YOU READY?", la camera le traverse
   1.9-4.0   plongee vers le quai : lac, Jet d'Eau, immeubles haussmanniens
-  4.0-5.4   rase le toit (valises sur la galerie), le feu est rouge droit devant
-  5.4-8.0   le bus grille le feu ; travelling lateral cote lac, facades qui defilent
+  4.0-5.6   au-dessus du toit (valises), feux rouges droit devant : le bus passe sous le portique
+  5.6-8.0   travelling lateral cote lac, lettrage du bus, facades qui defilent
   8.0-9.0   la camera entre par une fenetre laterale
   9.0-10.6  traverse le bus dans l'allee, passagers avec valises, sort par l'arriere
   10.6-12.7 pivote sur la femme au telephone sur la promenade, qui se retourne
@@ -260,14 +260,17 @@ def build_world():
     for zx in (CROSS_X - 10, CROSS_X + 10):
         for i in range(8):
             box("zebra", (3.0, 0.5, 0.02), (zx, -3.5 + i, 0.06), COL["dash"])
+    # Portique de feux au-dessus de la chaussee : trois gros feux rouges bien visibles,
+    # la camera passe dessous avec le bus. Aucun poteau sur la trajectoire de la camera.
     lx = CROSS_X - 8.0
-    box("light_pole", (0.22, 0.22, 6.0), (lx, 4.4, 0), COL["pole"])
-    box("light_arm", (0.16, 6.2, 0.16), (lx, 1.4, 5.9), COL["pole"])
-    for ly, lz in ((-1.5, 4.9), (4.4, 2.6), (-4.4, 2.6)):
-        if ly < 0:
-            box("light_pole", (0.22, 0.22, 3.8), (lx, ly, 0), COL["pole"])
-        box("light_head", (0.4, 0.5, 1.3), (lx, ly, lz), COL["pole"])
-        box("red_light", (0.12, 0.38, 0.38), (lx - 0.25, ly, lz + 0.85), COL["red_light"])
+    for py in (-5.2, 5.2):
+        box("light_pole", (0.3, 0.3, 7.0), (lx, py, 0), COL["pole"])
+        box("light_head", (0.45, 0.55, 1.4), (lx, py, 2.6), COL["pole"])
+        box("red_light", (0.14, 0.42, 0.42), (lx - 0.28, py, 3.5), COL["red_light"])
+    box("light_beam", (0.3, 10.7, 0.3), (lx, 0, 6.8), COL["pole"])
+    for ly in (-2.6, 0.0, 2.6):
+        box("light_head", (0.5, 0.8, 1.6), (lx, ly, 5.3), COL["pole"])
+        box("red_light", (0.16, 0.62, 0.62), (lx - 0.32, ly, 6.15), COL["red_light"])
     for cy in (11.0, 17.5):  # dans la rue transversale, pretes a traverser
         box("car", (1.8, 4.3, 1.4), (CROSS_X - 2.0, cy, 0.1), COL["car"])
 
@@ -434,11 +437,14 @@ def camera_keys():
     rel(0.0, (-30, -22, 150), (4, 0, 1))
     rel(1.2, (-22, -12, 78), (5, 0, 1))
     rel(2.5, (-9, -1.5, 9.5), (4, 0, 2.2))
-    rel(3.3, (-3.5, -1.0, 4.4), (9, 0, 1.5))
-    rel(3.9, (1.0, -3.5, 3.4), (7, 0.5, 1.5))
+    # reste au-dessus du toit, regard vers l'avant : feux rouges droit devant,
+    # le bus passe sous le portique a 3,85 s sans freiner
+    rel(3.3, (-5.0, -0.3, 4.7), (10, 0, 3.0))
+    rel(4.0, (-3.5, -0.5, 4.4), (10, 0, 2.6))
+    rel(4.4, (0.8, -3.2, 3.4), (7, 0.5, 1.6))
     # travelling lateral cote lac : lettrage + facades
-    rel(4.7, (6.0, -7.5, 1.7), (0.3, 0, 1.7))
-    rel(5.8, (5.0, -7.2, 1.7), (0.0, 0, 1.8))
+    rel(5.0, (6.0, -6.6, 1.7), (0.3, 0, 1.7))
+    rel(5.8, (5.0, -6.6, 1.7), (0.0, 0, 1.8))
     # approche et entree par la fenetre avant droite
     rel(6.5, (4.2, -4.0, 1.9), (0.5, 0, 1.8))
     rel(7.0, (3.15, -1.7, 1.93), (-2.0, 0.3, 1.8))
@@ -455,9 +461,9 @@ def camera_keys():
     world(11.1, (RASTA_CAM.x + 0.3, RASTA_CAM.y - 0.1, RASTA_CAM.z), head)
     # repart vers l'avant, depasse le bus par au-dessus, fonce sur le panneau
     world(11.6, (189.5, 0.0, 2.4), (232, 1, 3))
-    world(12.4, (226, 0.0, 5.0), (SIGN_X, 0, 9.5))
-    world(13.3, (286, 0.0, 8.8), (SIGN_X, 0, 9.8))
-    world(14.0, (SIGN_X - 6.8, 0.0, 9.8), (SIGN_X, 0, 9.8))
+    world(12.3, (236, 0.0, 5.5), (SIGN_X, 0, 9.5))
+    world(13.1, (SIGN_X - 17, 0.0, 9.4), (SIGN_X, 0, 9.8))  # arrive tot : le panneau remplit deja le cadre
+    world(14.0, (SIGN_X - 6.8, 0.0, 9.8), (SIGN_X, 0, 9.8))  # puis poussee lente
     return k
 
 
