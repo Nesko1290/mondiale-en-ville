@@ -3,7 +3,7 @@
 Remplacer partout `[LIEN FOURVENUES]`, `[LIEN DÉSINSCRIPTION]` et `[XX]` (tickets restants) avant envoi.
 Images hébergées sur jsDelivr (dépôt GitHub public).
 
-- `00_annonce.html` · objet : « 🔒 Privacy is back · 100 tickets only »
+- `00_annonce.html` · objet : « 🔒 Privacy is back · la dernière de l’année »
 
 ## Envoi quotidien
 
@@ -12,7 +12,7 @@ Images hébergées sur jsDelivr (dépôt GitHub public).
 | MER. 25.11 | J-17 | 🔒 Privacy is back · 100 tickets only | quotidien/01_j-17_25.11.html |
 | JEU. 26.11 | J-16 | Celle-là, c’est pour nos day ones 🖤 | quotidien/02_j-16_26.11.html |
 | VEN. 27.11 | J-15 | Moins de monde, plus de vibes | quotidien/03_j-15_27.11.html |
-| SAM. 28.11 | J-14 | Dans 14 jours, c’est nous | quotidien/04_j-14_28.11.html |
+| SAM. 28.11 | J-14 | On finit 2026 ensemble 🖤 | quotidien/04_j-14_28.11.html |
 | DIM. 29.11 | J-13 | Le line-up de la Privacy 🎧 | quotidien/05_j-13_29.11.html |
 | LUN. 30.11 | J-12 | Aux platines : Nesko | quotidien/06_j-12_30.11.html |
 | MAR. 01.12 | J-11 | Aux platines : Rafal | quotidien/07_j-11_01.12.html |
@@ -26,4 +26,4 @@ Images hébergées sur jsDelivr (dépôt GitHub public).
 | MER. 09.12 | J-3 | 🚨 Derniers tickets Privacy | quotidien/15_j-3_09.12.html |
 | JEU. 10.12 | J-2 | J-2 · tenue prête ? | quotidien/16_j-2_10.12.html |
 | VEN. 11.12 | J-1 | Demain soir, on y est | quotidien/17_j-1_11.12.html |
-| SAM. 12.12 | JOUR J | 🔒 C’est ce soir | quotidien/18_jour-j_12.12.html |
+| SAM. 12.12 | JOUR J | 🔒 Ce soir, la dernière de l’année | quotidien/18_jour-j_12.12.html |
