@@ -1,6 +1,6 @@
 # Mails Fourvenues · Afroworld Privacy 12.12
 
-Remplacer partout `[LIEN FOURVENUES]`, `[LIEN DÉSINSCRIPTION]` et `[XX]` (tickets restants) avant envoi.
+Lien de réservation déjà intégré. Remplacer `[LIEN DÉSINSCRIPTION]` et `[XX]` (tickets restants) avant envoi.
 Images hébergées sur jsDelivr (dépôt GitHub public).
 
 - `00_annonce.html` · objet : « 🔒 Privacy is back · la dernière de l’année »
